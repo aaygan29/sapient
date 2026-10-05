@@ -1,0 +1,156 @@
+<div id="ns-root">
+<style>
+#ns-root{--bg:#0d1117;--panel:#161b22;--ink:#e6edf3;--muted:#8b949e;--line:#30363d;
+  background:var(--bg);color:var(--ink);border-radius:14px;padding:18px 20px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;max-width:980px;margin:auto}
+#ns-root h1{font-size:19px;margin:0 0 2px}#ns-root .sub{color:var(--muted);font-size:13px;margin-bottom:10px}
+#ns-root .headline{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:9px 12px;font-size:13px;margin-bottom:12px}
+#ns-root .subjects{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+#ns-root .subjects button{background:var(--panel);color:var(--ink);border:1px solid var(--line);
+  border-radius:20px;padding:5px 13px;font-size:12px;cursor:pointer}
+#ns-root .subjects button.active{background:#1f6feb;border-color:#1f6feb;color:#fff}
+#ns-root .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+@media(max-width:760px){#ns-root .grid{grid-template-columns:1fr}}
+#ns-root .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+#ns-root .metric{margin:9px 0}#ns-root .metric .lab{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+#ns-root .bar{height:9px;background:#0d1117;border-radius:6px;overflow:hidden}
+#ns-root .bar>span{display:block;height:100%;width:0;transition:width .12s linear}
+#ns-root .controls{display:flex;align-items:center;gap:10px;margin-top:10px}
+#ns-root .controls button{background:#1f6feb;border:none;color:#fff;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px}
+#ns-root input[type=range]{flex:1;accent-color:#1f6feb}
+#ns-root .time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px;min-width:62px;text-align:right}
+#ns-root .rec{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
+#ns-root .moments{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6}
+#ns-root .moments b{color:var(--ink)}
+#ns-root text{font-size:9px;fill:var(--ink);font-family:inherit}
+</style>
+
+<h1 id="ns-title"></h1><div class="sub" id="ns-sub"></div>
+<div class="headline" id="ns-headline"></div>
+<div class="subjects" id="ns-subjects"></div>
+
+<div class="grid">
+  <div class="card">
+    <svg id="ns-brain" viewBox="0 0 440 320" width="100%"></svg>
+    <div style="margin-top:8px">
+      <svg id="ns-spark" viewBox="0 0 440 80" width="100%"></svg>
+    </div>
+    <div class="controls">
+      <button id="ns-play">▶ Play</button>
+      <input id="ns-scrub" type="range" min="0" value="0"/>
+      <span class="time" id="ns-time">0.0s</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span style="font-size:13px;font-weight:600">Read-out at this moment</span>
+      <span class="rec" id="ns-rec">Hold</span>
+    </div>
+    <div id="ns-metrics"></div>
+    <div class="moments" id="ns-momlist"></div>
+  </div>
+</div>
+</div>
+<script>
+(function(){
+const DATA = {"title": "Neuro Read-out \u2014 Live Digital Brain", "subtitle": "Same 12s clip, three brains \u2014 play to watch the cortex light up.", "subjects": ["Average brain", "Reward-seeker", "Deliberator"], "reports": {"Average brain": {"timeline": {"fps": 1.0, "duration": 12.0, "source": "ad-arc(illustrative) :: Average brain", "personalized": false, "frames": [{"t": 0.0, "networks": {"Visual": 60.0, "Default": 57.1, "Somatomotor": 28.6, "DorsalAttention": 31.4, "VentralAttention": 2.9, "Limbic": 14.3, "Frontoparietal": 45.7}, "metrics": {"valence": 22.1, "arousal": 8.6, "engagement": 23.3, "manipulation": 23.8, "buy_sell": 49.6}, "buy_sell": 49.6, "recommendation": "Hold"}, {"t": 1.0, "networks": {"Visual": 60.0, "Default": 57.1, "Somatomotor": 28.6, "DorsalAttention": 31.4, "VentralAttention": 2.9, "Limbic": 14.3, "Frontoparietal": 45.7}, "metrics": {"valence": 22.1, "arousal": 8.6, "engagement": 23.3, "manipulation": 23.8, "buy_sell": 49.6}, "buy_sell": 49.6, "recommendation": "Hold"}, {"t": 2.0, "networks": {"Visual": 60.0, "Default": 57.1, "Somatomotor": 28.6, "DorsalAttention": 31.4, "VentralAttention": 2.9, "Limbic": 14.3, "Frontoparietal": 45.7}, "metrics": {"valence": 22.1, "arousal": 8.6, "engagement": 23.3, "manipulation": 23.8, "buy_sell": 49.6}, "buy_sell": 49.6, "recommendation": "Hold"}, {"t": 3.0, "networks": {"Visual": 60.0, "Default": 57.1, "Somatomotor": 28.6, "DorsalAttention": 31.4, "VentralAttention": 2.9, "Limbic": 14.3, "Frontoparietal": 45.7}, "metrics": {"valence": 22.1, "arousal": 8.6, "engagement": 23.3, "manipulation": 23.8, "buy_sell": 49.6}, "buy_sell": 49.6, "recommendation": "Hold"}, {"t": 4.0, "networks": {"Visual": 74.3, "Default": 42.9, "Somatomotor": 31.4, "DorsalAttention": 74.3, "VentralAttention": 31.4, "Limbic": 54.3, "Frontoparietal": 37.1}, "metrics": {"valence": 20.0, "arousal": 42.9, "engagement": 51.4, "manipulation": 61.4, "buy_sell": 65.5}, "buy_sell": 65.5, "recommendation": "Buy"}, {"t": 5.0, "networks": {"Visual": 74.3, "Default": 42.9, "Somatomotor": 31.4, "DorsalAttention": 74.3, "VentralAttention": 31.4, "Limbic": 61.4, "Frontoparietal": 37.1}, "metrics": {"valence": 25.4, "arousal": 46.4, "engagement": 52.6, "manipulation": 66.2, "buy_sell": 68.4}, "buy_sell": 68.4, "recommendation": "Buy"}, {"t": 6.0, "networks": {"Visual": 74.3, "Default": 42.9, "Somatomotor": 31.4, "DorsalAttention": 74.3, "VentralAttention": 31.4, "Limbic": 68.6, "Frontoparietal": 37.1}, "metrics": {"valence": 30.7, "arousal": 50.0, "engagement": 53.8, "manipulation": 71.0, "buy_sell": 71.3}, "buy_sell": 71.3, "recommendation": "Buy"}, {"t": 7.0, "networks": {"Visual": 74.3, "Default": 42.9, "Somatomotor": 31.4, "DorsalAttention": 74.3, "VentralAttention": 31.4, "Limbic": 75.7, "Frontoparietal": 37.1}, "metrics": {"valence": 36.1, "arousal": 53.6, "engagement": 55.0, "manipulation": 75.7, "buy_sell": 74.3}, "buy_sell": 74.3, "recommendation": "Buy"}, {"t": 8.0, "networks": {"Visual": 57.1, "Default": 28.6, "Somatomotor": 28.6, "DorsalAttention": 57.1, "VentralAttention": 94.3, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -12.1, "arousal": 97.1, "engagement": 71.9, "manipulation": 100.0, "buy_sell": 63.8}, "buy_sell": 63.8, "recommendation": "Buy"}, {"t": 9.0, "networks": {"Visual": 57.1, "Default": 28.6, "Somatomotor": 28.6, "DorsalAttention": 57.1, "VentralAttention": 94.3, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -12.1, "arousal": 97.1, "engagement": 71.9, "manipulation": 100.0, "buy_sell": 63.8}, "buy_sell": 63.8, "recommendation": "Buy"}, {"t": 10.0, "networks": {"Visual": 57.1, "Default": 28.6, "Somatomotor": 28.6, "DorsalAttention": 57.1, "VentralAttention": 94.3, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -12.1, "arousal": 97.1, "engagement": 71.9, "manipulation": 100.0, "buy_sell": 63.8}, "buy_sell": 63.8, "recommendation": "Buy"}, {"t": 11.0, "networks": {"Visual": 57.1, "Default": 28.6, "Somatomotor": 28.6, "DorsalAttention": 57.1, "VentralAttention": 94.3, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -12.1, "arousal": 97.1, "engagement": 71.9, "manipulation": 100.0, "buy_sell": 63.8}, "buy_sell": 63.8, "recommendation": "Buy"}]}, "stats": {"metrics": {"arousal": {"key": "arousal", "label": "Arousal / Intensity", "mean": 51.31, "peak": 97.1, "peak_t": 8.0, "trough": 8.6, "trough_t": 0.0, "auc": 562.85, "volatility": 14.76, "final": 97.1}, "buy_sell": {"key": "buy_sell", "label": "Buy / Sell Signal", "mean": 61.09, "peak": 74.3, "peak_t": 7.0, "trough": 49.6, "trough_t": 0.0, "auc": 676.4, "volatility": 5.8, "final": 63.8}, "engagement": {"key": "engagement", "label": "Engagement", "mean": 49.47, "peak": 71.9, "peak_t": 8.0, "trough": 23.3, "trough_t": 0.0, "auc": 546.0, "volatility": 8.87, "final": 71.9}, "manipulation": {"key": "manipulation", "label": "Persuasion Pressure", "mean": 64.12, "peak": 100.0, "peak_t": 8.0, "trough": 23.8, "trough_t": 0.0, "auc": 707.6, "volatility": 11.85, "final": 100.0}, "valence": {"key": "valence", "label": "Affective Valence", "mean": 12.68, "peak": 36.1, "peak_t": 7.0, "trough": -12.1, "trough_t": 8.0, "auc": 147.2, "volatility": 14.48, "final": -12.1}}, "peak_moments": [{"t": 8.0, "metric": "manipulation", "label": "Persuasion Pressure", "score": 100.0}, {"t": 8.0, "metric": "arousal", "label": "Arousal / Intensity", "score": 97.1}, {"t": 7.0, "metric": "buy_sell", "label": "Buy / Sell Signal", "score": 74.3}, {"t": 8.0, "metric": "engagement", "label": "Engagement", "score": 71.9}], "network_dynamics": {"Default": {"mean": 42.9, "peak": 57.1, "range": 28.5}, "DorsalAttention": {"mean": 54.3, "peak": 74.3, "range": 42.9}, "Frontoparietal": {"mean": 27.6, "peak": 45.7, "range": 45.7}, "Limbic": {"mean": 59.8, "peak": 100.0, "range": 85.7}, "Somatomotor": {"mean": 29.5, "peak": 31.4, "range": 2.8}, "VentralAttention": {"mean": 42.9, "peak": 94.3, "range": 91.4}, "Visual": {"mean": 63.8, "peak": 74.3, "range": 17.2}}, "segments": [{"label": "intro", "t0": 0.0, "t1": 3.0, "manipulation": 23.8, "buy_sell": 49.6}, {"label": "build", "t0": 4.0, "t1": 7.0, "manipulation": 68.6, "buy_sell": 69.9}, {"label": "payoff", "t0": 8.0, "t1": 11.0, "manipulation": 100.0, "buy_sell": 63.8}], "duration": 12.0, "n_frames": 12, "personalized": false, "headline": "Peak persuasion pressure (100) at 8s; most dynamic network: VentralAttention (\u039491)."}}, "Reward-seeker": {"timeline": {"fps": 1.0, "duration": 12.0, "source": "ad-arc(illustrative) :: Reward-seeker", "personalized": true, "frames": [{"t": 0.0, "networks": {"Visual": 55.6, "Default": 53.7, "Somatomotor": 35.2, "DorsalAttention": 37.0, "VentralAttention": 27.8, "Limbic": 44.4, "Frontoparietal": 29.6}, "metrics": {"valence": 19.0, "arousal": 36.1, "engagement": 38.0, "manipulation": 63.6, "buy_sell": 57.5}, "buy_sell": 57.5, "recommendation": "Hold"}, {"t": 1.0, "networks": {"Visual": 55.6, "Default": 53.7, "Somatomotor": 35.2, "DorsalAttention": 37.0, "VentralAttention": 27.8, "Limbic": 44.4, "Frontoparietal": 29.6}, "metrics": {"valence": 19.0, "arousal": 36.1, "engagement": 38.0, "manipulation": 63.6, "buy_sell": 57.5}, "buy_sell": 57.5, "recommendation": "Hold"}, {"t": 2.0, "networks": {"Visual": 55.6, "Default": 53.7, "Somatomotor": 35.2, "DorsalAttention": 37.0, "VentralAttention": 27.8, "Limbic": 44.4, "Frontoparietal": 29.6}, "metrics": {"valence": 19.0, "arousal": 36.1, "engagement": 38.0, "manipulation": 63.6, "buy_sell": 57.5}, "buy_sell": 57.5, "recommendation": "Hold"}, {"t": 3.0, "networks": {"Visual": 55.6, "Default": 53.7, "Somatomotor": 35.2, "DorsalAttention": 37.0, "VentralAttention": 27.8, "Limbic": 44.4, "Frontoparietal": 29.6}, "metrics": {"valence": 19.0, "arousal": 36.1, "engagement": 38.0, "manipulation": 63.6, "buy_sell": 57.5}, "buy_sell": 57.5, "recommendation": "Hold"}, {"t": 4.0, "networks": {"Visual": 64.8, "Default": 44.4, "Somatomotor": 37.0, "DorsalAttention": 64.8, "VentralAttention": 46.3, "Limbic": 70.4, "Frontoparietal": 24.1}, "metrics": {"valence": 17.6, "arousal": 58.3, "engagement": 56.2, "manipulation": 88.0, "buy_sell": 67.8}, "buy_sell": 67.8, "recommendation": "Buy"}, {"t": 5.0, "networks": {"Visual": 64.8, "Default": 44.4, "Somatomotor": 37.0, "DorsalAttention": 64.8, "VentralAttention": 46.3, "Limbic": 75.0, "Frontoparietal": 24.1}, "metrics": {"valence": 21.1, "arousal": 60.6, "engagement": 56.9, "manipulation": 91.0, "buy_sell": 69.7}, "buy_sell": 69.7, "recommendation": "Buy"}, {"t": 6.0, "networks": {"Visual": 64.8, "Default": 44.4, "Somatomotor": 37.0, "DorsalAttention": 64.8, "VentralAttention": 46.3, "Limbic": 79.6, "Frontoparietal": 24.1}, "metrics": {"valence": 24.5, "arousal": 63.0, "engagement": 57.7, "manipulation": 94.1, "buy_sell": 71.6}, "buy_sell": 71.6, "recommendation": "Buy"}, {"t": 7.0, "networks": {"Visual": 64.8, "Default": 44.4, "Somatomotor": 37.0, "DorsalAttention": 64.8, "VentralAttention": 46.3, "Limbic": 84.3, "Frontoparietal": 24.1}, "metrics": {"valence": 28.0, "arousal": 65.3, "engagement": 58.5, "manipulation": 97.2, "buy_sell": 73.5}, "buy_sell": 73.5, "recommendation": "Buy"}, {"t": 8.0, "networks": {"Visual": 53.7, "Default": 35.2, "Somatomotor": 35.2, "DorsalAttention": 53.7, "VentralAttention": 87.0, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -3.2, "arousal": 93.5, "engagement": 69.4, "manipulation": 100.0, "buy_sell": 66.7}, "buy_sell": 66.7, "recommendation": "Buy"}, {"t": 9.0, "networks": {"Visual": 53.7, "Default": 35.2, "Somatomotor": 35.2, "DorsalAttention": 53.7, "VentralAttention": 87.0, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -3.2, "arousal": 93.5, "engagement": 69.4, "manipulation": 100.0, "buy_sell": 66.7}, "buy_sell": 66.7, "recommendation": "Buy"}, {"t": 10.0, "networks": {"Visual": 53.7, "Default": 35.2, "Somatomotor": 35.2, "DorsalAttention": 53.7, "VentralAttention": 87.0, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -3.2, "arousal": 93.5, "engagement": 69.4, "manipulation": 100.0, "buy_sell": 66.7}, "buy_sell": 66.7, "recommendation": "Buy"}, {"t": 11.0, "networks": {"Visual": 53.7, "Default": 35.2, "Somatomotor": 35.2, "DorsalAttention": 53.7, "VentralAttention": 87.0, "Limbic": 100.0, "Frontoparietal": 0.0}, "metrics": {"valence": -3.2, "arousal": 93.5, "engagement": 69.4, "manipulation": 100.0, "buy_sell": 66.7}, "buy_sell": 66.7, "recommendation": "Buy"}]}, "stats": {"metrics": {"arousal": {"key": "arousal", "label": "Arousal / Intensity", "mean": 63.8, "peak": 93.5, "peak_t": 8.0, "trough": 36.1, "trough_t": 0.0, "auc": 700.8, "volatility": 9.56, "final": 93.5}, "buy_sell": {"key": "buy_sell", "label": "Buy / Sell Signal", "mean": 64.95, "peak": 73.5, "peak_t": 7.0, "trough": 57.5, "trough_t": 0.0, "auc": 717.3, "volatility": 3.76, "final": 66.7}, "engagement": {"key": "engagement", "label": "Engagement", "mean": 54.91, "peak": 69.4, "peak_t": 8.0, "trough": 38.0, "trough_t": 0.0, "auc": 605.2, "volatility": 5.74, "final": 69.4}, "manipulation": {"key": "manipulation", "label": "Persuasion Pressure", "mean": 85.39, "peak": 100.0, "peak_t": 8.0, "trough": 63.6, "trough_t": 0.0, "auc": 942.9, "volatility": 6.82, "final": 100.0}, "valence": {"key": "valence", "label": "Affective Valence", "mean": 12.87, "peak": 28.0, "peak_t": 7.0, "trough": -3.2, "trough_t": 8.0, "auc": 146.5, "volatility": 9.37, "final": -3.2}}, "peak_moments": [{"t": 8.0, "metric": "manipulation", "label": "Persuasion Pressure", "score": 100.0}, {"t": 8.0, "metric": "arousal", "label": "Arousal / Intensity", "score": 93.5}, {"t": 7.0, "metric": "buy_sell", "label": "Buy / Sell Signal", "score": 73.5}, {"t": 8.0, "metric": "engagement", "label": "Engagement", "score": 69.4}], "network_dynamics": {"Default": {"mean": 44.4, "peak": 53.7, "range": 18.5}, "DorsalAttention": {"mean": 51.8, "peak": 64.8, "range": 27.8}, "Frontoparietal": {"mean": 17.9, "peak": 29.6, "range": 29.6}, "Limbic": {"mean": 73.9, "peak": 100.0, "range": 55.6}, "Somatomotor": {"mean": 35.8, "peak": 37.0, "range": 1.8}, "VentralAttention": {"mean": 53.7, "peak": 87.0, "range": 59.2}, "Visual": {"mean": 58.0, "peak": 64.8, "range": 11.1}}, "segments": [{"label": "intro", "t0": 0.0, "t1": 3.0, "manipulation": 63.6, "buy_sell": 57.5}, {"label": "build", "t0": 4.0, "t1": 7.0, "manipulation": 92.6, "buy_sell": 70.7}, {"label": "payoff", "t0": 8.0, "t1": 11.0, "manipulation": 100.0, "buy_sell": 66.7}], "duration": 12.0, "n_frames": 12, "personalized": true, "headline": "Peak persuasion pressure (100) at 8s; most dynamic network: VentralAttention (\u039459)."}}, "Deliberator": {"timeline": {"fps": 1.0, "duration": 12.0, "source": "ad-arc(illustrative) :: Deliberator", "personalized": true, "frames": [{"t": 0.0, "networks": {"Visual": 75.0, "Default": 71.9, "Somatomotor": 40.6, "DorsalAttention": 43.7, "VentralAttention": 0.0, "Limbic": 1.6, "Frontoparietal": 93.8}, "metrics": {"valence": 19.1, "arousal": 0.8, "engagement": 26.8, "manipulation": 0.0, "buy_sell": 43.7}, "buy_sell": 43.7, "recommendation": "Hold"}, {"t": 1.0, "networks": {"Visual": 75.0, "Default": 71.9, "Somatomotor": 40.6, "DorsalAttention": 43.7, "VentralAttention": 0.0, "Limbic": 1.6, "Frontoparietal": 93.8}, "metrics": {"valence": 19.1, "arousal": 0.8, "engagement": 26.8, "manipulation": 0.0, "buy_sell": 43.7}, "buy_sell": 43.7, "recommendation": "Hold"}, {"t": 2.0, "networks": {"Visual": 75.0, "Default": 71.9, "Somatomotor": 40.6, "DorsalAttention": 43.7, "VentralAttention": 0.0, "Limbic": 1.6, "Frontoparietal": 93.8}, "metrics": {"valence": 19.1, "arousal": 0.8, "engagement": 26.8, "manipulation": 0.0, "buy_sell": 43.7}, "buy_sell": 43.7, "recommendation": "Hold"}, {"t": 3.0, "networks": {"Visual": 75.0, "Default": 71.9, "Somatomotor": 40.6, "DorsalAttention": 43.7, "VentralAttention": 0.0, "Limbic": 1.6, "Frontoparietal": 93.8}, "metrics": {"valence": 19.1, "arousal": 0.8, "engagement": 26.8, "manipulation": 0.0, "buy_sell": 43.7}, "buy_sell": 43.7, "recommendation": "Hold"}, {"t": 4.0, "networks": {"Visual": 90.6, "Default": 56.2, "Somatomotor": 43.7, "DorsalAttention": 90.6, "VentralAttention": 31.2, "Limbic": 45.3, "Frontoparietal": 84.4}, "metrics": {"valence": 16.8, "arousal": 38.3, "engagement": 57.6, "manipulation": 10.4, "buy_sell": 61.1}, "buy_sell": 61.1, "recommendation": "Buy"}, {"t": 5.0, "networks": {"Visual": 90.6, "Default": 56.2, "Somatomotor": 43.7, "DorsalAttention": 90.6, "VentralAttention": 31.2, "Limbic": 53.1, "Frontoparietal": 84.4}, "metrics": {"valence": 22.7, "arousal": 42.2, "engagement": 58.9, "manipulation": 15.6, "buy_sell": 64.3}, "buy_sell": 64.3, "recommendation": "Buy"}, {"t": 6.0, "networks": {"Visual": 90.6, "Default": 56.2, "Somatomotor": 43.7, "DorsalAttention": 90.6, "VentralAttention": 31.2, "Limbic": 60.9, "Frontoparietal": 84.4}, "metrics": {"valence": 28.5, "arousal": 46.1, "engagement": 60.2, "manipulation": 20.8, "buy_sell": 67.5}, "buy_sell": 67.5, "recommendation": "Buy"}, {"t": 7.0, "networks": {"Visual": 90.6, "Default": 56.2, "Somatomotor": 43.7, "DorsalAttention": 90.6, "VentralAttention": 31.2, "Limbic": 68.7, "Frontoparietal": 84.4}, "metrics": {"valence": 34.4, "arousal": 50.0, "engagement": 61.5, "manipulation": 26.0, "buy_sell": 70.7}, "buy_sell": 70.7, "recommendation": "Buy"}, {"t": 8.0, "networks": {"Visual": 71.9, "Default": 40.6, "Somatomotor": 40.6, "DorsalAttention": 71.9, "VentralAttention": 100.0, "Limbic": 95.3, "Frontoparietal": 43.8}, "metrics": {"valence": -18.4, "arousal": 97.7, "engagement": 79.9, "manipulation": 93.2, "buy_sell": 59.2}, "buy_sell": 59.2, "recommendation": "Hold"}, {"t": 9.0, "networks": {"Visual": 71.9, "Default": 40.6, "Somatomotor": 40.6, "DorsalAttention": 71.9, "VentralAttention": 100.0, "Limbic": 95.3, "Frontoparietal": 43.8}, "metrics": {"valence": -18.4, "arousal": 97.7, "engagement": 79.9, "manipulation": 93.2, "buy_sell": 59.2}, "buy_sell": 59.2, "recommendation": "Hold"}, {"t": 10.0, "networks": {"Visual": 71.9, "Default": 40.6, "Somatomotor": 40.6, "DorsalAttention": 71.9, "VentralAttention": 100.0, "Limbic": 95.3, "Frontoparietal": 43.8}, "metrics": {"valence": -18.4, "arousal": 97.7, "engagement": 79.9, "manipulation": 93.2, "buy_sell": 59.2}, "buy_sell": 59.2, "recommendation": "Hold"}, {"t": 11.0, "networks": {"Visual": 71.9, "Default": 40.6, "Somatomotor": 40.6, "DorsalAttention": 71.9, "VentralAttention": 100.0, "Limbic": 95.3, "Frontoparietal": 43.8}, "metrics": {"valence": -18.4, "arousal": 97.7, "engagement": 79.9, "manipulation": 93.2, "buy_sell": 59.2}, "buy_sell": 59.2, "recommendation": "Hold"}]}, "stats": {"metrics": {"arousal": {"key": "arousal", "label": "Arousal / Intensity", "mean": 47.55, "peak": 97.7, "peak_t": 8.0, "trough": 0.8, "trough_t": 0.0, "auc": 521.35, "volatility": 16.16, "final": 97.7}, "buy_sell": {"key": "buy_sell", "label": "Buy / Sell Signal", "mean": 56.27, "peak": 70.7, "peak_t": 7.0, "trough": 43.7, "trough_t": 0.0, "auc": 623.75, "volatility": 6.35, "final": 59.2}, "engagement": {"key": "engagement", "label": "Engagement", "mean": 55.42, "peak": 79.9, "peak_t": 8.0, "trough": 26.8, "trough_t": 0.0, "auc": 611.65, "volatility": 9.7, "final": 79.9}, "manipulation": {"key": "manipulation", "label": "Persuasion Pressure", "mean": 37.13, "peak": 93.2, "peak_t": 8.0, "trough": 0.0, "trough_t": 0.0, "auc": 399.0, "volatility": 18.87, "final": 93.2}, "valence": {"key": "valence", "label": "Affective Valence", "mean": 8.77, "peak": 34.4, "peak_t": 7.0, "trough": -18.4, "trough_t": 8.0, "auc": 104.85, "volatility": 15.86, "final": -18.4}}, "peak_moments": [{"t": 8.0, "metric": "arousal", "label": "Arousal / Intensity", "score": 97.7}, {"t": 8.0, "metric": "manipulation", "label": "Persuasion Pressure", "score": 93.2}, {"t": 8.0, "metric": "engagement", "label": "Engagement", "score": 79.9}, {"t": 7.0, "metric": "buy_sell", "label": "Buy / Sell Signal", "score": 70.7}], "network_dynamics": {"Default": {"mean": 56.2, "peak": 71.9, "range": 31.3}, "DorsalAttention": {"mean": 68.7, "peak": 90.6, "range": 46.9}, "Frontoparietal": {"mean": 74.0, "peak": 93.8, "range": 50.0}, "Limbic": {"mean": 51.3, "peak": 95.3, "range": 93.7}, "Somatomotor": {"mean": 41.6, "peak": 43.7, "range": 3.1}, "VentralAttention": {"mean": 43.7, "peak": 100.0, "range": 100.0}, "Visual": {"mean": 79.2, "peak": 90.6, "range": 18.7}}, "segments": [{"label": "intro", "t0": 0.0, "t1": 3.0, "manipulation": 0.0, "buy_sell": 43.7}, {"label": "build", "t0": 4.0, "t1": 7.0, "manipulation": 18.2, "buy_sell": 65.9}, {"label": "payoff", "t0": 8.0, "t1": 11.0, "manipulation": 93.2, "buy_sell": 59.2}], "duration": 12.0, "n_frames": 12, "personalized": true, "headline": "Peak arousal / intensity (98) at 8s; most dynamic network: VentralAttention (\u0394100)."}}}};
+const NETS = {
+  Frontoparietal:{x:108,y:120,rx:44,ry:36,t:"Frontoparietal",s:"analytic control"},
+  Limbic:{x:120,y:206,rx:42,ry:30,t:"Limbic",s:"reward / emotion"},
+  VentralAttention:{x:206,y:210,rx:40,ry:28,t:"Ventral Attn",s:"salience / urgency"},
+  Somatomotor:{x:208,y:92,rx:48,ry:26,t:"Somatomotor",s:"action"},
+  DorsalAttention:{x:284,y:120,rx:44,ry:32,t:"Dorsal Attn",s:"focus"},
+  Default:{x:236,y:166,rx:42,ry:30,t:"Default",s:"memory / self"},
+  Visual:{x:356,y:166,rx:46,ry:42,t:"Visual",s:"seeing"}
+};
+const METRICS=[
+  {k:"manipulation",l:"Persuasion Pressure",c:"#ff5c5c"},
+  {k:"buy_sell",l:"Buy / Sell Signal",c:"#4cd964"},
+  {k:"arousal",l:"Arousal / Intensity",c:"#ffb74d"},
+  {k:"engagement",l:"Engagement",c:"#5ac8fa"},
+  {k:"valence",l:"Affective Valence",c:"#b388ff",signed:true}
+];
+const $=id=>document.getElementById(id);
+$("ns-title").textContent=DATA.title; $("ns-sub").textContent=DATA.subtitle||"";
+
+let subject=DATA.subjects[0], idx=0, playing=false, timer=null;
+
+// build brain svg
+const brain=$("ns-brain");
+brain.innerHTML='<path d="M58,156 C58,84 132,46 224,46 C326,46 404,82 404,162 C404,238 332,278 230,278 C138,278 58,236 58,156 Z" '
+  +'fill="#0d1117" stroke="#30363d" stroke-width="2"/>';
+for(const [k,r] of Object.entries(NETS)){
+  brain.innerHTML+=`<ellipse id="rg-${k}" cx="${r.x}" cy="${r.y}" rx="${r.rx}" ry="${r.ry}" fill="#ff7043" fill-opacity="0.05" stroke="#30363d" stroke-width="1"/>`
+   +`<text x="${r.x}" y="${r.y-2}" text-anchor="middle" font-weight="700">${r.t}</text>`
+   +`<text x="${r.x}" y="${r.y+9}" text-anchor="middle" fill="#8b949e">${r.s}</text>`;
+}
+// metric rows
+$("ns-metrics").innerHTML=METRICS.map(m=>
+  `<div class="metric"><div class="lab"><span>${m.l}</span><span id="mv-${m.k}">–</span></div>`
+  +`<div class="bar"><span id="mb-${m.k}" style="background:${m.c}"></span></div></div>`).join("");
+
+function heat(v){ // 0..100 -> warm glow opacity + hue
+  const o=0.06+0.0094*v; return o; }
+function frames(){return DATA.reports[subject].timeline.frames;}
+function stats(){return DATA.reports[subject].stats;}
+
+function drawSpark(){
+  const fr=frames(), W=440,H=80, n=fr.length;
+  const xs=i=>10+(W-20)*(n<2?0.5:i/(n-1));
+  const ys=v=>H-8-(H-16)*(v/100);
+  let pts=fr.map((f,i)=>`${xs(i)},${ys(f.metrics.manipulation||0)}`).join(" ");
+  $("ns-spark").innerHTML=
+    `<text x="10" y="12" fill="#8b949e">Persuasion pressure over time</text>`
+    +`<polyline points="${pts}" fill="none" stroke="#ff5c5c" stroke-width="2"/>`
+    +`<line id="ns-head" x1="${xs(idx)}" y1="14" x2="${xs(idx)}" y2="${H-6}" stroke="#e6edf3" stroke-width="1" stroke-dasharray="3 3"/>`;
+}
+function moveHead(){const fr=frames(),n=fr.length,W=440;const x=10+(W-20)*(n<2?0.5:idx/(n-1));
+  const h=$("ns-head"); if(h){h.setAttribute("x1",x);h.setAttribute("x2",x);} }
+
+function render(){
+  const fr=frames(), f=fr[idx];
+  for(const k of Object.keys(NETS)){
+    const el=$("rg-"+k); const v=(f.networks[k]!==undefined)?f.networks[k]:0;
+    el.setAttribute("fill-opacity", heat(v).toFixed(3));
+    el.setAttribute("stroke", v>60?"#ff7043":"#30363d");
+  }
+  for(const m of METRICS){
+    let v=f.metrics[m.k]; if(v===undefined)v=0;
+    const w=m.signed?(v+100)/2:v;
+    $("mb-"+m.k).style.width=Math.max(0,Math.min(100,w))+"%";
+    $("mv-"+m.k).textContent=(m.signed?(v>0?"+":""):"")+v.toFixed(0);
+  }
+  const rec=f.recommendation||"Hold", rc=$("ns-rec"); rc.textContent=rec;
+  rc.style.background=rec==="Buy"?"#11331f":rec==="Sell"?"#3a1414":"#22272e";
+  rc.style.color=rec==="Buy"?"#4cd964":rec==="Sell"?"#ff5c5c":"#8b949e";
+  $("ns-time").textContent=f.t.toFixed(1)+"s";
+  $("ns-scrub").value=idx; moveHead();
+}
+function setSubject(s){
+  subject=s; idx=0;
+  for(const b of document.querySelectorAll("#ns-subjects button"))
+    b.classList.toggle("active", b.dataset.s===s);
+  const st=stats();
+  $("ns-headline").innerHTML="<b>"+(DATA.reports[subject].timeline.personalized?"Personalized brain — ":"Average brain — ")+"</b>"+st.headline;
+  $("ns-scrub").max=frames().length-1;
+  $("ns-momlist").innerHTML="<b>Moments that matter:</b><br>"+
+    st.peak_moments.slice(0,4).map(p=>`• ${p.label}: <b>${p.score.toFixed(0)}</b> at ${p.t.toFixed(0)}s`).join("<br>");
+  drawSpark(); render();
+}
+// subject buttons
+$("ns-subjects").innerHTML=DATA.subjects.map((s,i)=>
+  `<button data-s="${s}" class="${i===0?'active':''}">${s}</button>`).join("");
+for(const b of document.querySelectorAll("#ns-subjects button"))
+  b.onclick=()=>{stop();setSubject(b.dataset.s);};
+
+$("ns-scrub").oninput=e=>{idx=+e.target.value;render();};
+function step(){const n=frames().length; idx=(idx+1)%n; render(); if(idx===n-1)stop();}
+function play(){playing=true;$("ns-play").textContent="❚❚ Pause";
+  const fps=DATA.reports[subject].timeline.fps||1; timer=setInterval(step,1000/Math.max(fps,0.5)/1.5);}
+function stop(){playing=false;$("ns-play").textContent="▶ Play";if(timer)clearInterval(timer);}
+$("ns-play").onclick=()=>{playing?stop():(idx>=frames().length-1&&(idx=0),play());};
+
+setSubject(DATA.subjects[0]);
+})();
+</script>

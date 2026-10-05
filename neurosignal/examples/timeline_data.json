@@ -1,0 +1,1590 @@
+{
+  "Average brain": {
+    "timeline": {
+      "fps": 1.0,
+      "duration": 12.0,
+      "source": "ad-arc(illustrative) :: Average brain",
+      "personalized": false,
+      "provenance": null,
+      "notes": [],
+      "frames": [
+        {
+          "t": 0.0,
+          "networks": {
+            "Visual": 60.0,
+            "Default": 57.1,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 31.4,
+            "VentralAttention": 2.9,
+            "Limbic": 14.3,
+            "Frontoparietal": 45.7
+          },
+          "metrics": {
+            "valence": 22.1,
+            "arousal": 8.6,
+            "engagement": 23.3,
+            "manipulation": 23.8,
+            "buy_sell": 49.6
+          },
+          "constructs": {
+            "reward_value": 35.7,
+            "emotion": 14.3,
+            "attention": 31.4,
+            "visual_sensory": 60.0,
+            "memory_encoding": 57.1,
+            "conflict_risk": 2.9,
+            "cognitive_load": 45.7
+          },
+          "buy_sell": 49.6,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 1.0,
+          "networks": {
+            "Visual": 60.0,
+            "Default": 57.1,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 31.4,
+            "VentralAttention": 2.9,
+            "Limbic": 14.3,
+            "Frontoparietal": 45.7
+          },
+          "metrics": {
+            "valence": 22.1,
+            "arousal": 8.6,
+            "engagement": 23.3,
+            "manipulation": 23.8,
+            "buy_sell": 49.6
+          },
+          "constructs": {
+            "reward_value": 35.7,
+            "emotion": 14.3,
+            "attention": 31.4,
+            "visual_sensory": 60.0,
+            "memory_encoding": 57.1,
+            "conflict_risk": 2.9,
+            "cognitive_load": 45.7
+          },
+          "buy_sell": 49.6,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 2.0,
+          "networks": {
+            "Visual": 60.0,
+            "Default": 57.1,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 31.4,
+            "VentralAttention": 2.9,
+            "Limbic": 14.3,
+            "Frontoparietal": 45.7
+          },
+          "metrics": {
+            "valence": 22.1,
+            "arousal": 8.6,
+            "engagement": 23.3,
+            "manipulation": 23.8,
+            "buy_sell": 49.6
+          },
+          "constructs": {
+            "reward_value": 35.7,
+            "emotion": 14.3,
+            "attention": 31.4,
+            "visual_sensory": 60.0,
+            "memory_encoding": 57.1,
+            "conflict_risk": 2.9,
+            "cognitive_load": 45.7
+          },
+          "buy_sell": 49.6,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 3.0,
+          "networks": {
+            "Visual": 60.0,
+            "Default": 57.1,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 31.4,
+            "VentralAttention": 2.9,
+            "Limbic": 14.3,
+            "Frontoparietal": 45.7
+          },
+          "metrics": {
+            "valence": 22.1,
+            "arousal": 8.6,
+            "engagement": 23.3,
+            "manipulation": 23.8,
+            "buy_sell": 49.6
+          },
+          "constructs": {
+            "reward_value": 35.7,
+            "emotion": 14.3,
+            "attention": 31.4,
+            "visual_sensory": 60.0,
+            "memory_encoding": 57.1,
+            "conflict_risk": 2.9,
+            "cognitive_load": 45.7
+          },
+          "buy_sell": 49.6,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 4.0,
+          "networks": {
+            "Visual": 74.3,
+            "Default": 42.9,
+            "Somatomotor": 31.4,
+            "DorsalAttention": 74.3,
+            "VentralAttention": 31.4,
+            "Limbic": 54.3,
+            "Frontoparietal": 37.1
+          },
+          "metrics": {
+            "valence": 20.0,
+            "arousal": 42.9,
+            "engagement": 51.4,
+            "manipulation": 61.4,
+            "buy_sell": 65.5
+          },
+          "constructs": {
+            "reward_value": 48.6,
+            "emotion": 54.3,
+            "attention": 74.3,
+            "visual_sensory": 74.3,
+            "memory_encoding": 42.9,
+            "conflict_risk": 31.4,
+            "cognitive_load": 37.1
+          },
+          "buy_sell": 65.5,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 5.0,
+          "networks": {
+            "Visual": 74.3,
+            "Default": 42.9,
+            "Somatomotor": 31.4,
+            "DorsalAttention": 74.3,
+            "VentralAttention": 31.4,
+            "Limbic": 61.4,
+            "Frontoparietal": 37.1
+          },
+          "metrics": {
+            "valence": 25.4,
+            "arousal": 46.4,
+            "engagement": 52.6,
+            "manipulation": 66.2,
+            "buy_sell": 68.4
+          },
+          "constructs": {
+            "reward_value": 52.1,
+            "emotion": 61.4,
+            "attention": 74.3,
+            "visual_sensory": 74.3,
+            "memory_encoding": 42.9,
+            "conflict_risk": 31.4,
+            "cognitive_load": 37.1
+          },
+          "buy_sell": 68.4,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 6.0,
+          "networks": {
+            "Visual": 74.3,
+            "Default": 42.9,
+            "Somatomotor": 31.4,
+            "DorsalAttention": 74.3,
+            "VentralAttention": 31.4,
+            "Limbic": 68.6,
+            "Frontoparietal": 37.1
+          },
+          "metrics": {
+            "valence": 30.7,
+            "arousal": 50.0,
+            "engagement": 53.8,
+            "manipulation": 71.0,
+            "buy_sell": 71.3
+          },
+          "constructs": {
+            "reward_value": 55.7,
+            "emotion": 68.6,
+            "attention": 74.3,
+            "visual_sensory": 74.3,
+            "memory_encoding": 42.9,
+            "conflict_risk": 31.4,
+            "cognitive_load": 37.1
+          },
+          "buy_sell": 71.3,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 7.0,
+          "networks": {
+            "Visual": 74.3,
+            "Default": 42.9,
+            "Somatomotor": 31.4,
+            "DorsalAttention": 74.3,
+            "VentralAttention": 31.4,
+            "Limbic": 75.7,
+            "Frontoparietal": 37.1
+          },
+          "metrics": {
+            "valence": 36.1,
+            "arousal": 53.6,
+            "engagement": 55.0,
+            "manipulation": 75.7,
+            "buy_sell": 74.3
+          },
+          "constructs": {
+            "reward_value": 59.3,
+            "emotion": 75.7,
+            "attention": 74.3,
+            "visual_sensory": 74.3,
+            "memory_encoding": 42.9,
+            "conflict_risk": 31.4,
+            "cognitive_load": 37.1
+          },
+          "buy_sell": 74.3,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 8.0,
+          "networks": {
+            "Visual": 57.1,
+            "Default": 28.6,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 57.1,
+            "VentralAttention": 94.3,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -12.1,
+            "arousal": 97.1,
+            "engagement": 71.9,
+            "manipulation": 100.0,
+            "buy_sell": 63.8
+          },
+          "constructs": {
+            "reward_value": 64.3,
+            "emotion": 100.0,
+            "attention": 57.1,
+            "visual_sensory": 57.1,
+            "memory_encoding": 28.6,
+            "conflict_risk": 94.3,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 63.8,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 9.0,
+          "networks": {
+            "Visual": 57.1,
+            "Default": 28.6,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 57.1,
+            "VentralAttention": 94.3,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -12.1,
+            "arousal": 97.1,
+            "engagement": 71.9,
+            "manipulation": 100.0,
+            "buy_sell": 63.8
+          },
+          "constructs": {
+            "reward_value": 64.3,
+            "emotion": 100.0,
+            "attention": 57.1,
+            "visual_sensory": 57.1,
+            "memory_encoding": 28.6,
+            "conflict_risk": 94.3,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 63.8,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 10.0,
+          "networks": {
+            "Visual": 57.1,
+            "Default": 28.6,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 57.1,
+            "VentralAttention": 94.3,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -12.1,
+            "arousal": 97.1,
+            "engagement": 71.9,
+            "manipulation": 100.0,
+            "buy_sell": 63.8
+          },
+          "constructs": {
+            "reward_value": 64.3,
+            "emotion": 100.0,
+            "attention": 57.1,
+            "visual_sensory": 57.1,
+            "memory_encoding": 28.6,
+            "conflict_risk": 94.3,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 63.8,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 11.0,
+          "networks": {
+            "Visual": 57.1,
+            "Default": 28.6,
+            "Somatomotor": 28.6,
+            "DorsalAttention": 57.1,
+            "VentralAttention": 94.3,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -12.1,
+            "arousal": 97.1,
+            "engagement": 71.9,
+            "manipulation": 100.0,
+            "buy_sell": 63.8
+          },
+          "constructs": {
+            "reward_value": 64.3,
+            "emotion": 100.0,
+            "attention": 57.1,
+            "visual_sensory": 57.1,
+            "memory_encoding": 28.6,
+            "conflict_risk": 94.3,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 63.8,
+          "recommendation": "Buy"
+        }
+      ]
+    },
+    "stats": {
+      "metrics": {
+        "arousal": {
+          "key": "arousal",
+          "label": "Arousal / Intensity",
+          "mean": 51.31,
+          "peak": 97.1,
+          "peak_t": 8.0,
+          "trough": 8.6,
+          "trough_t": 0.0,
+          "auc": 562.85,
+          "volatility": 14.76,
+          "final": 97.1
+        },
+        "buy_sell": {
+          "key": "buy_sell",
+          "label": "Buy / Sell Signal",
+          "mean": 61.09,
+          "peak": 74.3,
+          "peak_t": 7.0,
+          "trough": 49.6,
+          "trough_t": 0.0,
+          "auc": 676.4,
+          "volatility": 5.8,
+          "final": 63.8
+        },
+        "engagement": {
+          "key": "engagement",
+          "label": "Engagement",
+          "mean": 49.47,
+          "peak": 71.9,
+          "peak_t": 8.0,
+          "trough": 23.3,
+          "trough_t": 0.0,
+          "auc": 546.0,
+          "volatility": 8.87,
+          "final": 71.9
+        },
+        "manipulation": {
+          "key": "manipulation",
+          "label": "Persuasion Pressure",
+          "mean": 64.12,
+          "peak": 100.0,
+          "peak_t": 8.0,
+          "trough": 23.8,
+          "trough_t": 0.0,
+          "auc": 707.6,
+          "volatility": 11.85,
+          "final": 100.0
+        },
+        "valence": {
+          "key": "valence",
+          "label": "Affective Valence",
+          "mean": 12.68,
+          "peak": 36.1,
+          "peak_t": 7.0,
+          "trough": -12.1,
+          "trough_t": 8.0,
+          "auc": 147.2,
+          "volatility": 14.48,
+          "final": -12.1
+        }
+      },
+      "peak_moments": [
+        {
+          "t": 8.0,
+          "metric": "manipulation",
+          "label": "Persuasion Pressure",
+          "score": 100.0
+        },
+        {
+          "t": 8.0,
+          "metric": "arousal",
+          "label": "Arousal / Intensity",
+          "score": 97.1
+        },
+        {
+          "t": 7.0,
+          "metric": "buy_sell",
+          "label": "Buy / Sell Signal",
+          "score": 74.3
+        },
+        {
+          "t": 8.0,
+          "metric": "engagement",
+          "label": "Engagement",
+          "score": 71.9
+        }
+      ],
+      "network_dynamics": {
+        "Default": {
+          "mean": 42.9,
+          "peak": 57.1,
+          "range": 28.5
+        },
+        "DorsalAttention": {
+          "mean": 54.3,
+          "peak": 74.3,
+          "range": 42.9
+        },
+        "Frontoparietal": {
+          "mean": 27.6,
+          "peak": 45.7,
+          "range": 45.7
+        },
+        "Limbic": {
+          "mean": 59.8,
+          "peak": 100.0,
+          "range": 85.7
+        },
+        "Somatomotor": {
+          "mean": 29.5,
+          "peak": 31.4,
+          "range": 2.8
+        },
+        "VentralAttention": {
+          "mean": 42.9,
+          "peak": 94.3,
+          "range": 91.4
+        },
+        "Visual": {
+          "mean": 63.8,
+          "peak": 74.3,
+          "range": 17.2
+        }
+      },
+      "segments": [
+        {
+          "label": "intro",
+          "t0": 0.0,
+          "t1": 3.0,
+          "manipulation": 23.8,
+          "buy_sell": 49.6
+        },
+        {
+          "label": "build",
+          "t0": 4.0,
+          "t1": 7.0,
+          "manipulation": 68.6,
+          "buy_sell": 69.9
+        },
+        {
+          "label": "payoff",
+          "t0": 8.0,
+          "t1": 11.0,
+          "manipulation": 100.0,
+          "buy_sell": 63.8
+        }
+      ],
+      "duration": 12.0,
+      "n_frames": 12,
+      "personalized": false,
+      "headline": "Peak persuasion pressure (100) at 8s; most dynamic network: VentralAttention (\u039491)."
+    }
+  },
+  "Reward-seeker": {
+    "timeline": {
+      "fps": 1.0,
+      "duration": 12.0,
+      "source": "ad-arc(illustrative) :: Reward-seeker",
+      "personalized": true,
+      "provenance": {
+        "subject": "reward_seeker",
+        "brain_file_fingerprint": ""
+      },
+      "notes": [
+        "Personalized live brain for enrolled subject 'reward_seeker'."
+      ],
+      "frames": [
+        {
+          "t": 0.0,
+          "networks": {
+            "Visual": 55.6,
+            "Default": 53.7,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 37.0,
+            "VentralAttention": 27.8,
+            "Limbic": 44.4,
+            "Frontoparietal": 29.6
+          },
+          "metrics": {
+            "valence": 19.0,
+            "arousal": 36.1,
+            "engagement": 38.0,
+            "manipulation": 63.6,
+            "buy_sell": 57.5
+          },
+          "constructs": {
+            "reward_value": 49.1,
+            "emotion": 44.4,
+            "attention": 37.0,
+            "visual_sensory": 55.6,
+            "memory_encoding": 53.7,
+            "conflict_risk": 27.8,
+            "cognitive_load": 29.6
+          },
+          "buy_sell": 57.5,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 1.0,
+          "networks": {
+            "Visual": 55.6,
+            "Default": 53.7,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 37.0,
+            "VentralAttention": 27.8,
+            "Limbic": 44.4,
+            "Frontoparietal": 29.6
+          },
+          "metrics": {
+            "valence": 19.0,
+            "arousal": 36.1,
+            "engagement": 38.0,
+            "manipulation": 63.6,
+            "buy_sell": 57.5
+          },
+          "constructs": {
+            "reward_value": 49.1,
+            "emotion": 44.4,
+            "attention": 37.0,
+            "visual_sensory": 55.6,
+            "memory_encoding": 53.7,
+            "conflict_risk": 27.8,
+            "cognitive_load": 29.6
+          },
+          "buy_sell": 57.5,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 2.0,
+          "networks": {
+            "Visual": 55.6,
+            "Default": 53.7,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 37.0,
+            "VentralAttention": 27.8,
+            "Limbic": 44.4,
+            "Frontoparietal": 29.6
+          },
+          "metrics": {
+            "valence": 19.0,
+            "arousal": 36.1,
+            "engagement": 38.0,
+            "manipulation": 63.6,
+            "buy_sell": 57.5
+          },
+          "constructs": {
+            "reward_value": 49.1,
+            "emotion": 44.4,
+            "attention": 37.0,
+            "visual_sensory": 55.6,
+            "memory_encoding": 53.7,
+            "conflict_risk": 27.8,
+            "cognitive_load": 29.6
+          },
+          "buy_sell": 57.5,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 3.0,
+          "networks": {
+            "Visual": 55.6,
+            "Default": 53.7,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 37.0,
+            "VentralAttention": 27.8,
+            "Limbic": 44.4,
+            "Frontoparietal": 29.6
+          },
+          "metrics": {
+            "valence": 19.0,
+            "arousal": 36.1,
+            "engagement": 38.0,
+            "manipulation": 63.6,
+            "buy_sell": 57.5
+          },
+          "constructs": {
+            "reward_value": 49.1,
+            "emotion": 44.4,
+            "attention": 37.0,
+            "visual_sensory": 55.6,
+            "memory_encoding": 53.7,
+            "conflict_risk": 27.8,
+            "cognitive_load": 29.6
+          },
+          "buy_sell": 57.5,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 4.0,
+          "networks": {
+            "Visual": 64.8,
+            "Default": 44.4,
+            "Somatomotor": 37.0,
+            "DorsalAttention": 64.8,
+            "VentralAttention": 46.3,
+            "Limbic": 70.4,
+            "Frontoparietal": 24.1
+          },
+          "metrics": {
+            "valence": 17.6,
+            "arousal": 58.3,
+            "engagement": 56.2,
+            "manipulation": 88.0,
+            "buy_sell": 67.8
+          },
+          "constructs": {
+            "reward_value": 57.4,
+            "emotion": 70.4,
+            "attention": 64.8,
+            "visual_sensory": 64.8,
+            "memory_encoding": 44.4,
+            "conflict_risk": 46.3,
+            "cognitive_load": 24.1
+          },
+          "buy_sell": 67.8,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 5.0,
+          "networks": {
+            "Visual": 64.8,
+            "Default": 44.4,
+            "Somatomotor": 37.0,
+            "DorsalAttention": 64.8,
+            "VentralAttention": 46.3,
+            "Limbic": 75.0,
+            "Frontoparietal": 24.1
+          },
+          "metrics": {
+            "valence": 21.1,
+            "arousal": 60.6,
+            "engagement": 56.9,
+            "manipulation": 91.0,
+            "buy_sell": 69.7
+          },
+          "constructs": {
+            "reward_value": 59.7,
+            "emotion": 75.0,
+            "attention": 64.8,
+            "visual_sensory": 64.8,
+            "memory_encoding": 44.4,
+            "conflict_risk": 46.3,
+            "cognitive_load": 24.1
+          },
+          "buy_sell": 69.7,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 6.0,
+          "networks": {
+            "Visual": 64.8,
+            "Default": 44.4,
+            "Somatomotor": 37.0,
+            "DorsalAttention": 64.8,
+            "VentralAttention": 46.3,
+            "Limbic": 79.6,
+            "Frontoparietal": 24.1
+          },
+          "metrics": {
+            "valence": 24.5,
+            "arousal": 63.0,
+            "engagement": 57.7,
+            "manipulation": 94.1,
+            "buy_sell": 71.6
+          },
+          "constructs": {
+            "reward_value": 62.0,
+            "emotion": 79.6,
+            "attention": 64.8,
+            "visual_sensory": 64.8,
+            "memory_encoding": 44.4,
+            "conflict_risk": 46.3,
+            "cognitive_load": 24.1
+          },
+          "buy_sell": 71.6,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 7.0,
+          "networks": {
+            "Visual": 64.8,
+            "Default": 44.4,
+            "Somatomotor": 37.0,
+            "DorsalAttention": 64.8,
+            "VentralAttention": 46.3,
+            "Limbic": 84.3,
+            "Frontoparietal": 24.1
+          },
+          "metrics": {
+            "valence": 28.0,
+            "arousal": 65.3,
+            "engagement": 58.5,
+            "manipulation": 97.2,
+            "buy_sell": 73.5
+          },
+          "constructs": {
+            "reward_value": 64.4,
+            "emotion": 84.3,
+            "attention": 64.8,
+            "visual_sensory": 64.8,
+            "memory_encoding": 44.4,
+            "conflict_risk": 46.3,
+            "cognitive_load": 24.1
+          },
+          "buy_sell": 73.5,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 8.0,
+          "networks": {
+            "Visual": 53.7,
+            "Default": 35.2,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 53.7,
+            "VentralAttention": 87.0,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -3.2,
+            "arousal": 93.5,
+            "engagement": 69.4,
+            "manipulation": 100.0,
+            "buy_sell": 66.7
+          },
+          "constructs": {
+            "reward_value": 67.6,
+            "emotion": 100.0,
+            "attention": 53.7,
+            "visual_sensory": 53.7,
+            "memory_encoding": 35.2,
+            "conflict_risk": 87.0,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 66.7,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 9.0,
+          "networks": {
+            "Visual": 53.7,
+            "Default": 35.2,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 53.7,
+            "VentralAttention": 87.0,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -3.2,
+            "arousal": 93.5,
+            "engagement": 69.4,
+            "manipulation": 100.0,
+            "buy_sell": 66.7
+          },
+          "constructs": {
+            "reward_value": 67.6,
+            "emotion": 100.0,
+            "attention": 53.7,
+            "visual_sensory": 53.7,
+            "memory_encoding": 35.2,
+            "conflict_risk": 87.0,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 66.7,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 10.0,
+          "networks": {
+            "Visual": 53.7,
+            "Default": 35.2,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 53.7,
+            "VentralAttention": 87.0,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -3.2,
+            "arousal": 93.5,
+            "engagement": 69.4,
+            "manipulation": 100.0,
+            "buy_sell": 66.7
+          },
+          "constructs": {
+            "reward_value": 67.6,
+            "emotion": 100.0,
+            "attention": 53.7,
+            "visual_sensory": 53.7,
+            "memory_encoding": 35.2,
+            "conflict_risk": 87.0,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 66.7,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 11.0,
+          "networks": {
+            "Visual": 53.7,
+            "Default": 35.2,
+            "Somatomotor": 35.2,
+            "DorsalAttention": 53.7,
+            "VentralAttention": 87.0,
+            "Limbic": 100.0,
+            "Frontoparietal": 0.0
+          },
+          "metrics": {
+            "valence": -3.2,
+            "arousal": 93.5,
+            "engagement": 69.4,
+            "manipulation": 100.0,
+            "buy_sell": 66.7
+          },
+          "constructs": {
+            "reward_value": 67.6,
+            "emotion": 100.0,
+            "attention": 53.7,
+            "visual_sensory": 53.7,
+            "memory_encoding": 35.2,
+            "conflict_risk": 87.0,
+            "cognitive_load": 0.0
+          },
+          "buy_sell": 66.7,
+          "recommendation": "Buy"
+        }
+      ]
+    },
+    "stats": {
+      "metrics": {
+        "arousal": {
+          "key": "arousal",
+          "label": "Arousal / Intensity",
+          "mean": 63.8,
+          "peak": 93.5,
+          "peak_t": 8.0,
+          "trough": 36.1,
+          "trough_t": 0.0,
+          "auc": 700.8,
+          "volatility": 9.56,
+          "final": 93.5
+        },
+        "buy_sell": {
+          "key": "buy_sell",
+          "label": "Buy / Sell Signal",
+          "mean": 64.95,
+          "peak": 73.5,
+          "peak_t": 7.0,
+          "trough": 57.5,
+          "trough_t": 0.0,
+          "auc": 717.3,
+          "volatility": 3.76,
+          "final": 66.7
+        },
+        "engagement": {
+          "key": "engagement",
+          "label": "Engagement",
+          "mean": 54.91,
+          "peak": 69.4,
+          "peak_t": 8.0,
+          "trough": 38.0,
+          "trough_t": 0.0,
+          "auc": 605.2,
+          "volatility": 5.74,
+          "final": 69.4
+        },
+        "manipulation": {
+          "key": "manipulation",
+          "label": "Persuasion Pressure",
+          "mean": 85.39,
+          "peak": 100.0,
+          "peak_t": 8.0,
+          "trough": 63.6,
+          "trough_t": 0.0,
+          "auc": 942.9,
+          "volatility": 6.82,
+          "final": 100.0
+        },
+        "valence": {
+          "key": "valence",
+          "label": "Affective Valence",
+          "mean": 12.87,
+          "peak": 28.0,
+          "peak_t": 7.0,
+          "trough": -3.2,
+          "trough_t": 8.0,
+          "auc": 146.5,
+          "volatility": 9.37,
+          "final": -3.2
+        }
+      },
+      "peak_moments": [
+        {
+          "t": 8.0,
+          "metric": "manipulation",
+          "label": "Persuasion Pressure",
+          "score": 100.0
+        },
+        {
+          "t": 8.0,
+          "metric": "arousal",
+          "label": "Arousal / Intensity",
+          "score": 93.5
+        },
+        {
+          "t": 7.0,
+          "metric": "buy_sell",
+          "label": "Buy / Sell Signal",
+          "score": 73.5
+        },
+        {
+          "t": 8.0,
+          "metric": "engagement",
+          "label": "Engagement",
+          "score": 69.4
+        }
+      ],
+      "network_dynamics": {
+        "Default": {
+          "mean": 44.4,
+          "peak": 53.7,
+          "range": 18.5
+        },
+        "DorsalAttention": {
+          "mean": 51.8,
+          "peak": 64.8,
+          "range": 27.8
+        },
+        "Frontoparietal": {
+          "mean": 17.9,
+          "peak": 29.6,
+          "range": 29.6
+        },
+        "Limbic": {
+          "mean": 73.9,
+          "peak": 100.0,
+          "range": 55.6
+        },
+        "Somatomotor": {
+          "mean": 35.8,
+          "peak": 37.0,
+          "range": 1.8
+        },
+        "VentralAttention": {
+          "mean": 53.7,
+          "peak": 87.0,
+          "range": 59.2
+        },
+        "Visual": {
+          "mean": 58.0,
+          "peak": 64.8,
+          "range": 11.1
+        }
+      },
+      "segments": [
+        {
+          "label": "intro",
+          "t0": 0.0,
+          "t1": 3.0,
+          "manipulation": 63.6,
+          "buy_sell": 57.5
+        },
+        {
+          "label": "build",
+          "t0": 4.0,
+          "t1": 7.0,
+          "manipulation": 92.6,
+          "buy_sell": 70.7
+        },
+        {
+          "label": "payoff",
+          "t0": 8.0,
+          "t1": 11.0,
+          "manipulation": 100.0,
+          "buy_sell": 66.7
+        }
+      ],
+      "duration": 12.0,
+      "n_frames": 12,
+      "personalized": true,
+      "headline": "Peak persuasion pressure (100) at 8s; most dynamic network: VentralAttention (\u039459)."
+    }
+  },
+  "Deliberator": {
+    "timeline": {
+      "fps": 1.0,
+      "duration": 12.0,
+      "source": "ad-arc(illustrative) :: Deliberator",
+      "personalized": true,
+      "provenance": {
+        "subject": "deliberator",
+        "brain_file_fingerprint": ""
+      },
+      "notes": [
+        "Personalized live brain for enrolled subject 'deliberator'."
+      ],
+      "frames": [
+        {
+          "t": 0.0,
+          "networks": {
+            "Visual": 75.0,
+            "Default": 71.9,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 43.7,
+            "VentralAttention": 0.0,
+            "Limbic": 1.6,
+            "Frontoparietal": 93.8
+          },
+          "metrics": {
+            "valence": 19.1,
+            "arousal": 0.8,
+            "engagement": 26.8,
+            "manipulation": 0.0,
+            "buy_sell": 43.7
+          },
+          "constructs": {
+            "reward_value": 36.7,
+            "emotion": 1.6,
+            "attention": 43.7,
+            "visual_sensory": 75.0,
+            "memory_encoding": 71.9,
+            "conflict_risk": 0.0,
+            "cognitive_load": 93.8
+          },
+          "buy_sell": 43.7,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 1.0,
+          "networks": {
+            "Visual": 75.0,
+            "Default": 71.9,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 43.7,
+            "VentralAttention": 0.0,
+            "Limbic": 1.6,
+            "Frontoparietal": 93.8
+          },
+          "metrics": {
+            "valence": 19.1,
+            "arousal": 0.8,
+            "engagement": 26.8,
+            "manipulation": 0.0,
+            "buy_sell": 43.7
+          },
+          "constructs": {
+            "reward_value": 36.7,
+            "emotion": 1.6,
+            "attention": 43.7,
+            "visual_sensory": 75.0,
+            "memory_encoding": 71.9,
+            "conflict_risk": 0.0,
+            "cognitive_load": 93.8
+          },
+          "buy_sell": 43.7,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 2.0,
+          "networks": {
+            "Visual": 75.0,
+            "Default": 71.9,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 43.7,
+            "VentralAttention": 0.0,
+            "Limbic": 1.6,
+            "Frontoparietal": 93.8
+          },
+          "metrics": {
+            "valence": 19.1,
+            "arousal": 0.8,
+            "engagement": 26.8,
+            "manipulation": 0.0,
+            "buy_sell": 43.7
+          },
+          "constructs": {
+            "reward_value": 36.7,
+            "emotion": 1.6,
+            "attention": 43.7,
+            "visual_sensory": 75.0,
+            "memory_encoding": 71.9,
+            "conflict_risk": 0.0,
+            "cognitive_load": 93.8
+          },
+          "buy_sell": 43.7,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 3.0,
+          "networks": {
+            "Visual": 75.0,
+            "Default": 71.9,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 43.7,
+            "VentralAttention": 0.0,
+            "Limbic": 1.6,
+            "Frontoparietal": 93.8
+          },
+          "metrics": {
+            "valence": 19.1,
+            "arousal": 0.8,
+            "engagement": 26.8,
+            "manipulation": 0.0,
+            "buy_sell": 43.7
+          },
+          "constructs": {
+            "reward_value": 36.7,
+            "emotion": 1.6,
+            "attention": 43.7,
+            "visual_sensory": 75.0,
+            "memory_encoding": 71.9,
+            "conflict_risk": 0.0,
+            "cognitive_load": 93.8
+          },
+          "buy_sell": 43.7,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 4.0,
+          "networks": {
+            "Visual": 90.6,
+            "Default": 56.2,
+            "Somatomotor": 43.7,
+            "DorsalAttention": 90.6,
+            "VentralAttention": 31.2,
+            "Limbic": 45.3,
+            "Frontoparietal": 84.4
+          },
+          "metrics": {
+            "valence": 16.8,
+            "arousal": 38.3,
+            "engagement": 57.6,
+            "manipulation": 10.4,
+            "buy_sell": 61.1
+          },
+          "constructs": {
+            "reward_value": 50.8,
+            "emotion": 45.3,
+            "attention": 90.6,
+            "visual_sensory": 90.6,
+            "memory_encoding": 56.2,
+            "conflict_risk": 31.2,
+            "cognitive_load": 84.4
+          },
+          "buy_sell": 61.1,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 5.0,
+          "networks": {
+            "Visual": 90.6,
+            "Default": 56.2,
+            "Somatomotor": 43.7,
+            "DorsalAttention": 90.6,
+            "VentralAttention": 31.2,
+            "Limbic": 53.1,
+            "Frontoparietal": 84.4
+          },
+          "metrics": {
+            "valence": 22.7,
+            "arousal": 42.2,
+            "engagement": 58.9,
+            "manipulation": 15.6,
+            "buy_sell": 64.3
+          },
+          "constructs": {
+            "reward_value": 54.7,
+            "emotion": 53.1,
+            "attention": 90.6,
+            "visual_sensory": 90.6,
+            "memory_encoding": 56.2,
+            "conflict_risk": 31.2,
+            "cognitive_load": 84.4
+          },
+          "buy_sell": 64.3,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 6.0,
+          "networks": {
+            "Visual": 90.6,
+            "Default": 56.2,
+            "Somatomotor": 43.7,
+            "DorsalAttention": 90.6,
+            "VentralAttention": 31.2,
+            "Limbic": 60.9,
+            "Frontoparietal": 84.4
+          },
+          "metrics": {
+            "valence": 28.5,
+            "arousal": 46.1,
+            "engagement": 60.2,
+            "manipulation": 20.8,
+            "buy_sell": 67.5
+          },
+          "constructs": {
+            "reward_value": 58.6,
+            "emotion": 60.9,
+            "attention": 90.6,
+            "visual_sensory": 90.6,
+            "memory_encoding": 56.2,
+            "conflict_risk": 31.2,
+            "cognitive_load": 84.4
+          },
+          "buy_sell": 67.5,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 7.0,
+          "networks": {
+            "Visual": 90.6,
+            "Default": 56.2,
+            "Somatomotor": 43.7,
+            "DorsalAttention": 90.6,
+            "VentralAttention": 31.2,
+            "Limbic": 68.7,
+            "Frontoparietal": 84.4
+          },
+          "metrics": {
+            "valence": 34.4,
+            "arousal": 50.0,
+            "engagement": 61.5,
+            "manipulation": 26.0,
+            "buy_sell": 70.7
+          },
+          "constructs": {
+            "reward_value": 62.5,
+            "emotion": 68.7,
+            "attention": 90.6,
+            "visual_sensory": 90.6,
+            "memory_encoding": 56.2,
+            "conflict_risk": 31.2,
+            "cognitive_load": 84.4
+          },
+          "buy_sell": 70.7,
+          "recommendation": "Buy"
+        },
+        {
+          "t": 8.0,
+          "networks": {
+            "Visual": 71.9,
+            "Default": 40.6,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 71.9,
+            "VentralAttention": 100.0,
+            "Limbic": 95.3,
+            "Frontoparietal": 43.8
+          },
+          "metrics": {
+            "valence": -18.4,
+            "arousal": 97.7,
+            "engagement": 79.9,
+            "manipulation": 93.2,
+            "buy_sell": 59.2
+          },
+          "constructs": {
+            "reward_value": 68.0,
+            "emotion": 95.3,
+            "attention": 71.9,
+            "visual_sensory": 71.9,
+            "memory_encoding": 40.6,
+            "conflict_risk": 100.0,
+            "cognitive_load": 43.8
+          },
+          "buy_sell": 59.2,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 9.0,
+          "networks": {
+            "Visual": 71.9,
+            "Default": 40.6,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 71.9,
+            "VentralAttention": 100.0,
+            "Limbic": 95.3,
+            "Frontoparietal": 43.8
+          },
+          "metrics": {
+            "valence": -18.4,
+            "arousal": 97.7,
+            "engagement": 79.9,
+            "manipulation": 93.2,
+            "buy_sell": 59.2
+          },
+          "constructs": {
+            "reward_value": 68.0,
+            "emotion": 95.3,
+            "attention": 71.9,
+            "visual_sensory": 71.9,
+            "memory_encoding": 40.6,
+            "conflict_risk": 100.0,
+            "cognitive_load": 43.8
+          },
+          "buy_sell": 59.2,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 10.0,
+          "networks": {
+            "Visual": 71.9,
+            "Default": 40.6,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 71.9,
+            "VentralAttention": 100.0,
+            "Limbic": 95.3,
+            "Frontoparietal": 43.8
+          },
+          "metrics": {
+            "valence": -18.4,
+            "arousal": 97.7,
+            "engagement": 79.9,
+            "manipulation": 93.2,
+            "buy_sell": 59.2
+          },
+          "constructs": {
+            "reward_value": 68.0,
+            "emotion": 95.3,
+            "attention": 71.9,
+            "visual_sensory": 71.9,
+            "memory_encoding": 40.6,
+            "conflict_risk": 100.0,
+            "cognitive_load": 43.8
+          },
+          "buy_sell": 59.2,
+          "recommendation": "Hold"
+        },
+        {
+          "t": 11.0,
+          "networks": {
+            "Visual": 71.9,
+            "Default": 40.6,
+            "Somatomotor": 40.6,
+            "DorsalAttention": 71.9,
+            "VentralAttention": 100.0,
+            "Limbic": 95.3,
+            "Frontoparietal": 43.8
+          },
+          "metrics": {
+            "valence": -18.4,
+            "arousal": 97.7,
+            "engagement": 79.9,
+            "manipulation": 93.2,
+            "buy_sell": 59.2
+          },
+          "constructs": {
+            "reward_value": 68.0,
+            "emotion": 95.3,
+            "attention": 71.9,
+            "visual_sensory": 71.9,
+            "memory_encoding": 40.6,
+            "conflict_risk": 100.0,
+            "cognitive_load": 43.8
+          },
+          "buy_sell": 59.2,
+          "recommendation": "Hold"
+        }
+      ]
+    },
+    "stats": {
+      "metrics": {
+        "arousal": {
+          "key": "arousal",
+          "label": "Arousal / Intensity",
+          "mean": 47.55,
+          "peak": 97.7,
+          "peak_t": 8.0,
+          "trough": 0.8,
+          "trough_t": 0.0,
+          "auc": 521.35,
+          "volatility": 16.16,
+          "final": 97.7
+        },
+        "buy_sell": {
+          "key": "buy_sell",
+          "label": "Buy / Sell Signal",
+          "mean": 56.27,
+          "peak": 70.7,
+          "peak_t": 7.0,
+          "trough": 43.7,
+          "trough_t": 0.0,
+          "auc": 623.75,
+          "volatility": 6.35,
+          "final": 59.2
+        },
+        "engagement": {
+          "key": "engagement",
+          "label": "Engagement",
+          "mean": 55.42,
+          "peak": 79.9,
+          "peak_t": 8.0,
+          "trough": 26.8,
+          "trough_t": 0.0,
+          "auc": 611.65,
+          "volatility": 9.7,
+          "final": 79.9
+        },
+        "manipulation": {
+          "key": "manipulation",
+          "label": "Persuasion Pressure",
+          "mean": 37.13,
+          "peak": 93.2,
+          "peak_t": 8.0,
+          "trough": 0.0,
+          "trough_t": 0.0,
+          "auc": 399.0,
+          "volatility": 18.87,
+          "final": 93.2
+        },
+        "valence": {
+          "key": "valence",
+          "label": "Affective Valence",
+          "mean": 8.77,
+          "peak": 34.4,
+          "peak_t": 7.0,
+          "trough": -18.4,
+          "trough_t": 8.0,
+          "auc": 104.85,
+          "volatility": 15.86,
+          "final": -18.4
+        }
+      },
+      "peak_moments": [
+        {
+          "t": 8.0,
+          "metric": "arousal",
+          "label": "Arousal / Intensity",
+          "score": 97.7
+        },
+        {
+          "t": 8.0,
+          "metric": "manipulation",
+          "label": "Persuasion Pressure",
+          "score": 93.2
+        },
+        {
+          "t": 8.0,
+          "metric": "engagement",
+          "label": "Engagement",
+          "score": 79.9
+        },
+        {
+          "t": 7.0,
+          "metric": "buy_sell",
+          "label": "Buy / Sell Signal",
+          "score": 70.7
+        }
+      ],
+      "network_dynamics": {
+        "Default": {
+          "mean": 56.2,
+          "peak": 71.9,
+          "range": 31.3
+        },
+        "DorsalAttention": {
+          "mean": 68.7,
+          "peak": 90.6,
+          "range": 46.9
+        },
+        "Frontoparietal": {
+          "mean": 74.0,
+          "peak": 93.8,
+          "range": 50.0
+        },
+        "Limbic": {
+          "mean": 51.3,
+          "peak": 95.3,
+          "range": 93.7
+        },
+        "Somatomotor": {
+          "mean": 41.6,
+          "peak": 43.7,
+          "range": 3.1
+        },
+        "VentralAttention": {
+          "mean": 43.7,
+          "peak": 100.0,
+          "range": 100.0
+        },
+        "Visual": {
+          "mean": 79.2,
+          "peak": 90.6,
+          "range": 18.7
+        }
+      },
+      "segments": [
+        {
+          "label": "intro",
+          "t0": 0.0,
+          "t1": 3.0,
+          "manipulation": 0.0,
+          "buy_sell": 43.7
+        },
+        {
+          "label": "build",
+          "t0": 4.0,
+          "t1": 7.0,
+          "manipulation": 18.2,
+          "buy_sell": 65.9
+        },
+        {
+          "label": "payoff",
+          "t0": 8.0,
+          "t1": 11.0,
+          "manipulation": 93.2,
+          "buy_sell": 59.2
+        }
+      ],
+      "duration": 12.0,
+      "n_frames": 12,
+      "personalized": true,
+      "headline": "Peak arousal / intensity (98) at 8s; most dynamic network: VentralAttention (\u0394100)."
+    }
+  }
+}
