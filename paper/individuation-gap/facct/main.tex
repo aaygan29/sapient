@@ -1,7 +1,8 @@
 \documentclass[sigconf,review,anonymous]{acmart}
 
 % ACM FAccT 2027 submission (anonymous review build). Compiles with the ACM `acmart`
-% class (built in on Overleaf; otherwise `tlmgr install acmart`).
+% class. hyperxmp.sty is vendored in this folder so it builds without an admin install;
+% on Overleaf acmart and its dependencies are already present.
 
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -24,21 +25,21 @@ Individual Neuro-Inference}
 
 \begin{abstract}
 Products and clinical tools increasingly claim to infer an individual's emotion, attention, or likely
-behaviour from brain and body signals, and increasingly from a \emph{predicted} brain, where a model maps
-a stimulus to cortical activity that is then read as a measurement. These claims are sold to advertisers,
+behaviour from brain and body signals, and increasingly from a \emph{predicted} brain, where a model maps a
+stimulus to cortical activity that is then read as a measurement. These claims are sold to advertisers,
 employers, and clinicians, and they assert private knowledge about specific people, yet there is no shared
 standard for deciding which of them can be true. We supply one. We distinguish three claim types,
 population, identity, and individual content, and show they have sharply different evidentiary status: a
 simple and provable boundary, the individuation gap, makes individual-content claims from a zero-shot
-predicted brain unsupportable, while identity and population claims are supportable under stated tests.
-From this we build three accountability artifacts. First, an audit rubric that classifies a marketed claim
-and assigns it a test and a verdict. Second, a mapping of the three claim types onto existing regulation,
-including the European Union's rules on emotion recognition and biometric categorization, data-protection
-law, and consumer-protection enforcement, which shows that the claims least supportable by evidence are
-also the ones regulation most restricts. Third, a disclosure standard and a refusal-first deployment
-pattern that keep identity recognition, which works, separate from mental-content reading, which does not.
-The contribution is a concrete way to hold individual neuro-inference claims accountable, grounded in a
-verifiable technical boundary rather than in contested notions of harm.
+predicted brain unsupportable, while identity and population claims are supportable under stated tests. On
+this boundary we build three accountability artifacts. An audit rubric classifies a marketed claim and
+assigns it a test and a verdict without access to the vendor's model. A regulatory mapping places the three
+claim types against emotion-recognition and biometric-categorization rules, data-protection law, and
+consumer-protection enforcement, and shows that the claims least supportable by evidence are also the ones
+regulation most restricts. A disclosure standard and a refusal-first deployment pattern keep identity
+recognition, which works, separate from mental-content reading, which does not. The contribution is a
+concrete and falsifiable way to hold individual neuro-inference claims accountable, grounded in a verifiable
+technical boundary rather than in contested notions of harm.
 \end{abstract}
 
 \keywords{neurotechnology, individual inference, accountability, transparency, auditing, emotion
@@ -47,155 +48,280 @@ recognition, biometric categorization, information asymmetry, EU AI Act, disclos
 \maketitle
 
 \section{Introduction}
-Systems that infer facts about people are the core concern of fairness, accountability, and transparency,
-and a fast-growing class of them infers mental content. Affective-computing products score emotion from a
-face or a voice, brand-intelligence platforms sell predicted audience response, and a new wave of
-neuro-mental-health tools offer to read an individual's state from brain or body signals. Many do so from a
-\emph{predicted} brain: a model maps a stimulus or context to cortical activity, which is then labelled with
-construct names and reported as if it had been measured \cite{poldrack2006,hutzler2013,yao2024}.
+Systems that infer facts about people are the core concern of fairness, accountability, and transparency, and
+a fast-growing class of them infers mental content. Affective-computing products score emotion from a face,
+a voice, or a wearable; brand-intelligence platforms sell predicted audience response; and a new wave of
+neuro-mental-health tools offers to read an individual's state from brain or body signals. A growing share of
+these systems does not measure a brain at all. Instead a model maps a stimulus or context to a predicted
+pattern of cortical activity, which is then labelled with construct names, attention, reward, stress, intent,
+and reported as if it had been recorded \cite{poldrack2006,hutzler2013,yao2024}. The label does the selling,
+and the label asserts knowledge about a specific person.
 
 The accountability problem is that these individual claims are asserted, priced, and acted on before anyone
-has agreed how to tell which are true. A person scored by such a system cannot easily contest the score, and
-a buyer or regulator cannot easily separate a claim that the evidence supports from one that it does not,
-because both arrive dressed as neural measurements. The result is an information asymmetry: the operator
-holds what looks like privileged knowledge about a specific person, and the person and the public hold no
-means to check it.
+has agreed how to tell which are true. A job applicant screened by an emotion-recognition tool cannot contest
+the inference that they lacked enthusiasm. A shopper profiled by a predicted-brain platform cannot see, let
+alone rebut, the claim that an advertisement moved their reward system. A patient offered a personalized
+neuro-readout cannot easily distinguish a validated measurement from a marketing construct. In each case the
+operator holds what looks like privileged, scientific knowledge about the person, and the person and the
+public hold no agreed means to check it. This is an information asymmetry of a particular kind: not merely
+that the operator knows more, but that the operator's claim is framed as a neural measurement, which borrows
+the authority of neuroscience while evading its standards of evidence.
 
-This paper gives a means to check it. We separate three kinds of claim and show they are not
-interchangeable. A \emph{population} claim predicts an aggregate or an audience. An \emph{identity} claim
+This paper gives a means to check the claim. Our central move is to stop treating ``reading the brain'' as a
+single capability and to separate three kinds of claim that are routinely conflated. A \emph{population}
+claim is about an aggregate, an audience, or a market, and not about any one person. An \emph{identity} claim
 recognizes or verifies which person is present. An \emph{individual-content} claim states what a specific
-person feels, attends to, or will choose. A short and verifiable technical boundary, which we call the
-individuation gap, makes the third kind unsupportable for a predicted brain that has never seen the person,
-while the first two are supportable under tests we state. On this boundary we build an audit rubric, a
-mapping to existing law, and a disclosure standard. Our aim is not to adjudicate whether neurotechnology is
-good or bad, but to give regulators, auditors, and builders a concrete and falsifiable basis for deciding
-which individual claims may be made.
+person feels, attends to, or will choose. These three are not interchangeable, and they do not share an
+evidentiary status. A short and verifiable technical boundary, which we call the individuation gap, makes
+individual-content claims from a predicted brain that has never seen the person unsupportable, while identity
+and population claims are supportable under tests we state.
 
-\paragraph{Contributions.}
-(1) A taxonomy of individual neuro-inference claims with, for each type, the test that would support it and
-its current evidentiary status. (2) An audit rubric that takes a marketed claim to a verdict
-(Figure~\ref{fig:audit}). (3) A mapping of the taxonomy onto emotion-recognition, biometric-categorization,
-data-protection, and consumer-protection regimes (Table~\ref{tab:reg}). (4) A disclosure standard and a
-refusal-first deployment pattern that separate identity from content.
+On this boundary we build the accountability machinery that the field asks for but that neuro-inference
+claims currently escape. We contribute (1) a taxonomy of individual neuro-inference claims, with the test
+that would support each type and its current evidentiary status; (2) an audit rubric that takes a marketed
+claim to a verdict without access to the vendor's model (Figure~\ref{fig:audit}); (3) a worked audit of the
+claim categories that dominate the market; (4) a mapping of the taxonomy onto emotion-recognition,
+biometric-categorization, data-protection, and consumer-protection regimes (Table~\ref{tab:reg}), which shows
+that evidence and law already point the same way; and (5) a disclosure standard and a refusal-first
+deployment pattern that keep identity separate from content. Our aim is not to adjudicate whether
+neurotechnology is good or bad, but to give regulators, auditors, and builders a concrete and falsifiable
+basis for deciding which individual claims may be made.
+
+\section{Related work}
+Our work sits at the meeting point of three literatures. The first is \emph{algorithmic auditing and
+accountability}. External and internal audits have exposed the gap between what systems claim and what they
+deliver, most influentially for facial analysis \cite{buolamwini2018}, and have proposed process frameworks
+to close the gap through documentation and impact assessment \cite{raji2020,metcalf2021}. These frameworks
+ask whether a system works as claimed and who is accountable when it does not; they do not, on their own,
+supply the domain-specific test that decides whether a \emph{neural} claim about an individual can be true.
+We contribute that test for the neuro-inference setting and fold it into an audit an outsider can run.
+
+The second is the \emph{critique of inference about inner states}. A large body of work questions whether
+affect and intent can be read from external signals at the individual level: emotion cannot be reliably
+inferred from facial configuration \cite{barrett2019}, and inferring a cognitive process from a brain region
+is unreliable because regions are not specific to processes \cite{poldrack2006,hutzler2013}. Our
+contribution is to convert this general caution into a sharp, provable boundary for the specific and
+commercially active case of a \emph{predicted} brain, and to separate the part of the claim that does hold
+(identity) from the part that does not (content).
+
+The third is \emph{neurorights and the governance of neurotechnology}, which argues for new protections such
+as mental privacy and cognitive liberty \cite{ienca2017}, and the emerging hard law that already touches
+these systems: the European Union's rules on emotion recognition and biometric categorization
+\cite{euaiact2024}, data-protection law's treatment of biometric and health data \cite{gdpr2016}, biometric
+privacy statutes \cite{bipa2008}, and consumer-protection doctrine on deceptive efficacy claims. Prior work
+in this strand makes the normative case; we add the operational link, showing that the claim type the
+evidence cannot support is the same claim type the law most restricts, and giving auditors a rubric that
+connects the two.
 
 \section{Background: the individuation gap}
-We state the boundary compactly; it is elementary and is proved, with machine-checked support, in a
-companion technical analysis. Let an outcome be $Y=S+\varepsilon$ with idiosyncratic-noise variance $v>0$,
-and let a predictor resolve an identifiable \emph{between-person} signal variance $a\ge 0$. The best-case
-squared correlation is $\rho^2 = a/(a+v)$. Aggregating over $N$ people replaces $v$ with $v/N$ and so raises
-$\rho^2$; this is the population regime. A zero-shot predicted brain, by contrast, emits the same features
-for every unseen person, so it carries no between-person variance, $a=0$, and $\rho^2=0$. The individual
-signal is not merely hard to extract; it is absent from the input, so no model and no amount of pooling
-recovers it. Per-person enrollment can supply $a>0$, but on current encoders and signals that enrollment
-recovers a person's \emph{identity} far more readily than their \emph{behaviour}: in-scanner fingerprinting
-reaches 100\% and a behavioural fingerprint reaches many times chance, while the direct link from an
-individual's neural signal to that individual's behaviour abstains under a calibrated test. The measurement
-literature agrees: individual brain-behaviour effects are small and need very large samples, individual
-test-retest reliability is low, and individual precision mapping takes hours of data per person
-\cite{marek2022,elliott2020,gordon2017,kang2024}. These facts are the premise of this paper, not its
-contribution; what follows builds accountability on top of them.
+We state the boundary compactly; it is elementary and is proved, with machine-checked support, in a companion
+technical analysis. Let an outcome be $Y=S+\varepsilon$ with idiosyncratic-noise variance $v>0$, and let a
+predictor resolve an identifiable \emph{between-person} signal variance $a\ge 0$. The best-case squared
+correlation between predictor and outcome is $\rho^2 = a/(a+v)$. Averaging over $N$ people replaces $v$ with
+$v/N$ and so raises $\rho^2$; this is the population regime, and it is why aggregate neural signals can
+forecast markets and audiences even when the sampled people's own choices do not
+\cite{knutson2007,dmochowski2014}. A zero-shot predicted brain, by contrast, emits the same features for every
+unseen person, so it carries no between-person variance, $a=0$, and $\rho^2=0$. The individual signal is not
+merely hard to extract; it is absent from the input, so no model and no amount of pooling recovers it.
+
+Per-person enrollment can supply $a>0$, but on current encoders and signals that enrollment recovers a
+person's \emph{identity} far more readily than their \emph{behaviour}. In-scanner fingerprinting from
+subject-specific encoders reaches 100\% identification, and a behavioural fingerprint reaches many times
+chance, while the direct link from an individual's neural signal to that individual's behaviour abstains under
+a calibrated test. The measurement literature points the same way: individual brain-behaviour effects are
+small and need very large samples \cite{marek2022,kang2024}, individual test-retest reliability of common
+measures is low \cite{elliott2020}, and individual precision mapping takes hours of data per person
+\cite{gordon2017}. These facts are the premise of this paper, not its contribution; what follows builds
+accountability on top of them.
 
 \section{A taxonomy of individual neuro-inference claims}
-We separate three claim types by what they assert about a person.
-\begin{description}
-\item[Population.] The claim is about an aggregate, an audience, or a market, not about any one person. It
-is supportable when the predicted index beats a content-only baseline out of sample and carries a
-calibrated interval. This is the regime where classical neuroforecasting works
-\cite{knutson2007,dmochowski2014}.
-\item[Identity.] The claim recognizes or verifies which person is present. It is supportable when a
-fingerprint exceeds chance on held-out data. It is also, precisely because it works, a biometric capability
-that carries re-identification and surveillance risk.
-\item[Individual content.] The claim states what a specific person feels, attends to, or will do. From a
-zero-shot predicted brain it is unsupportable by the individuation gap, and even with enrollment it is at
-present modest and expensive, and must be shown to beat a population model for that person.
-\end{description}
-The three are routinely conflated. A system that fingerprints a person well (identity) is advertised as
-reading that person's mind (content), and a system that forecasts an audience well (population) is sold as
-reading the individuals in it. The taxonomy makes the substitution visible and testable.
+We separate three claim types by what they assert about a person, because the evidentiary burden and the
+regulatory exposure differ by type.
+
+\paragraph{Population claims.} The claim is about an aggregate, an audience, or a market, and not about any
+one person. ``This advertisement will raise purchase intent in the target segment'' is a population claim. It
+is supportable when the predicted index beats a content-only baseline out of sample and carries a calibrated
+interval, and the baseline matters because a predicted neural index is a function of the stimulus and can
+reproduce what the stimulus already predicts while adding nothing of its own. Population claims are the
+regime where neuroforecasting has genuine support.
+
+\paragraph{Identity claims.} The claim recognizes or verifies which person is present, for example that a
+pattern of responses belongs to enrolled user A rather than user B. It is supportable when a fingerprint
+exceeds chance on held-out data, which it reliably does. Precisely because it works, it is a biometric
+capability, and it carries the re-identification and surveillance risks that attach to biometrics; a system
+that can tell people apart can also track them.
+
+\paragraph{Individual-content claims.} The claim states what a specific person feels, attends to, or will
+choose: ``this applicant is anxious,'' ``this user wants the product,'' ``this voter will be moved.'' From a
+zero-shot predicted brain, an individual-content claim is unsupportable by the individuation gap. With
+enrollment it becomes possible in principle, but on current systems it is modest, data-hungry, and must be
+shown to beat a population model for that specific person before it earns the label.
+
+The three types are routinely conflated, and the conflation is where accountability fails. A system that
+fingerprints a person well (identity) is advertised as reading that person's mind (content). A system that
+forecasts an audience well (population) is sold as reading the individuals who compose it. The taxonomy makes
+the substitution visible, and because each type has an explicit test, it makes the substitution checkable.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig_audit.pdf}
-\caption{The audit rubric. A marketed claim about a specific person is classified as population, identity,
-or individual-content; each type has an explicit test and a verdict. Individual-content claims from a
-zero-shot predicted brain fail by the individuation gap; identity claims pass but trigger biometric
-safeguards; population claims pass under a content-baseline and calibration test.}
+\caption{The audit rubric. A marketed claim about a specific person is classified as population, identity, or
+individual-content; each type has an explicit test and a verdict. Individual-content claims from a zero-shot
+predicted brain fail by the individuation gap; identity claims pass but trigger biometric safeguards;
+population claims pass under a content-baseline and calibration test.}
 \label{fig:audit}
 \end{figure}
 
 \section{An audit rubric}
 Figure~\ref{fig:audit} turns the taxonomy into a procedure an auditor can run on a product claim without
-access to the vendor's model. The auditor first classifies the claim by what it asserts about the person,
-then applies the corresponding test, then records the verdict and the required safeguards. The rubric is
-deliberately conservative: a claim that cannot be assigned a passing test defaults to \emph{unsupported}, so
-the burden of evidence rests on the operator. The rubric also separates the channels, so a vendor may be
-credited for a working identity or population capability without being credited for an unsupported
-content capability.
+access to the vendor's model or training data. The procedure has four steps. First, \emph{classify}: read the
+marketed claim and decide what it asserts about the person, population, identity, or individual content,
+using the claim's own language and its intended use. Second, \emph{apply the test} for that type: a
+content-baseline and calibration test for population claims, a held-out fingerprinting test above chance for
+identity claims, and for individual-content claims a demonstration that an individual's neural signal predicts
+that individual's behaviour better than a population model, which the individuation gap shows is impossible
+zero-shot and demanding under enrollment. Third, \emph{record the verdict and the required safeguards};
+identity claims that pass still inherit biometric obligations. Fourth, \emph{default to unsupported}: a claim
+that cannot be assigned a passing test is recorded as unsupported, so the burden of evidence rests on the
+operator rather than on the person being scored.
 
-A practical consequence is that much of what is marketed as individual mind-reading is, on audit, either a
-population instrument (useful, but not about the individual) or an identity instrument (about the individual,
-but recognition rather than mind-reading). Naming which of the three a product actually delivers is most of
-the accountability work.
+Two properties make the rubric usable in practice. It is \emph{black-box}: it classifies and tests the
+claim, not the internals of the model, so it can be applied to a product description, a marketing page, or a
+procurement document. And it \emph{separates the channels}: a vendor can be credited for a working identity
+or population capability without being credited for an unsupported content capability, which prevents a real
+capability in one channel from laundering an unsupported claim in another.
+
+\section{A worked audit of market claim categories}
+We apply the rubric to the claim categories that dominate the market. We audit \emph{categories} of claim
+rather than named products, both to keep the analysis general and to avoid singling out firms; the point is
+structural.
+
+\emph{Neuromarketing audience scoring} typically reports how a segment will respond to creative. Classified,
+this is a population claim; tested, it can pass if the vendor shows the predicted index beats a content-only
+baseline and carries an interval. The accountability failure here is not the capability but the slippage when
+the same score is re-described as reading an individual viewer.
+
+\emph{Affective-computing state detection} reports an individual's current emotion from face, voice, or
+wearable signals. Classified, this is an individual-content claim. Tested, it must beat a population model for
+the specific person and rest on a construct with a validated localizer; on the evidence, individual emotion
+read-out at this level is not supportable, which aligns with the broader finding that emotion cannot be
+reliably inferred from external configuration \cite{barrett2019}. The rubric records it as unsupported absent
+per-person evidence.
+
+\emph{Personalized neuro-wellness read-outs} offer an individual a number for stress, focus, or mood from a
+predicted or low-channel signal. Classified, these are individual-content claims; tested, they face the
+individuation gap when the system is zero-shot and the enrollment price when it is not. The honest version of
+such a product reports a population-calibrated or identity-based function and says so.
+
+\emph{Neural authentication} verifies a person from their responses. Classified, this is an identity claim;
+tested, it can pass, and the rubric then routes it to biometric safeguards rather than to a mind-reading
+claim. This is the one category where the capability and the claim coincide, and the accountability task is
+to keep it from being marketed as content.
+
+Across categories, the recurring pattern is that a working population or identity capability is re-described
+as individual mind-reading. Naming which of the three a product actually delivers is most of the
+accountability work, and the rubric makes that naming routine.
 
 \section{Mapping to regulation}
-The taxonomy aligns with where regulation already draws lines (Table~\ref{tab:reg}). The European Union's AI
-regulation restricts emotion inference in workplaces and schools and restricts biometric categorization,
-which maps onto our identity and individual-content rows; data-protection law treats biometric and
-health-adjacent inference as sensitive; and consumer-protection enforcement reaches deceptive efficacy
-claims, which is exactly what an unsupported individual-content claim is. The alignment is not a
-coincidence: the claims that the evidence least supports are the ones that most directly assert private
-knowledge about a person, which is what these regimes guard.
+The taxonomy aligns with where regulation already draws its lines (Table~\ref{tab:reg}). The European Union's
+AI regulation restricts the use of emotion-recognition systems in workplaces and education and restricts
+biometric categorization, which maps onto our individual-content and identity rows \cite{euaiact2024}.
+Data-protection law treats biometric data used to identify a person, and data concerning health, as special
+categories subject to heightened conditions, which maps onto the identity row and onto health-adjacent
+content claims \cite{gdpr2016}. Dedicated biometric-privacy statutes impose consent and disclosure
+obligations on the collection of biometric identifiers, again tracking the identity row \cite{bipa2008}. And
+consumer-protection doctrine reaches deceptive efficacy claims, which is precisely what an unsupported
+individual-content claim is.
+
+The alignment is not a coincidence. The claim that the evidence least supports, individual content from a
+predicted brain, is also the claim that most directly asserts private knowledge about a person's inner state,
+which is what these regimes are built to guard. A practical implication follows for each stakeholder. For
+regulators, the taxonomy gives a technical criterion to attach to emotion-recognition and biometric rules,
+so that enforcement can distinguish a supportable identity capability from an unsupportable content claim.
+For procurement, it gives a question to ask of any vendor: which of the three claim types is this, and which
+test did it pass. For auditors, it gives the black-box rubric above.
 
 \begin{table}[t]
 \centering\small
 \caption{The claim taxonomy against existing regulation. The least evidence-supportable claim type
 (individual content) is also the most restricted.}
 \label{tab:reg}
-\begin{tabular}{@{}p{1.7cm}p{2.0cm}p{2.9cm}@{}}
+\begin{tabular}{@{}p{1.65cm}p{2.0cm}p{2.9cm}@{}}
 \toprule
 Claim type & Evidentiary status & Regulatory exposure \\
 \midrule
-Population & Supportable with test & Advertising/consumer law on efficacy claims \\
-Identity & Supportable; biometric & Biometric identification rules; data-protection (biometric data) \\
-Individual content & Unsupportable zero-shot & Emotion-recognition limits; deceptive-claim enforcement \\
+Population & Supportable under a content-baseline and calibration test & Consumer-protection law on deceptive efficacy claims \\
+Identity & Supportable; a biometric capability & Biometric-categorization rules; data-protection for biometric data; biometric-privacy statutes \\
+Individual content & Unsupportable zero-shot; demanding under enrollment & Emotion-recognition restrictions; deceptive-claim enforcement \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \section{A disclosure standard and a refusal-first pattern}
-Accountability needs an artifact that survives deployment. We propose two. A \emph{disclosure standard}
-requires an operator to state, for each reported score, which of the three claim types it is, which test it
-passed, and the interval it carries; a score that cannot name its type or test is disclosed as unsupported.
-A \emph{refusal-first} deployment pattern returns an individual-content score only when the construct has a
-validated localizer, the predicted index beats a content-only baseline, and the score carries a conformal
-interval, and otherwise returns nothing. Identity and content are reported on separate, separately-governed
-channels, so a system may verify a person without asserting that it has read their mind. Together these move
-the default from assert-by-default to withhold-by-default, which is the posture the evidence warrants.
+Accountability needs an artifact that survives deployment, not only an audit performed once. We propose two.
+
+A \emph{disclosure standard} requires an operator to attach to each reported score three fields: the claim
+type (population, identity, or individual content), the test the score passed, and the uncertainty it
+carries. A score that cannot name its type or its test is disclosed as unsupported rather than presented as a
+measurement. The standard is deliberately lightweight, so it can live on a results screen, in an API
+response, or in a datasheet, and it is checkable by the same rubric an auditor uses. Its effect is to move the
+default from assert-by-default to disclose-by-default, and to make the identity-for-content substitution a
+visible misstatement rather than an ambiguous one.
+
+A \emph{refusal-first} deployment pattern builds the standard into the system. An individual-content score is
+returned only when the construct has a validated localizer, the predicted index beats a content-only
+baseline, and the score carries a conformal interval; otherwise the system returns nothing for that channel.
+Identity and content are computed and governed on separate channels, so a system may verify who a person is
+without asserting that it has read their mind, and the biometric safeguards that attach to identity do not
+leak permission to make content claims. The pattern does not forbid individual-content claims forever; it
+requires that they be earned, per person, by evidence, which is the posture the individuation gap and the
+reliability literature jointly warrant.
+
+\section{Discussion and broader impact}
+The framework has a direction. It makes it harder to sell individual mind-reading that the evidence does not
+support, and easier to credit the population and identity capabilities that it does. The protective impact is
+the main one: a person scored by such a system gains a basis to contest the claim, and a regulator gains a
+technical criterion to attach to existing rules. There is a countervailing risk. The identity capability,
+which we show is the part that works, is a biometric one, and a framework that validates it could be read as
+licensing re-identification or surveillance. We therefore treat identity as a restricted, separately-governed
+channel throughout, and we recommend that a passing identity test trigger biometric safeguards by default
+rather than commercial reuse. A second risk is that the audit's black-box simplicity invites gaming, where a
+vendor passes a population or identity test and then makes content claims off-channel; the disclosure standard
+exists to catch exactly this.
 
 \section{Limitations}
 The boundary we build on is a best-case abstraction; richer encoders change its constants but not its sign,
 since a zero-shot predictor carries no between-person variance. The regulatory mapping is a structural
-alignment, not legal advice, and specific obligations vary by jurisdiction and change over time. The audit
-rubric classifies claims, not internal model quality, and a vendor could pass the identity test while still
-making unsupported content claims elsewhere, which is why the disclosure standard is needed alongside it. The
-empirical figures quoted as premises are drawn from existing public datasets and from the cited literature,
-and the companion technical analysis should be consulted for their derivation.
+alignment rather than legal advice, and specific obligations vary by jurisdiction and change over time. The
+audit rubric classifies claims, not internal model quality, so it must be paired with the disclosure standard
+to catch off-channel claims. The worked audit addresses claim categories rather than named products, which
+keeps it general but means a given product must still be audited on its own terms. The empirical figures
+quoted as premises come from existing public datasets and the cited literature, and the companion technical
+analysis should be consulted for their derivation.
 
 \section*{Generative AI Disclosure}
-Generative AI tools were used to assist with drafting and editing the text and with writing figure code.
-All research questions, framing, analysis, and claims are the author's own, and the author takes full
+Generative AI tools were used to assist with drafting and editing the text and with writing figure code. All
+research questions, framing, analysis, and claims are the author's own, and the author takes full
 responsibility for the content of this paper.
 
 \bibliographystyle{ACM-Reference-Format}
 \begin{thebibliography}{00}
+\bibitem{barrett2019} L.~F. Barrett, R. Adolphs, S. Marsella, A.~M. Martinez, and S.~D. Pollak. 2019. Emotional expressions reconsidered: challenges to inferring emotion from human facial movements. \emph{Psychological Science in the Public Interest} 20, 1 (2019), 1--68.
+\bibitem{bipa2008} State of Illinois. 2008. Biometric Information Privacy Act, 740 ILCS 14.
+\bibitem{buolamwini2018} J. Buolamwini and T. Gebru. 2018. Gender Shades: intersectional accuracy disparities in commercial gender classification. In \emph{Proceedings of the 1st Conference on Fairness, Accountability and Transparency (PMLR 81)}. 77--91.
 \bibitem{dmochowski2014} J.~P. Dmochowski et al. 2014. Audience preferences are predicted by temporal reliability of neural processing. \emph{Nature Communications} 5 (2014), 5567.
 \bibitem{elliott2020} M.~L. Elliott et al. 2020. What is the test-retest reliability of common task-fMRI measures? \emph{Psychological Science} 31, 7 (2020), 792--806.
+\bibitem{euaiact2024} European Parliament and Council. 2024. Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act). \emph{Official Journal of the European Union}.
+\bibitem{gdpr2016} European Parliament and Council. 2016. Regulation (EU) 2016/679 (General Data Protection Regulation). \emph{Official Journal of the European Union}.
 \bibitem{gordon2017} E.~M. Gordon et al. 2017. Precision functional mapping of individual human brains. \emph{Neuron} 95, 4 (2017), 791--807.
 \bibitem{hutzler2013} F. Hutzler. 2013. Reverse inference is not a fallacy per se. \emph{NeuroImage} 84 (2013), 1061--1069.
+\bibitem{ienca2017} M. Ienca and R. Andorno. 2017. Towards new human rights in the age of neuroscience and neurotechnology. \emph{Life Sciences, Society and Policy} 13, 5 (2017).
 \bibitem{kang2024} K. Kang et al. 2024. Study design features increase replicability in brain-wide association studies. \emph{Nature} 636, 8043 (2024), 719--727.
 \bibitem{knutson2007} B. Knutson et al. 2007. Neural predictors of purchases. \emph{Neuron} 53, 1 (2007), 147--156.
 \bibitem{marek2022} S. Marek et al. 2022. Reproducible brain-wide association studies require thousands of individuals. \emph{Nature} 603 (2022), 654--660.
+\bibitem{metcalf2021} J. Metcalf, E. Moss, E.~A. Watkins, R. Singh, and M.~C. Elish. 2021. Algorithmic impact assessments and accountability: the co-construction of impacts. In \emph{Proceedings of the ACM Conference on Fairness, Accountability, and Transparency}. 735--746.
 \bibitem{poldrack2006} R.~A. Poldrack. 2006. Can cognitive processes be inferred from neuroimaging data? \emph{Trends in Cognitive Sciences} 10, 2 (2006), 59--63.
+\bibitem{raji2020} I.~D. Raji et al. 2020. Closing the AI accountability gap: defining an end-to-end framework for internal algorithmic auditing. In \emph{Proceedings of the ACM Conference on Fairness, Accountability, and Transparency}. 33--44.
 \bibitem{yao2024} X. Yao et al. 2024. Using neural data to forecast aggregate consumer behavior in neuromarketing. \emph{Journal of Consumer Behaviour} (2024).
 \end{thebibliography}
 
