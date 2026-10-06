@@ -1,0 +1,30 @@
+[project]
+name = "neurosignal"
+version = "0.2.0"
+description = "Multimodal, evidence-based neuro-behavioral analysis: detect brain-activation constructs (reward, emotion, attention, visual, memory, conflict) and metrics (valence, arousal, engagement, manipulation, sycophancy, buy/sell) from text/audio/video or measured fMRI."
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+
+# Core is intentionally light — only numpy. Detection logic runs anywhere.
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+# Atlas + measured-fMRI input (Schaefer-1000 / Yeo-7 on fsaverage5).
+atlas = ["nilearn>=0.10", "scipy>=1.10"]
+# Image -> predicted visual cortex via the Digital Brain encoder.
+encoder = ["torch>=2.2", "scikit-learn>=1.6,<1.7", "transformers>=4.40", "pillow>=10", "huggingface_hub>=0.23"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+neurosignal = "neurosignal.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["neurosignal*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

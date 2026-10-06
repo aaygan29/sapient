@@ -1,0 +1,13 @@
+{
+  "n": 60,
+  "rho": 0.488,
+  "perm_p": 0.0002,
+  "ci95": [
+    0.266,
+    0.664
+  ],
+  "incremental_rho": 0.345,
+  "baseline_rho": 0.488,
+  "passed": true,
+  "verdict": "PROVEN on this sample: indicator predicts outcome above chance and adds incremental validity over self-report (comparable to self-report \u2014 adds info but is not shown to beat it)"
+}

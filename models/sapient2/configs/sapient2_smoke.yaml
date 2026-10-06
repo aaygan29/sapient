@@ -1,0 +1,44 @@
+# Smoke-test config for sapient-2 — same role as sapient1_smoke.yaml:
+# full I/O dims to keep dataset.py / model.py / eval.py / release.py code
+# paths identical to production; transformer body shrunk for CPU speed.
+
+inherits: sapient2_base.yaml
+
+variant_name: sapient2_smoke
+hf_repo: The-Sapient-Company/sapient-2-scratch-llama   # release.py uses this;
+                                                        # smoke never pushes.
+
+model:
+  d_video: 1408
+  d_audio: 1024
+  d_text:  3072
+  n_vertices: 20484
+  max_stim_len: 200
+  max_fmri_len: 100
+  hidden: 128
+  n_layers: 2
+  n_heads: 4
+  ff_mult: 2
+  low_rank_dim: 256
+  n_subjects: 2
+  dropout: 0.05
+  modality_dropout: 0.1
+  subject_dropout: 0.0
+
+train:
+  optimizer: AdamW
+  lr: 1.0e-3
+  weight_decay: 0.0
+  betas: [0.9, 0.999]
+  lr_schedule: OneCycleLR
+  pct_start: 0.1
+  epochs: 1
+  batch_size: 2
+  grad_accum_steps: 1
+  grad_clip: 1.0
+  precision: bf16-mixed
+  loss: masked_mse
+  log_every: 1
+  val_every: 1
+  save_best_metric: vertex_pearson_mean
+  seed: 0

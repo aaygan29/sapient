@@ -1,0 +1,25 @@
+# sapient-1 first-light, AUDIO + VIDEO only, trained on CNeuroMod Friends.
+# No text/Llama stream — the manifest is built AV-only, so text_path is None
+# and data/dataset.py zero-fills the text tensor (proj_text bias only). This
+# mirrors sapient2_scratch_av: the fast first-light variant that depends only
+# on fsaverage5 BOLD + the V-JEPA2 (video) and W2V-BERT (audio) features.
+#
+# Train reads /data/manifest.json:
+#   modal run train.py --config configs/sapient1_av.yaml
+
+inherits: sapient1_base.yaml
+
+variant_name: sapient1_av
+hf_repo: The-Sapient-Company/sapient-1-llama   # release.py repo (lineage lock)
+
+model:
+  d_video: 1408   # real V-JEPA2 ViT-g output dim (base config's 1280 is stale)
+
+train:
+  epochs: 6
+  batch_size: 4
+  grad_accum_steps: 2
+  lr: 1.0e-4
+  seed: 42
+  save_best_metric: vertex_pearson_mean
+  log_every: 10

@@ -1,0 +1,63 @@
+# sapient-2 trained from scratch on ds004996 (HRI), AUDIO + VIDEO only.
+# No text/Llama stream — the manifest is built with --av-only, so text_path is
+# None and data/dataset.py feeds a zero text tensor (proj_text bias only).
+# This is the fast first-light variant that depends only on fMRIPrep + the
+# V-JEPA2 (video) and W2V-BERT (audio) feature apps; it skips the Llama
+# dependency entirely.
+#
+# Train reads /data/manifest.json, so build the AV manifest to that path:
+#   modal run data/manifest.py --av-only \
+#       --fmri-roots /data/fmri/ds004996 --out /data/manifest.json
+
+inherits: sapient2_base.yaml
+
+variant_name: sapient2_scratch_av
+hf_repo: The-Sapient-Company/sapient-2-scratch-av
+
+# AV manifest produced by data/manifest.py --av-only over ds004996 only.
+manifest_file: /data/manifest.json
+
+encoders:
+  video:
+    model_id: facebook/vjepa2-vitg-fpc64-256
+    license: MIT
+    hidden_dim: 1408   # matches model.d_video=1408 (V-JEPA2 ViT-g feature dim)
+    rate_hz: 2
+    modal_app: sapient-2-features-vjepa2
+    gpu: A100-80GB
+
+  audio:
+    model_id: facebook/w2v-bert-2.0
+    license: MIT
+    hidden_dim: 1024
+    rate_hz: 2
+    modal_app: sapient-2-features-w2vbert
+    gpu: A100-40GB
+  # text stream intentionally omitted — AV-only variant.
+
+datasets:
+  primary:
+    name: ds004996
+    description: NeuroEngage (Toruparova et al. 2025) — human-human and human-robot dialogue
+    openneuro: ds004996
+    license: CC0
+    fmri_cache_repo: The-Sapient-Company/ds004996-fmri-fsaverage5
+    feature_cache_repos:
+      video: The-Sapient-Company/ds004996-features-vjepa2
+      audio: The-Sapient-Company/ds004996-features-w2vbert
+
+# Random init — no warm start
+init:
+  from_pretrained: null
+
+train:
+  modal_app: sapient-2-train-scratch-llama   # reuse the existing scratch app
+  gpu: H100-80GB
+  timeout_seconds: 86400
+  lr: 1.0e-4                                  # scratch uses the base lr
+  pool_subjects_across_datasets: false        # single dataset (ds004996)
+
+release:
+  hf_repo: The-Sapient-Company/sapient-2-scratch-av
+  artifact_dir: release_artifacts/sapient-2-scratch-av
+  private: true

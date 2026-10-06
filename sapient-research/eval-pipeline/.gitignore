@@ -1,0 +1,9 @@
+data/
+__pycache__/
+*.npy
+*.nii.gz
+*.pt
+*.ckpt
+.venv/
+wandb/
+*.log

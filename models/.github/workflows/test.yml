@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: [sapient1, sapient2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install minimum deps for the unit tests
+        run: |
+          python -m pip install --upgrade pip
+          # Only what test_shapes.py / test_overfit.py / test_parcellation.py /
+          # test_license_guard.py need. Modal / nilearn / etc. are only used by
+          # the smoke-test target, which isn't part of CI.
+          pip install pytest torch numpy pyyaml scipy nibabel
+      - name: pytest
+        working-directory: ${{ matrix.repo }}
+        run: pytest tests/ -v

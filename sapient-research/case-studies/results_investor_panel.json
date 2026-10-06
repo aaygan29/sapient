@@ -1,0 +1,52 @@
+{
+  "rows": [
+    {
+      "name": "Daisy (LBJ, 1964)",
+      "category": "political",
+      "approach": 57.5,
+      "buy_sell": 65.3
+    },
+    {
+      "name": "1984 (Apple, Super Bowl)",
+      "category": "brand",
+      "approach": 56.25,
+      "buy_sell": 64.0
+    },
+    {
+      "name": "Think Small (VW, 1959)",
+      "category": "brand",
+      "approach": 57.5,
+      "buy_sell": 47.3
+    },
+    {
+      "name": "Morning in America (Reagan, 1984)",
+      "category": "political",
+      "approach": 70.0,
+      "buy_sell": 70.5
+    },
+    {
+      "name": "Whopper Freakout (BK, 2007)",
+      "category": "brand",
+      "approach": 45.0,
+      "buy_sell": 50.1
+    },
+    {
+      "name": "Generic product spot (low-arousal control)",
+      "category": "control",
+      "approach": 27.5,
+      "buy_sell": 40.4
+    },
+    {
+      "name": "Fear-appeal PSA (anti-smoking, graphic)",
+      "category": "psa",
+      "approach": 52.5,
+      "buy_sell": 58.9
+    },
+    {
+      "name": "Dumb Ways to Die (Metro, 2012)",
+      "category": "psa",
+      "approach": 70.0,
+      "buy_sell": 65.3
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "lens": "political_persuasion",
+  "coverage": 0.8125,
+  "networks": {
+    "Limbic": 0.345,
+    "Default": 0.345,
+    "DorsalAttention": 0.502,
+    "VentralAttention": 0.125,
+    "Frontoparietal": 0.448,
+    "Visual": 0.0
+  },
+  "forecast": {
+    "buy_sell": 44.3,
+    "ci95": [
+      39.2,
+      49.8
+    ],
+    "approach_drive": 0.343,
+    "avoid_drive": 0.274,
+    "integration": 0.349,
+    "mode": "aggregate",
+    "recommendation": "Hold",
+    "generalizability": 0.442,
+    "notes": [
+      "mode=aggregate; integration gain=0.25 (Genevsky-Knutson: affect generalizes, integration is individual-specific).",
+      "Network affinities are real, from Knutson/Genevsky peak MNI coords projected onto Schaefer-2018/Yeo-7 (see data/neuroforecasting_reference.json _provenance).",
+      "CORTICAL PROXY: the core reward (NAcc) and aversion (anterior insula) nuclei are subcortical and ABSENT from the Schaefer/Yeo cortical atlas; the composite reads their cortical shadows, so treat absolute buy/sell thresholds cautiously."
+    ]
+  },
+  "trajectory": [
+    {
+      "segment": 0,
+      "top_concepts": [
+        "family",
+        "free",
+        "future",
+        "imagine",
+        "safe"
+      ],
+      "networks": {
+        "Limbic": 0.547,
+        "Default": 0.533,
+        "DorsalAttention": 0.441,
+        "VentralAttention": 0.0,
+        "Frontoparietal": 0.321,
+        "Visual": 0.0
+      },
+      "coverage": 1.0
+    },
+    {
+      "segment": 1,
+      "top_concepts": [
+        "cannot",
+        "danger",
+        "fear",
+        "ignore",
+        "threat"
+      ],
+      "networks": {
+        "Limbic": 0.174,
+        "Default": 0.143,
+        "DorsalAttention": 0.573,
+        "VentralAttention": 0.404,
+        "Frontoparietal": 0.644,
+        "Visual": 0.0
+      },
+      "coverage": 0.667
+    },
+    {
+      "segment": 2,
+      "top_concepts": [
+        "choose",
+        "courage",
+        "doubt",
+        "fear",
+        "hope"
+      ],
+      "networks": {
+        "Limbic": 0.344,
+        "Default": 0.336,
+        "DorsalAttention": 0.484,
+        "VentralAttention": 0.133,
+        "Frontoparietal": 0.443,
+        "Visual": 0.0
+      },
+      "coverage": 0.833
+    },
+    {
+      "segment": 3,
+      "top_concepts": [
+        "bold",
+        "brings",
+        "change",
+        "everyone",
+        "opportunity"
+      ],
+      "networks": {
+        "Limbic": 0.371,
+        "Default": 0.393,
+        "DorsalAttention": 0.456,
+        "VentralAttention": 0.0,
+        "Frontoparietal": 0.337,
+        "Visual": 0.0
+      },
+      "coverage": 0.75
+    },
+    {
+      "segment": 4,
+      "top_concepts": [
+        "believe",
+        "fight",
+        "future",
+        "ours",
+        "win"
+      ],
+      "networks": {
+        "Limbic": 0.361,
+        "Default": 0.379,
+        "DorsalAttention": 0.519,
+        "VentralAttention": 0.079,
+        "Frontoparietal": 0.355,
+        "Visual": 0.0
+      },
+      "coverage": 0.8
+    }
+  ]
+}

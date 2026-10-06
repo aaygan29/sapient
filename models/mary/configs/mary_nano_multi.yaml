@@ -1,0 +1,37 @@
+# Mary-Nano-Multi — the PROVEN small recipe, on the FULL multi-dataset.
+#
+# Why this run (2026-06-03): the scaled `mary_multi_v2` recipe (d_model 1024, 6
+# layers, LR 3e-4) COLLAPSES — s13 peaks at epoch 0 (vpm 0.0164) then decays to
+# 0.0075; s23 never leaves zero. Same config, seed-dependent total failure =
+# training instability (LR too hot for the wider/deeper model). Meanwhile the
+# small base/nano architecture (768, 1 fusion + 2 pred, LR 3e-4) learns cleanly
+# to vpm 0.039 / top10pct 0.157 — but only on the Huth (audio/text) slice, so it
+# has NO trained visual stream.
+#
+# This config keeps the PROVEN architecture + LR (inherits mary_base.yaml: 768/1/2,
+# 3e-4) and points it at the full 5-dataset manifest (which includes slowfast/qwen_vl
+# video on cneuromod movie10 + wen2017). Goal: a genuinely-predictive, VIDEO-capable
+# checkpoint to serve live. If this learns, the multi-data pipeline is sound and the
+# big-model recipe was the bug; if it collapses, the multi pipeline is the bug.
+
+inherits: mary_base.yaml
+variant_name: mary_nano_multi
+hf_repo: The-Sapient-Company/mary-orcle-nano
+manifest_file: manifest_mary_multi.json     # full 5-dataset, 541 runs / 43 subjects / ~160h
+
+model:
+  # Keep the proven small architecture (mary_base defaults: 768 / 1 fusion / 2 pred).
+  modality_dropout: 0.10        # slightly gentler than 0.15 — half the entries already
+                                # miss visual streams; less aggressive zeroing.
+
+train:
+  learning_rate: 3.0e-4         # proven stable at this model size (do NOT raise)
+  warmup_steps: 500
+  max_epochs: 50
+  batch_size: 16
+  sequence_length: 200
+  train_oversample: 20          # 431 train entries × 20 ≈ 8.6k windows/epoch
+  early_stopping_patience: 10
+  gradient_clip_norm: 1.0
+  gpu: H100
+  timeout_seconds: 64800

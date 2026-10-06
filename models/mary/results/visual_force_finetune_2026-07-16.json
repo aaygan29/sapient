@@ -1,0 +1,61 @@
+{
+  "_headline": "ANSWERED: visual is a LEARNED SHORTCUT, not non-predictive. The SERVED checkpoint already predicts the brain from visual streams ALONE at r=0.0752 (58% of its full-stream accuracy) — nobody had measured this. 400 steps (1.8 minutes of H100) of forcing visual-only prediction raised that to r=0.1001 (76% of full), a +33% relative gain, without harming audio or overall accuracy.",
+  "date": "2026-07-16",
+  "script": "scripts/finetune_visual_force.py --steps 400 --p-audio-drop 0.5",
+  "source_checkpoint": "/data/checkpoints/mary_multi_stable_resp_s13/best.pt (epoch=11)",
+  "output_checkpoint": "/data/checkpoints/mary_visual_force_v1/best.pt",
+  "_output_note": "NEW checkpoint. The served checkpoint was not modified.",
+  "modal_app": "https://modal.com/apps/robert-16572/main/ap-euZgLxsoqwhGvPYBmW2Irc",
+  "metric": "vertex_pearson_mean_responsive (ISC > 0.05 mask)",
+  "data": "real fMRI — 214 video train entries, 112 video val windows. NOT simulated.",
+  "train_minutes": 1.835,
+
+  "pre_finetune": {
+    "base_all": 0.12967342138290405,
+    "visual_only": 0.07516241073608398,
+    "audio_only": 0.12696813046932220,
+    "swap_all_visual": 0.12375354766845703,
+    "delta_swap_visual": -0.0059198737144470215
+  },
+  "post_finetune": {
+    "base_all": 0.13121719658374786,
+    "visual_only": 0.10005708038806915,
+    "audio_only": 0.12709107995033264,
+    "swap_all_visual": 0.12335500866174698,
+    "delta_swap_visual": -0.0078621879220008850
+  },
+
+  "derived": {
+    "visual_only_gain": { "abs": 0.0249, "relative_pct": 33.1 },
+    "visual_only_pct_of_base_pre": 58.0,
+    "visual_only_pct_of_base_post": 76.3,
+    "audio_only_pct_of_base_pre": 97.9,
+    "visual_marginal_over_audio_only_pre": { "abs": 0.0027, "pct_of_base": 2.1 },
+    "base_all_change": { "abs": 0.0015, "_caveat": "no CI, plausibly noise" }
+  },
+
+  "verdict": [
+    "SHORTCUT, not non-predictive. This is the discriminating result the four diagnostic scripts were built to get, and it comes down clearly on the shortcut side.",
+    "The strongest single number is PRE-finetune, i.e. true of the SERVED model today: visual_only = 0.0752, which is 58% of what the model achieves with all six streams. The visual encoders are not inert. They were never inert. They predict the brain from pixels alone.",
+    "Forcing is trivially easy: 400 steps and 1.8 minutes of H100 lifted visual_only 33% relative (0.0752 -> 0.1001, 76% of full accuracy). A pathway that improves that fast on that little compute was under-trained, not incapable.",
+    "It did no harm: audio_only was unchanged (0.1270 -> 0.1271) and base_all did not drop (0.1297 -> 0.1312). The audio pathway was not traded away."
+  ],
+
+  "the_subtlety_that_matters": {
+    "_finding": "Visual is INDIVIDUALLY PREDICTIVE but MARGINALLY REDUNDANT, and these are not in conflict.",
+    "removing_visual_costs": "2.1% of base (audio_only 0.1270 vs base_all 0.1297)",
+    "shuffling_visual_costs": "10.4% of base (permutation null, ci95 excludes zero)",
+    "why_they_differ": "Shuffled visual injects ACTIVELY WRONG content; absent visual merely withholds. Wrong visual hurts ~5x more than missing visual. So the model genuinely reads the visual stream — mismatched pixels degrade it — but in a naturalistic movie corpus what you see is largely predictable from what you hear and what is said, so visual's UNIQUE contribution over audio+text is small (~2%).",
+    "implication": "'Mary cannot see' is false. 'Visual adds little on top of audio+text IN THIS CORPUS' is true. The ceiling here is the corpus's audio/visual redundancy, not the encoder."
+  },
+
+  "limitations": [
+    "One run, one seed, 400 steps, 1.8 minutes. This is a hypothesis test, explicitly, not a trained model. mary_visual_force_v1 is NOT a ship candidate.",
+    "No confidence intervals on any of these eval numbers. base_all 0.1297 -> 0.1312 is well within plausible noise and should NOT be reported as an improvement.",
+    "delta_swap_visual here uses the WEAK roll-by-half permutation (it reproduces -0.0059 exactly), so the -0.0059 -> -0.0079 shift understates the effect and is not the number to quote. Use the permutation null (-0.0135) from visual_swap_null_2026-07-16.json.",
+    "Forcing did NOT make the FULL model lean on visual much more (swap delta -0.0059 -> -0.0079). The shortcut persists when audio is available. Visual-only capability improved; full-model reliance barely moved.",
+    "112 val windows. Absolute accuracy remains low (r~0.13 on responsive vertices)."
+  ],
+
+  "what_this_changes": "The program has operated on 'the served model ignores visual content (swap-test delta ~0.3%)' — that premise, written in finetune_visual_force.py's own docstring, is now falsified from three directions: the 0.3% was slowfast measured alone; the permutation was weak; and visual-only prediction was never measured at all and turns out to be 58% of full accuracy. Production still runs ACTIVE_STREAMS = ('beats','whisper','qwen_ctx') (qualia/core/mary_engine.py:21), i.e. with a demonstrably predictive visual pathway switched off. Whether to turn it on is now a cost/benefit question (slowfast needs A100-40GB, qwen_vl A100-80GB per asset) against a ~2% marginal accuracy gain — NOT the 'it does nothing anyway' question it has been treated as."
+}

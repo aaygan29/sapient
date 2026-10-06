@@ -1,0 +1,76 @@
+# sapient-1 with Llama-3.2-3B text encoder — the sole text variant for v1.
+# Inherits everything from sapient1_base.yaml. Override only the encoder-specific
+# fields and the dataset / release identifiers.
+#
+# Decision: Llama-3.2-3B is the only text encoder. The Qwen2.5-7B variant was
+# removed 2026-05-26 (pre-seed compute budget, stronger brain-encoding precedent,
+# negligible 700M MAU concern). The `proj_text` Linear is dimension-agnostic in
+# code; swapping to a future encoder is a single config line. See
+# engineering-outline/09_data_sources_and_licensing.md §6.
+
+inherits: sapient1_base.yaml
+
+variant_name: sapient1_llama
+hf_repo: The-Sapient-Company/sapient-1-llama
+
+encoders:
+  video:
+    model_id: facebook/vjepa2-vitg-fpc64-256
+    license: MIT
+    hidden_dim: 1280
+    rate_hz: 2
+    modal_app: sapient-1-features-vjepa2
+    gpu: A100-80GB
+
+  audio:
+    model_id: facebook/w2v-bert-2.0
+    license: MIT
+    hidden_dim: 1024
+    rate_hz: 2
+    modal_app: sapient-1-features-w2vbert
+    gpu: A100-40GB
+
+  text:
+    model_id: meta-llama/Llama-3.2-3B
+    license: Llama-3.2-Community
+    hidden_dim: 3072
+    context_words: 1024
+    rate_hz: 2
+    modal_app: sapient-1-features-llama
+    gpu: A100-40GB
+    dtype: bfloat16
+
+datasets:
+  primary:
+    name: cneuromod
+    subjects: [sub-01, sub-02, sub-03, sub-05]   # 4 CC0 open subjects
+    license: CC0
+    tr_seconds: 1.49
+    fmri_cache_repo: The-Sapient-Company/cneuromod-fmri-fsaverage5
+    feature_cache_repos:
+      video: The-Sapient-Company/cneuromod-features-vjepa2
+      audio: The-Sapient-Company/cneuromod-features-w2vbert
+      text:  The-Sapient-Company/cneuromod-features-llama
+
+  augmentation:
+    # Decision #14: BOLD Moments + Narratives are AUGMENTATION ONLY (week 2)
+    - name: bold_moments
+      openneuro: ds005165
+      tr_seconds: 1.75
+      license: verify-before-training
+    - name: narratives
+      openneuro: ds002345
+      tr_seconds: 1.5
+      license: features-only      # stimulus audio NOT redistributed
+
+train:
+  modal_app: sapient-1-train-llama
+  gpu: H100-80GB
+  timeout_seconds: 86400        # 24 h hard cap
+
+release:
+  hf_repo: The-Sapient-Company/sapient-1-llama
+  artifact_dir: release_artifacts/sapient-1-llama
+  private: true                 # flip to false after demo + legal review
+  llama_naming_compliance: true # -llama suffix per Llama 3.2 Community License §5
+  built_with_llama_attribution: true

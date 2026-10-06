@@ -1,0 +1,33 @@
+# Mary-Nano — the 24h POC config. Inherits mary_base.yaml; overrides data slice + epochs
+# to fit the sprint. This mirrors ORCLE-Nano's "15% data, single seed" POC ethos.
+
+inherits: mary_base.yaml
+variant_name: mary_nano
+hf_repo: The-Sapient-Company/mary-orcle-nano
+
+# POC data slice (expand toward the paper's 9-subject/60h as the clock allows).
+datasets:
+  primary:
+    name: cneuromod
+    subjects: [sub-01, sub-02, sub-03, sub-05]    # CC0 open subjects (family precedent)
+    tasks: [friends, movie10]                     # movie10 holds the bourne OOD eval
+    tr_seconds: 1.49
+  augmentation:                                   # add only if time permits
+    - {name: wen2017,  subjects: [sub-01], modalities: [video]}
+    - {name: lebel2023, subjects: [sub-EN057, sub-EN058], modalities: [audio, text]}
+
+train:
+  # Small POC cohort (~50 train windows) → each epoch is a few steps and seconds
+  # on H100. Use many epochs (random window re-sampling per epoch acts as data
+  # augmentation) with early stopping on val/pearson_mean (patience 5).
+  max_epochs: 40
+  warmup_steps: 100
+  batch_size: 16
+  train_oversample: 40       # ~56 entries × 40 = 2240 windows/epoch → ~140 steps/epoch
+  early_stopping_patience: 8
+  modal_app: mary-train
+  gpu: H100-80GB
+  timeout_seconds: 64800    # 18h cap to leave room for eval + papers
+
+model:
+  n_subjects: 4             # the CC0 slice; bump when augmentation subjects are added

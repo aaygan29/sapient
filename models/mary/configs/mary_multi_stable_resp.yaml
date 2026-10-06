@@ -1,0 +1,39 @@
+# Mary-Multi-Stable-Resp — the PROVEN stable recipe + responsive-vertex fix.
+#
+# Inherits mary_multi_stable (LR 1e-4, the recipe that actually trains the wider/deeper
+# d_model=1024 model — NOT the mary_multi_v2 / 3e-4 recipe that collapses). On top of it
+# we add the responsive-vertex fix: ~90% of the 20,484 fsaverage5 vertices are noise
+# (ISC≈0) and dilute the whole-brain mean ~10:1, so the loss + best.pt selection were
+# chasing noise. Here:
+#   - loss.vertex_weight: isc  → MSE + NegCorr vertex reductions are ISC-weighted
+#                                (per-vertex noise ceiling from /data/noise_ceiling_isc.npy)
+#   - select_on: responsive    → best.pt is chosen on vertex_pearson_mean_responsive
+#                                (mask ISC > 0.05), not the diluted whole-brain mean.
+# All ISC loads are guarded in train.py — a missing map degrades to whole-brain behavior.
+#
+# Launch (3-seed ensemble, one detached H100 job per seed):
+#   modal run --detach train.py --config configs/mary_multi_stable_resp.yaml --seed 13
+#   modal run --detach train.py --config configs/mary_multi_stable_resp.yaml --seed 17
+#   modal run --detach train.py --config configs/mary_multi_stable_resp.yaml --seed 23
+
+inherits: mary_multi_stable.yaml     # LR 1e-4, d_model 1024, correlation-led loss
+variant_name: mary_multi_stable_resp
+hf_repo: The-Sapient-Company/mary-orcle-multi
+manifest_file: manifest_mary_multi.json
+
+# Per-vertex ISC noise ceiling on the Modal volume (guarded load in train.py).
+noise_ceiling_file: noise_ceiling_isc.npy
+
+loss:
+  vertex_weight: isc                 # ISC-weighted MSE + NegCorr (responsive-vertex fix)
+  responsive_threshold: 0.05         # responsive = ISC > 0.05 (metric mask)
+
+# Choose best.pt on the responsive metric (falls back to whole-brain if ISC missing).
+select_on: responsive
+
+train:
+  max_epochs: 40
+  early_stopping_patience: 10
+
+# Ensemble: launch this config with seeds [13, 17, 23] as 3 parallel detached H100 jobs.
+ensemble_seeds: [13, 17, 23]

@@ -1,0 +1,67 @@
+# Mary — base config. Faithful 6-stream ORCLE encoder (The Sapient Lab papers).
+# Architecture hyperparameters are LOCKED to the ORCLE-Nano whitepaper. See
+# /Users/robertgutierrez/Desktop/sapient-research/Mary-Model-Insights/01-orcle-nano-architecture.md
+# and mary/CONTRACTS.md.
+
+variant_name: mary_base
+hf_repo: The-Sapient-Company/mary-orcle        # Qwen/Whisper/SlowFast-based (not Llama)
+
+model:
+  d_model: 768
+  n_fusion_layers: 1          # fusion Transformer (pre-norm, cross-attn, learned modality embeds)
+  n_prediction_layers: 2      # prediction Transformer with RoPE
+  n_heads: 8
+  ff_mult: 4
+  dropout: 0.1
+  hrf_kernel_size: 5          # per-stream depthwise HRF conv
+  modality_dropout: 0.15
+  n_vertices: 20484           # fsaverage5 (LH+RH)
+  max_stim_len: 200           # 100 s × 2 Hz feature grid
+  max_fmri_len: 100           # 100 s × 1 Hz fMRI grid  (T_TR per window)
+  n_subjects: 9               # overridden per data slice
+  rope: true
+  use_demographic_slot: true
+
+# Six frozen backbone streams (extracted in data/, cached as (T_2Hz, D_m) float16).
+streams:
+  slowfast:  {model_id: "facebook/slowfast-r101",          d: 2304, rate_hz: 2, modal_app: mary-features-slowfast, gpu: A100-40GB}
+  qwen_vl:   {model_id: "Qwen/Qwen3-VL-8B-Instruct",       d: 4096, rate_hz: 2, modal_app: mary-features-qwen_vl,  gpu: A100-80GB}
+  beats:     {model_id: "microsoft/BEATs",                 d: 768,  rate_hz: 2, modal_app: mary-features-beats,    gpu: A100-40GB}
+  whisper:   {model_id: "openai/whisper-large-v3-turbo",   d: 1280, rate_hz: 2, modal_app: mary-features-whisper,  gpu: A100-40GB}
+  qwen_ctx:  {model_id: "Qwen/Qwen3-8B",                   d: 4096, rate_hz: 2, modal_app: mary-features-qwen_ctx, gpu: A100-80GB}
+  got_ocr:   {model_id: "stepfun-ai/GOT-OCR2_0",           d: 768,  rate_hz: 2, modal_app: mary-features-got_ocr,  gpu: A100-40GB}
+
+loss:
+  # ORCLE-Nano §5 specifies 1.0/0.5/0.1. On our z-scored narrative slice, an
+  # MSE-dominant mix collapses predictions to the temporal mean (corr≈0). We
+  # down-weight MSE and lead with the correlation + contrastive terms, which
+  # recovers learning (verified: single-batch overfit drives r→0.68). Documented
+  # deviation from the paper's nominal weights, forced by the small open-data POC.
+  mse_weight: 0.2
+  negcorr_weight: 1.0
+  infonce_weight: 0.3
+  infonce_temperature: 0.07
+
+train:
+  optimizer: AdamW
+  learning_rate: 3.0e-4
+  weight_decay: 0.01
+  scheduler: cosine_with_warmup
+  warmup_steps: 1000
+  max_epochs: 30
+  batch_size: 16
+  sequence_length: 200        # TR tokens per batch window
+  early_stopping_patience: 5
+  early_stopping_metric: val/pearson_mean
+  gradient_clip_norm: 1.0
+  precision: bf16
+  modal_app: mary-train
+  gpu: H100-80GB
+  timeout_seconds: 86400
+
+seeds: [13]                   # single seed for the POC (ORCLE-Nano convention)
+
+eval:
+  modal_app: mary-eval
+  ood_stimulus: cneuromod/movie10/bourne   # Bourne Ultimatum OOD (matches Paper B)
+  metrics: [vertex_pearson, parcel_pearson, noise_ceiling, yeo7, bootstrap_ci]

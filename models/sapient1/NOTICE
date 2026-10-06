@@ -1,0 +1,39 @@
+sapient-1-llama
+Copyright 2026 The Sapient Company
+
+This product includes weights trained from scratch by The Sapient Company
+on publicly-released, CC0-licensed neuroimaging data. The released sapient-1
+weights are Apache 2.0; upstream frozen feature-extractor weights retain
+their own licenses:
+
+- V-JEPA 2 Gigantic (facebook/vjepa2-vitg-fpc64-256), MIT License,
+  Copyright 2025 Meta Platforms, Inc.
+  https://github.com/facebookresearch/vjepa2
+
+- Wav2Vec-BERT 2.0 (facebook/w2v-bert-2.0), MIT License,
+  Copyright 2023 Meta Platforms, Inc.
+  https://huggingface.co/facebook/w2v-bert-2.0
+
+- Llama-3.2-3B (meta-llama/Llama-3.2-3B), Llama 3.2 Community License,
+  Copyright 2024 Meta Platforms, Inc.
+  https://huggingface.co/meta-llama/Llama-3.2-3B
+  The derived model is named "sapient-1-llama" in compliance with the
+  Llama 3.2 Community License Section 5 naming requirement.
+  Built with Llama.
+
+Training data:
+- Courtois NeuroMod (CC0 open subset: sub-01, sub-02, sub-03, sub-05),
+  released by McGill via the Canadian Open Neuroscience Platform (CONP).
+  https://docs.cneuromod.ca/en/latest/ACCESS.html
+- BOLD Moments Dataset (Lahner et al. 2024, OpenNeuro ds005165). Used
+  through frozen feature encoders only; stimulus frames not redistributed.
+  https://www.nature.com/articles/s41467-024-50310-3
+- Narratives (Nastase et al. 2021, OpenNeuro ds002345). fMRI labels and
+  feature-extractor embeddings only; original stimulus audio is not
+  redistributed with this model.
+  https://www.nature.com/articles/s41597-021-01033-3
+
+Architectural inspiration:
+- TRIBE v1 (D'Ascoli et al. 2025, arXiv:2507.22229). This model uses
+  the architecture family described in the published paper; it does not
+  contain or derive from TRIBE v1 or TRIBE v2 weights.

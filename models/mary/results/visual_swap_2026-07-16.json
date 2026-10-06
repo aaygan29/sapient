@@ -1,0 +1,45 @@
+{
+  "_comment": "Run 1 — single deterministic permutation (roll-by-half), the original diagnose_visual_swap.py. Point estimate, NO confidence interval. Superseded for inference by the permutation-null run (see visual_swap_null_2026-07-16.json); kept because it is the run that reproduces the historical ~0.3% slowfast headline.",
+  "date": "2026-07-16",
+  "script": "scripts/diagnose_visual_swap.py",
+  "checkpoint": "/data/checkpoints/mary_multi_stable_resp_s13/best.pt",
+  "modal_app": "https://modal.com/apps/robert-16572/main/ap-0sykrdyCjAQouRw5vaphig",
+  "metric": "vertex_pearson_mean_responsive (ISC > 0.05 mask, /data/noise_ceiling_isc.npy)",
+  "split": "val",
+  "data": "real fMRI val windows from manifest_mary_multi.json — NOT simulated",
+  "permutation": "deterministic roll-by-half: perm[i] = (i + B//2) % B",
+  "loads_all_streams": true,
+  "_loads_all_streams_note": "This script calls model.load_state_dict(ckpt['state_dict']) WITHOUT the ACTIVE_STREAMS filter used by qualia/core/mary_engine.py, so the video encoders ARE loaded and active here. It measures the model with video genuinely switched on.",
+
+  "n_video_windows": 112,
+  "base_acc_all_streams": 0.12967415153980255,
+
+  "deltas": {
+    "slowfast":       { "acc": 0.12926338613033295, "delta": -0.0004107654094696045, "pct_of_base": -0.32 },
+    "qwen_vl":        { "acc": 0.12747694551944733, "delta": -0.0021972060203552246, "pct_of_base": -1.69 },
+    "got_ocr":        { "acc": 0.12887933850288390, "delta": -0.0007948130369186401, "pct_of_base": -0.61 },
+    "whisper":        { "acc": 0.12820440530776978, "delta": -0.0014697462320327759, "pct_of_base": -1.13 },
+    "beats":          { "acc": 0.12090380489826202, "delta": -0.0087703466415405270, "pct_of_base": -6.76 },
+    "qwen_ctx":       { "acc": 0.10430035740137100, "delta": -0.0253737941384315500, "pct_of_base": -19.57 },
+    "ALL_VISUAL":     { "acc": 0.12375722825527191, "delta": -0.0059169232845306400, "pct_of_base": -4.56 },
+    "ALL_AUDIO_TEXT": { "acc": 0.05832702666521072, "delta": -0.0713471248745918300, "pct_of_base": -55.02 }
+  },
+
+  "findings": [
+    "POSITIVE CONTROL FIRES: shuffling audio+text together costs -55.0% of base accuracy (0.1297 -> 0.0583). The harness detects signal when signal is present, so the visual numbers are interpretable.",
+    "The historical ~0.3% headline REPRODUCES exactly, and is now identified: it was slowfast measured ALONE (-0.0004 = -0.32% of base).",
+    "That headline UNDERSTATED visual by ~15x. All three visual streams shuffled together cost -0.0059 (-4.56%), not -0.0004.",
+    "REDUNDANCY is the reason, and it is not specific to visual: the three audio/text streams individually sum to -0.036 but together cost -0.071, ~2x the sum. Single-stream ablation systematically understates every stream in this conjunctive-fusion architecture.",
+    "Text (qwen_ctx) is the single dominant stream at -19.6% of base — for a product selling visual creative analysis, the model leans hardest on the transcript.",
+    "Honest ratio: visual ~4.6% of responsive-vertex accuracy vs audio+text ~55%. Visual is not zero. It is ~12x less than sound and language."
+  ],
+
+  "limitations": [
+    "ONE permutation, ONE batch. Point estimate with no confidence interval. -0.0713 is far too large to be noise; -0.0059 CANNOT be called distinguishable from zero on this run alone. See the permutation-null run.",
+    "Base accuracy is r=0.1297 on responsive vertices — low in absolute terms. All deltas are fractions of an already-small number.",
+    "Restricted to the 112 val windows that carry slowfast features.",
+    "DOES NOT ANSWER THE CAUSAL QUESTION. A near-zero ablation delta is equally consistent with (a) visual is non-predictive in this corpus and (b) the model learned an audio/text shortcut and routes around visual. Separating those requires finetune_visual_force.py, which forces visual-only prediction, then test_visual_divergence.py to score it."
+  ],
+
+  "why_this_matters": "qualia/core/mary_engine.py:21 sets ACTIVE_STREAMS = ('beats','whisper','qwen_ctx'), so in production the visual streams are gated off entirely. The mary-readout-validation audit notes that Visual Attention, Face Processing and the Visual Pull composite are nevertheless computed and shown to customers — derived from audio and transcript. This run quantifies the ceiling on any honest visual claim: even with the video encoders loaded and active, visual content moves responsive-vertex accuracy by roughly 4.6%."
+}

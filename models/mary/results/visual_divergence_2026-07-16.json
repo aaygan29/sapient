@@ -1,0 +1,52 @@
+{
+  "_headline": "MIXED / WEAK. The visual-force finetune raised visual CONTENT-sensitivity on 2 of 3 measures (two-video swap 1.82x, slowfast on/off 1.68x) but LOWERED all-visual-off divergence (0.58x). All magnitudes remain tiny (1-4% output change). This is consistent-with, not confirmation-of, the shortcut verdict. The strong evidence remains the visual_only ACCURACY result in visual_force_finetune_2026-07-16.json.",
+  "date": "2026-07-16",
+  "script": "scripts/test_visual_divergence.py",
+  "served_checkpoint": "/data/checkpoints/mary_multi_stable_resp_s13/best.pt",
+  "compared_checkpoint": "/data/checkpoints/mary_visual_force_v1/best.pt",
+  "modal_app": "https://modal.com/apps/robert-16572/main/ap-0a6a5GDptIIXQbcJcyeO1k",
+  "n_video_windows": 112,
+  "data": "real fMRI val windows from manifest_mary_multi.json — NOT simulated",
+
+  "_metric_note": "This measures OUTPUT DIVERGENCE, not accuracy. pct_output_change = (1 - r) * 100 where r correlates the predicted brain curve with all streams against the curve with a stream removed/swapped. It answers 'does visual move the output', NOT 'does visual improve the output'. The swap diagnostic answers the latter.",
+
+  "served": {
+    "slowfast_on_vs_off_corr": 0.9930982328951359,
+    "slowfast_pct_output_change": 0.690176710486412,
+    "all_visual_on_vs_off_corr": 0.962916687130928,
+    "all_visual_pct_output_change": 3.708331286907196,
+    "two_video_visual_swap_corr": 0.9838287574904305,
+    "two_video_visual_swap_pct_change": 1.6171242509569472
+  },
+  "visual_force_v1": {
+    "slowfast_on_vs_off_corr": 0.9883945781205382,
+    "slowfast_pct_output_change": 1.1605421879461786,
+    "all_visual_on_vs_off_corr": 0.9783367993576186,
+    "all_visual_pct_output_change": 2.1663200642381364,
+    "two_video_visual_swap_corr": 0.9705696552991867,
+    "two_video_visual_swap_pct_change": 2.9430344700813293
+  },
+
+  "comparison": {
+    "two_video_visual_swap": { "served": 1.617, "forced": 2.943, "ratio": 1.82, "direction": "UP — supports finetune (this is the script's own headline metric)" },
+    "slowfast_on_vs_off":    { "served": 0.690, "forced": 1.161, "ratio": 1.68, "direction": "UP — supports finetune" },
+    "all_visual_on_vs_off":  { "served": 3.708, "forced": 2.166, "ratio": 0.58, "direction": "DOWN — CONTRADICTS finetune" }
+  },
+
+  "interpretation": [
+    "2 of 3 measures moved the intended direction. The two-video swap — the script's stated headline ('Higher = visual drives output more') — rose 1.82x, so swapping visual content between different videos now perturbs the predicted curve nearly twice as much.",
+    "The all-visual-off REGRESSION has a plausible but UNTESTED explanation: swap injects WRONG visual while on/off REMOVES it. The finetune trained visual-only passes with p_audio_drop=0.5, giving the model heavy practice operating with missing streams, which may have made its no-visual fallback cleaner while raising its sensitivity to wrong pixels. Content-sensitivity up, absence-sensitivity down. This is a post-hoc story fitted to three numbers, NOT established by this run.",
+    "MAGNITUDES ARE TINY IN BOTH CHECKPOINTS. On the served model, removing EVERY visual stream changes the predicted brain curve by only 3.7% — the output is 96% the same curve with no pixels at all. This is the redundancy finding from a third angle and is consistent with visual_only=0.075 / audio_only=0.127 / base=0.130: visual and audio carry largely the SAME information about the brain, so removing either barely moves the output while either alone predicts respectably."
+  ],
+
+  "folklore_correction": "test_visual_divergence.py's own docstring calls slowfast on-vs-off 'the original ~0.1% headline number'. It measures 0.690% on the served checkpoint — ~7x the claimed figure. Combined with the swap diagnostic findings (slowfast-alone masking, weak roll-by-half permutation), NONE of the numbers in this program's visual folklore reproduce as stated.",
+
+  "limitations": [
+    "No confidence intervals on any value. Single batch, one seed.",
+    "The two-video swap uses the WEAK roll-by-half permutation, which visual_swap_null_2026-07-16.json showed understates effects ~2.3x. Absolute values are therefore understated; the served-vs-forced COMPARISON remains valid because both checkpoints get the identical permutation.",
+    "mary_visual_force_v1 is a 400-step / 1.8-minute hypothesis test, NOT a trained model. Nothing here is a ship candidate.",
+    "Output divergence is not accuracy. A model can diverge more and predict worse. This run does NOT show the forced checkpoint is better, only that visual moves its output more."
+  ],
+
+  "verdict": "Directionally consistent with the shortcut verdict, but weak and internally mixed. Do NOT cite this as the evidence that visual is real. Cite the accuracy result: the served model predicts the brain from pixels alone at r=0.0752 (58% of full), rising to r=0.1001 after 1.8 minutes of forcing."
+}

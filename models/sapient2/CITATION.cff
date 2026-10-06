@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+title: "sapient-2: a conversation-specialized brain encoder"
+message: "If you use this model, please cite it as below."
+type: software
+authors:
+  - name: "The Sapient Company"
+    website: "https://huggingface.co/The-Sapient-Company"
+repository-code: "https://huggingface.co/The-Sapient-Company/sapient-2-ft-llama"
+url: "https://huggingface.co/The-Sapient-Company/sapient-2-ft-llama"
+license: Apache-2.0
+version: "0.1.0"
+date-released: "2026-06-15"
+keywords:
+  - brain-encoding
+  - fmri
+  - multimodal
+  - human-robot-interaction
+  - conversation
+  - neuroscience
+  - foundation-model
+references:
+  - type: article
+    title: "TRIBE: Predicting whole-brain responses to videos with foundation models"
+    authors:
+      - family-names: D'Ascoli
+        given-names: Stéphane
+    year: 2025
+    identifiers:
+      - type: doi
+        value: 10.48550/arXiv.2507.22229
+    notes: "Architectural inspiration only; sapient-2 contains no TRIBE-derived weights."
+  - type: data
+    title: "ds004996 NeuroEngage"
+    notes: "Primary training corpus. CC0 on OpenNeuro."
+  - type: article
+    title: "Brain mechanisms of human conversation with a robot partner"
+    authors:
+      - family-names: Rauchbauer
+    year: 2019
+    identifiers:
+      - type: url
+        value: "https://pubmed.ncbi.nlm.nih.gov/30852994/"
+    notes: "ds001740 augmentation corpus. Pinned to v2.1.0, CC0 on OpenNeuro."

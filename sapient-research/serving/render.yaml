@@ -1,0 +1,22 @@
+# Render blueprint — one-click hosted sandbox (https://render.com).
+# After connecting the repo: add a Secret File named `keys.json` (Settings -> Secret Files),
+# generated locally with:  python scripts/issue_key.py --client-id investor-demo
+services:
+  - type: web
+    name: sapient-sandbox
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter            # CPU, cheap — sandbox needs no GPU
+    healthCheckPath: /healthz
+    autoDeploy: false
+    envVars:
+      - key: SAPIENT_ENGINE
+        value: mock
+      - key: SAPIENT_DOCS
+        value: "0"
+      - key: SAPIENT_KEYS_FILE
+        value: /etc/secrets/keys.json
+      - key: SAPIENT_RATE_LIMIT_PER_MIN
+        value: "12"
+      - key: SAPIENT_DAILY_QUOTA
+        value: "200"

@@ -1,0 +1,14 @@
+[project]
+name = "sapient-client"
+version = "0.1.0"
+description = "Thin HTTP client for the Sapient-1 Encoding API. Contains NO model code or weights."
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+dependencies = ["requests>=2.31"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["sapient_client*"]

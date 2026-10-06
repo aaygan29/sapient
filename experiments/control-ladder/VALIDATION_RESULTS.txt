@@ -1,0 +1,45 @@
+==============================================================================
+MVE CONTROL-LADDER VALIDATION (synthetic ground truth, NOT real brains)
+20 seeds, RidgeCV, paired bootstrap CI over seeds. Skill = out-of-sample R^2.
+==============================================================================
+
+--- WORLD=SIGNAL  SPLIT=LOSO-stim  (ENROLLED regime) ---
+   skill M0      = +0.077 +/- 0.036
+   skill M0plus  = +0.063 +/- 0.033
+   skill M1      = +0.062 +/- 0.032
+   skill M2      = +0.689 +/- 0.055
+   skill M2perm  = +0.240 +/- 0.051
+   GATE 1  M2 > M0plus : diff=+0.626  CI[+0.522,+0.696]  -> PASS
+   GATE 2  M2 > M2perm : diff=+0.449  CI[+0.378,+0.526]  -> PASS
+
+--- WORLD=SIGNAL  SPLIT=LOSO-subj  (UNSEEN regime) ---
+   skill M0      = -0.046 +/- 0.032
+   skill M0plus  = -0.027 +/- 0.030
+   skill M1      = -0.027 +/- 0.028
+   skill M2      = -0.069 +/- 0.032
+   skill M2perm  = -0.097 +/- 0.038
+   GATE 1  M2 > M0plus : diff=-0.041  CI[-0.083,-0.006]  -> fire? no
+   GATE 2  M2 > M2perm : diff=+0.028  CI[-0.020,+0.069]  -> fire? no
+
+--- WORLD=NULL  SPLIT=LOSO-stim  (ENROLLED regime) ---
+   skill M0      = +0.713 +/- 0.065
+   skill M0plus  = +0.400 +/- 0.144
+   skill M1      = +0.400 +/- 0.145
+   skill M2      = +0.487 +/- 0.100
+   skill M2perm  = +0.488 +/- 0.099
+   GATE 1  M2 > M0plus : diff=+0.087  CI[+0.011,+0.227]  -> PASS
+   GATE 2  M2 > M2perm : diff=-0.001  CI[-0.013,+0.008]  -> fire? no
+
+--- WORLD=NULL  SPLIT=LOSO-subj  (UNSEEN regime) ---
+   skill M0      = +0.787 +/- 0.048
+   skill M0plus  = +0.865 +/- 0.032
+   skill M1      = +0.865 +/- 0.032
+   skill M2      = +0.899 +/- 0.022
+   skill M2perm  = +0.900 +/- 0.021
+   GATE 1  M2 > M0plus : diff=+0.034  CI[+0.021,+0.057]  -> PASS
+   GATE 2  M2 > M2perm : diff=-0.001  CI[-0.003,+0.001]  -> fire? no
+
+==============================================================================
+Apparatus is correct iff: SIGNAL/ENROLLED fires both gates; NULL/ENROLLED does NOT fire
+Gate 2; SIGNAL/UNSEEN does NOT fire Gate 2 (individual signal cannot reach a new person).
+==============================================================================

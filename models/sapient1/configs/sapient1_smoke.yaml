@@ -1,0 +1,49 @@
+# Smoke-test config — full I/O dims, tiny model, 1 epoch.
+# All input/output dims match production so dataset.py / model.py / eval.py
+# / release.py exercise the SAME code paths. Only the transformer body is
+# shrunk so the whole thing runs on CPU in under a minute.
+
+inherits: sapient1_base.yaml
+
+variant_name: sapient1_smoke
+hf_repo: The-Sapient-Company/sapient-1-llama   # release.py uses this; smoke
+                                                # never actually pushes.
+
+model:
+  # Full I/O dims — DO NOT shrink (must match real features / fMRI shape).
+  d_video: 1280
+  d_audio: 1024
+  d_text:  3072
+  n_vertices: 20484
+  max_stim_len: 200
+  max_fmri_len: 100
+  # Shrunk body for speed.
+  hidden: 128
+  n_layers: 2
+  n_heads: 4
+  ff_mult: 2
+  low_rank_dim: 256
+  # Synthetic data has 2 subjects.
+  n_subjects: 2
+  # Smoke runs: keep dropout sane.
+  dropout: 0.05
+  modality_dropout: 0.1
+  subject_dropout: 0.0
+
+train:
+  optimizer: AdamW
+  lr: 1.0e-3
+  weight_decay: 0.0
+  betas: [0.9, 0.999]
+  lr_schedule: OneCycleLR
+  pct_start: 0.1
+  epochs: 1
+  batch_size: 2
+  grad_accum_steps: 1
+  grad_clip: 1.0
+  precision: bf16-mixed
+  loss: masked_mse
+  log_every: 1
+  val_every: 1
+  save_best_metric: vertex_pearson_mean
+  seed: 0

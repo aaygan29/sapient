@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "sapient-1: a clean-room trimodal brain encoder"
+message: "If you use this model, please cite it as below."
+type: software
+authors:
+  - name: "The Sapient Company"
+    website: "https://huggingface.co/The-Sapient-Company"
+repository-code: "https://huggingface.co/The-Sapient-Company/sapient-1-llama"
+url: "https://huggingface.co/The-Sapient-Company/sapient-1-llama"
+license: Apache-2.0
+version: "0.1.0"
+date-released: "2026-06-01"
+keywords:
+  - brain-encoding
+  - fmri
+  - multimodal
+  - neuroscience
+  - foundation-model
+references:
+  - type: article
+    title: "TRIBE: Predicting whole-brain responses to videos with foundation models"
+    authors:
+      - family-names: D'Ascoli
+        given-names: Stéphane
+    year: 2025
+    identifiers:
+      - type: doi
+        value: 10.48550/arXiv.2507.22229
+    notes: "Architectural inspiration only; sapient-1 contains no TRIBE-derived weights."

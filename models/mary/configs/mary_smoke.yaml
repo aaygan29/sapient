@@ -1,0 +1,12 @@
+# Tiny local smoke config — validates the train path on CPU. Not for real runs.
+inherits: mary_base.yaml
+variant_name: mary_smoke
+model:
+  n_subjects: 2
+train:
+  max_epochs: 1
+  batch_size: 2
+  sequence_length: 100
+  warmup_steps: 2
+  early_stopping_patience: 5
+  log_every: 1

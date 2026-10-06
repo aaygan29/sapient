@@ -1,0 +1,43 @@
+sapient-2-llama (covers sapient-2-scratch-llama and sapient-2-ft-llama)
+Copyright 2026 The Sapient Company
+
+This product includes weights trained from scratch (or fine-tuned from
+sapient-1-llama) by The Sapient Company on publicly-released, CC0-licensed
+neuroimaging data. The released sapient-2 weights are Apache 2.0; upstream
+frozen feature-extractor weights retain their own licenses:
+
+- V-JEPA 2 Gigantic (facebook/vjepa2-vitg-fpc64-256), MIT License,
+  Copyright 2025 Meta Platforms, Inc.
+  https://github.com/facebookresearch/vjepa2
+
+- Wav2Vec-BERT 2.0 (facebook/w2v-bert-2.0), MIT License,
+  Copyright 2023 Meta Platforms, Inc.
+  https://huggingface.co/facebook/w2v-bert-2.0
+
+- Llama-3.2-3B (meta-llama/Llama-3.2-3B), Llama 3.2 Community License,
+  Copyright 2024 Meta Platforms, Inc.
+  https://huggingface.co/meta-llama/Llama-3.2-3B
+  The derived models are named "sapient-2-scratch-llama" and
+  "sapient-2-ft-llama" in compliance with the Llama 3.2 Community License
+  Section 5 naming requirement.
+  Built with Llama.
+
+Training data:
+- ds004996 NeuroEngage (Toruparova et al. 2025; ~50 subjects of human-human
+  and human-robot dialogue fMRI). Released CC0 via OpenNeuro.
+  https://openneuro.org/datasets/ds004996
+
+- ds001740 Rauchbauer 2019/2020 (25 French speakers; human-human and
+  human-robot conversation with the Furhat robot; Wizard-of-Oz protocol).
+  Pinned to version 2.1.0. Released CC0 via OpenNeuro.
+  https://openneuro.org/datasets/ds001740/versions/2.1.0
+  https://pubmed.ncbi.nlm.nih.gov/30852994/
+
+The sapient-2-ft variant is fine-tuned from sapient-1-llama weights
+(The-Sapient-Company/sapient-1-llama, Apache 2.0). The subject_embedding
+table is dropped on load because the subject set differs from sapient-1.
+
+Architectural inspiration:
+- TRIBE v1 (D'Ascoli et al. 2025, arXiv:2507.22229). This model uses the
+  architecture family described in the published paper; it does not contain
+  or derive from TRIBE v1 or TRIBE v2 weights.

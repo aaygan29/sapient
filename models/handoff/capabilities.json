@@ -1,0 +1,33 @@
+{
+  "version": "2026-06-10",
+  "_note": "THE CONTRACT between the model side (Aayush) and the frontend (Robert). Aayush's agent adds/updates entries here when a model can output something new; Robert's agent reads here to render it. Every capability MUST carry covered + honesty. display picks the frontend block: dial | bars | curve | brain_map | card | image. Keep this accurate — it is the source of truth.",
+  "lenses": ["attention", "emotion", "memory", "buy_sell", "manipulation"],
+  "models": {
+    "mary": {
+      "modal_app": "mary-serve",
+      "modality": ["text", "audio", "video"],
+      "output": "Yeo-7 network activations + per-second curve + composite scores; the canonical artifact shape"
+    },
+    "qualia": {
+      "modal_app": "qualia-serve",
+      "modality": ["video", "image"],
+      "renders_through": "mary",
+      "_note": "Qualia is the visual model (internal id kairo). api/_qualiaRun.ts maps its output into Mary's artifact shape, so it reuses Mary's display blocks and all lenses."
+    }
+  },
+  "capabilities": [
+    { "key": "overall_score",   "label": "Overall score",        "display": "dial",      "lens": "universal",     "why": "aggregate predicted brain response", "tool": false, "covered": true,  "honesty": "encoding estimate, not a guarantee of performance" },
+    { "key": "brain_map",       "label": "Brain response map",   "display": "brain_map", "lens": "universal",     "why": "Glasser-180 / Yeo-7 predicted activation", "tool": false, "covered": true,  "honesty": "predicted fMRI alignment, not measured brain activity" },
+    { "key": "positivity",      "label": "Positivity",           "display": "dial",      "lens": "emotion",       "why": "limbic reward/emotion vs withdrawal", "tool": false, "covered": true,  "honesty": "activation estimate" },
+    { "key": "intensity",       "label": "Intensity",            "display": "dial",      "lens": "emotion",       "why": "limbic + salience arousal", "tool": false, "covered": true,  "honesty": "activation estimate" },
+    { "key": "engagement",      "label": "Engagement",           "display": "dial",      "lens": "attention",     "why": "dorsal attention + salience + reward", "tool": false, "covered": true,  "honesty": "activation estimate" },
+    { "key": "attention_curve", "label": "Predicted attention",  "display": "curve",     "lens": "attention",     "why": "per-second attention prediction with dip markers", "tool": false, "covered": true,  "honesty": "predicted, per-second" },
+    { "key": "memory",          "label": "Memory encoding",      "display": "bars",      "lens": "memory",        "why": "hippocampus / DMN encoding", "tool": false, "covered": true,  "honesty": "activation estimate" },
+    { "key": "five_pillars",    "label": "Breakdown (5 pillars)","display": "bars",      "lens": "universal",     "why": "the 5 pillars + hesitation/risk + mental effort", "tool": false, "covered": true,  "honesty": "activation estimate" },
+    { "key": "mental_effort",   "label": "Mental effort",        "display": "bars",      "lens": "universal",     "why": "frontoparietal cognitive load", "tool": false, "covered": true,  "honesty": "activation estimate" },
+    { "key": "hesitation_risk", "label": "Hesitation / risk",    "display": "bars",      "lens": "buy_sell",      "why": "ACC + anterior insula conflict", "tool": false, "covered": true,  "honesty": "activation estimate" },
+    { "key": "buy_signal",      "label": "Buy signal",           "display": "card",      "lens": "buy_sell",      "why": "approach-avoidance neuroforecasting (reward − conflict)", "tool": true,  "covered": true,  "honesty": "decision-support heuristic, not a clinical or financial guarantee" },
+    { "key": "manipulation",    "label": "Manipulation index",   "display": "card",      "lens": "manipulation",  "why": "affective/reward drive vs analytic control — System-1 capture", "tool": true,  "covered": true,  "honesty": "activation estimate" },
+    { "key": "sycophancy",      "label": "Sycophancy index",     "display": "card",      "lens": "manipulation",  "why": "social-reward + praise with low epistemic conflict", "tool": true,  "covered": false, "honesty": "PREVIEW — serve.py passes null/default today; not live yet" }
+  ]
+}

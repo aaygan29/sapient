@@ -1,0 +1,23 @@
+# Experiment 1 — Sharper Temporal Predictions
+#
+# Hypothesis: over-smoothed time-courses cap correlation in Default Mode + Limbic.
+# Fix: stronger NegCorr loss + smaller HRF kernel forces sharper neural tracking.
+#
+# Status: READY — not started
+
+inherits: ../configs/mary_multi_v2.yaml
+variant_name: exp_01_temporal_sharpening
+
+model:
+  hrf_kernel_size: 3          # was 5 — less temporal blurring
+
+loss:
+  negcorr_weight: 2.0         # was 1.0 — double the sharpening pressure
+  infonce_weight: 0.5         # was 0.3 — stronger contrastive signal across time
+
+train:
+  max_epochs: 120
+  early_stopping_patience: 25
+  batch_size: 16
+  learning_rate: 3.0e-4
+  timeout_seconds: 21600      # 6h cap

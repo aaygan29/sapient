@@ -1,0 +1,83 @@
+# sapient-2 fine-tuned from sapient-1-llama on ds004996 + ds001740.
+# Decisions #11 (lr=5e-5) and #12 (drop subject_embed on load) apply.
+
+inherits: sapient2_base.yaml
+
+variant_name: sapient2_ft_llama
+hf_repo: The-Sapient-Company/sapient-2-ft-llama
+
+encoders:
+  video:
+    model_id: facebook/vjepa2-vitg-fpc64-256
+    license: MIT
+    hidden_dim: 1280
+    rate_hz: 2
+    modal_app: sapient-2-features-vjepa2
+    gpu: A100-80GB
+
+  audio:
+    model_id: facebook/w2v-bert-2.0
+    license: MIT
+    hidden_dim: 1024
+    rate_hz: 2
+    modal_app: sapient-2-features-w2vbert
+    gpu: A100-40GB
+
+  text:
+    model_id: meta-llama/Llama-3.2-3B
+    license: Llama-3.2-Community
+    hidden_dim: 3072
+    context_words: 1024
+    rate_hz: 2
+    modal_app: sapient-2-features-llama
+    gpu: A100-40GB
+    dtype: bfloat16
+
+datasets:
+  primary:
+    name: ds004996
+    description: NeuroEngage (Toruparova et al. 2025) — ~50 subjects of human-human and human-robot dialogue
+    openneuro: ds004996
+    license: CC0
+    fmri_cache_repo: The-Sapient-Company/ds004996-fmri-fsaverage5
+    feature_cache_repos:
+      video: The-Sapient-Company/ds004996-features-vjepa2
+      audio: The-Sapient-Company/ds004996-features-w2vbert
+      text:  The-Sapient-Company/ds004996-features-llama
+    tr_seconds: verify-from-dataset_description
+
+  augmentation:
+    name: ds001740
+    description: Rauchbauer 2019/2020 — 25 French speakers with the Furhat robot (Wizard-of-Oz)
+    openneuro: ds001740
+    version: 2.1.0
+    license: CC0
+    fmri_cache_repo: The-Sapient-Company/ds001740-fmri-fsaverage5
+    feature_cache_repos:
+      video: The-Sapient-Company/ds001740-features-vjepa2
+      audio: The-Sapient-Company/ds001740-features-w2vbert
+      text:  The-Sapient-Company/ds001740-features-llama
+    tr_seconds: verify-from-dataset_description
+
+# Warm-start from sapient-1 (decision #12)
+init:
+  from_pretrained: The-Sapient-Company/sapient-1-llama
+  drop_keys_on_load:
+    - subject_embed.weight          # different subject set; re-init the table
+  strict: false
+
+train:
+  modal_app: sapient-2-train-ft-llama
+  gpu: H100-80GB
+  timeout_seconds: 86400
+  lr: 5.0e-5                        # decision #11 — fine-tune at lower LR
+  pool_subjects_across_datasets: true
+
+release:
+  hf_repo: The-Sapient-Company/sapient-2-ft-llama
+  artifact_dir: release_artifacts/sapient-2-ft-llama
+  private: true
+  llama_naming_compliance: true
+  built_with_llama_attribution: true
+  # Spec §9 lineage panel: the ft variant explicitly declares sapient-1 as origin
+  declares_lineage: The-Sapient-Company/sapient-1-llama

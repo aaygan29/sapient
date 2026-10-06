@@ -1,0 +1,21 @@
+# Experiment 3 — Loss Rebalancing Toward Correlation
+#
+# Hypothesis: MSE-dominant loss pushes predictions toward mean BOLD amplitude,
+# under-serving regions where response *shape* matters more than *magnitude*
+# (Default Mode, Limbic). Strip MSE back, lead with NegCorr.
+#
+
+inherits: ../configs/mary_multi_v2.yaml
+variant_name: exp_03_loss_rebalance
+
+loss:
+  mse_weight: 0.05            # was 0.2 — nearly remove magnitude pressure
+  negcorr_weight: 2.5         # was 1.0 — correlation is now the primary objective
+  infonce_weight: 0.5         # was 0.3
+
+train:
+  max_epochs: 150             # more time for new objective to converge
+  early_stopping_patience: 30
+  batch_size: 16
+  learning_rate: 3.0e-4
+  timeout_seconds: 21600      # 6h cap

@@ -1,0 +1,78 @@
+# sapient-2 trained from scratch on ds004996 + ds001740 with Llama-3.2-3B.
+# Random init; no sapient-1 weight lineage in this variant.
+
+inherits: sapient2_base.yaml
+
+variant_name: sapient2_scratch_llama
+hf_repo: The-Sapient-Company/sapient-2-scratch-llama
+
+encoders:
+  video:
+    model_id: facebook/vjepa2-vitg-fpc64-256
+    license: MIT
+    hidden_dim: 1280
+    rate_hz: 2
+    modal_app: sapient-2-features-vjepa2
+    gpu: A100-80GB
+
+  audio:
+    model_id: facebook/w2v-bert-2.0
+    license: MIT
+    hidden_dim: 1024
+    rate_hz: 2
+    modal_app: sapient-2-features-w2vbert
+    gpu: A100-40GB
+
+  text:
+    model_id: meta-llama/Llama-3.2-3B
+    license: Llama-3.2-Community
+    hidden_dim: 3072
+    context_words: 1024
+    rate_hz: 2
+    modal_app: sapient-2-features-llama
+    gpu: A100-40GB
+    dtype: bfloat16
+
+datasets:
+  primary:
+    name: ds004996
+    description: NeuroEngage (Toruparova et al. 2025) — ~50 subjects of human-human and human-robot dialogue
+    openneuro: ds004996
+    license: CC0
+    fmri_cache_repo: The-Sapient-Company/ds004996-fmri-fsaverage5
+    feature_cache_repos:
+      video: The-Sapient-Company/ds004996-features-vjepa2
+      audio: The-Sapient-Company/ds004996-features-w2vbert
+      text:  The-Sapient-Company/ds004996-features-llama
+    tr_seconds: verify-from-dataset_description
+
+  augmentation:
+    name: ds001740
+    description: Rauchbauer 2019/2020 — 25 French speakers with the Furhat robot (Wizard-of-Oz)
+    openneuro: ds001740
+    version: 2.1.0                       # pinned per spec §2.1
+    license: CC0
+    fmri_cache_repo: The-Sapient-Company/ds001740-fmri-fsaverage5
+    feature_cache_repos:
+      video: The-Sapient-Company/ds001740-features-vjepa2
+      audio: The-Sapient-Company/ds001740-features-w2vbert
+      text:  The-Sapient-Company/ds001740-features-llama
+    tr_seconds: verify-from-dataset_description
+
+# Random init — no warm start
+init:
+  from_pretrained: null
+
+train:
+  modal_app: sapient-2-train-scratch-llama
+  gpu: H100-80GB
+  timeout_seconds: 86400
+  lr: 1.0e-4                              # scratch uses the base lr
+  pool_subjects_across_datasets: true     # ds004996 + ds001740 → single subject_embed table
+
+release:
+  hf_repo: The-Sapient-Company/sapient-2-scratch-llama
+  artifact_dir: release_artifacts/sapient-2-scratch-llama
+  private: true
+  llama_naming_compliance: true
+  built_with_llama_attribution: true

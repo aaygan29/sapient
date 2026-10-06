@@ -1,0 +1,30 @@
+# Mary-Nano-v2 — the "beat ORCLE on %-of-ceiling" attempt.
+# Targets the three diagnosed, fixable gaps:
+#   1. Model right-sized to data: d_model 2048 -> 768 (ORCLE-Nano scale; the 2048
+#      Full tier was over-parameterized for our open-data slice).
+#   2. Over-smoothing loosened: HRF depthwise-conv kernel 5 -> 3, and NegCorr loss
+#      weight 1.0 -> 1.5 (our predictions had lag-1 autocorr 0.95 vs BOLD ~0.12 —
+#      near-flat time-courses cap correlation). Push toward sharper, varying output.
+#   3. Trained to convergence: 100 epochs, patience 25 (prior run early-stopped ~16-35).
+# Per-subject fine-tuning on Friends-deepened data follows this base train.
+inherits: mary_full.yaml
+variant_name: mary_nano_v2
+hf_repo: The-Sapient-Company/mary-nano-v2
+
+model:
+  d_model: 768
+  n_fusion_layers: 1
+  n_prediction_layers: 2
+  hrf_kernel_size: 3
+
+loss:
+  negcorr_weight: 1.5
+
+train:
+  max_epochs: 100
+  early_stopping_patience: 25
+  batch_size: 24              # 768 is lighter than 2048 — larger batch
+  learning_rate: 3.0e-4
+  timeout_seconds: 21600      # 6h cap
+
+ensemble_seeds: [13, 17, 23]

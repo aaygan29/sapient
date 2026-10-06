@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sapient · Neural Response Engine</title>
+<style>
+  :root{
+    --bg:#080d10; --bg2:#0d1419; --panel:#101a20; --panel2:#13212a;
+    --line:#1e2f38; --ink:#eaf4f4; --muted:#7f969b; --teal:#3fb8ad; --teal2:#56d6c6;
+    --mag:#e36bae; --gold:#e8b765; --green:#46c98b; --amber:#e6b450; --red:#e8736f;
+    --shadow:0 20px 60px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 700px at 75% -10%,#10242a 0%,var(--bg) 55%);
+    color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 22px 80px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:11px}
+  .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--teal),var(--mag));
+    box-shadow:0 0 22px rgba(63,184,173,.5)}
+  .brand b{font-size:17px;letter-spacing:.2px}
+  .brand span{display:block;font-size:11px;color:var(--muted);margin-top:1px}
+  .pill{font-size:10px;font-weight:700;letter-spacing:1px;color:#0a0f12;background:linear-gradient(135deg,var(--gold),#f0c987);padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle}
+  .gear{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:10px;
+    padding:8px 12px;font-size:12px;cursor:pointer}
+  .hero{margin:34px 0 22px}
+  .hero h1{font-size:34px;line-height:1.1;margin:0 0 10px;letter-spacing:-.5px;
+    background:linear-gradient(120deg,#fff,#bfeee8 60%,#e7b7d8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);max-width:620px;font-size:15px;margin:0}
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .uploader{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin-top:20px}
+  @media(max-width:680px){.uploader{grid-template-columns:1fr}}
+  .drop{border:1.5px dashed #2a3f49;border-radius:13px;padding:18px;display:flex;gap:14px;align-items:center;
+    cursor:pointer;transition:.2s;background:rgba(63,184,173,.03)}
+  .drop:hover,.drop.over{border-color:var(--teal);background:rgba(63,184,173,.08)}
+  .drop .ic{font-size:26px}
+  .drop .t{font-size:14px}.drop .s{font-size:12px;color:var(--muted);margin-top:2px}
+  input[type=text]{width:100%;margin-top:12px;background:var(--bg2);border:1px solid var(--line);
+    color:var(--ink);border-radius:10px;padding:11px 12px;font-size:13px}
+  .btn{background:linear-gradient(135deg,var(--teal),var(--teal2));color:#04201d;border:0;border-radius:12px;
+    padding:14px 26px;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;transition:.2s}
+  .btn:disabled{opacity:.45;cursor:default}
+  .btn:not(:disabled):hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(63,184,173,.3)}
+  .status{margin-top:14px;font-size:13px;color:var(--muted);min-height:18px}
+  .status.err{color:var(--red)}
+  /* settings drawer */
+  .drawer{display:none;margin-top:14px;gap:12px}
+  .drawer.open{display:grid;grid-template-columns:1fr 1fr}
+  @media(max-width:680px){.drawer.open{grid-template-columns:1fr}}
+  .drawer label{font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px}
+  /* results */
+  #results{display:none;margin-top:26px;animation:rise .5s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .top{display:grid;grid-template-columns:300px 1fr;gap:18px}
+  @media(max-width:780px){.top{grid-template-columns:1fr}}
+  .gauge-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .gnum{font-size:46px;font-weight:800;letter-spacing:-1px}
+  .glabel{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
+  .rec{margin-top:10px;font-weight:700;font-size:15px;padding:7px 16px;border-radius:999px;display:inline-block}
+  .rec.Buy{background:rgba(70,201,139,.16);color:var(--green);border:1px solid rgba(70,201,139,.4)}
+  .rec.Hold{background:rgba(230,180,80,.16);color:var(--amber);border:1px solid rgba(230,180,80,.4)}
+  .rec.Pass,.rec.Sell{background:rgba(232,115,111,.16);color:var(--red);border:1px solid rgba(232,115,111,.4)}
+  .conf{font-size:12px;color:var(--muted);margin-top:8px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .con{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+  .con .h{display:flex;justify-content:space-between;align-items:baseline}
+  .con .h b{font-size:13.5px}.con .h .v{font-size:15px;font-weight:800}
+  .con .nets{font-size:10.5px;color:var(--muted);margin:3px 0 9px}
+  .con .desc{font-size:11.5px;color:var(--muted);margin-top:9px;line-height:1.45}
+  .track{height:7px;background:#0c161b;border-radius:6px;overflow:hidden}
+  .fill{height:100%;width:0;border-radius:6px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+  .section-h{font-size:12px;text-transform:uppercase;letter-spacing:1.6px;color:var(--muted);margin:24px 4px 10px}
+  .legend{display:flex;gap:16px;font-size:11.5px;color:var(--muted);margin:0 4px 6px}
+  .legend i{display:inline-block;width:10px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  .peakrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chip{background:rgba(227,107,174,.12);border:1px solid rgba(227,107,174,.35);color:#f0a9d3;
+    font-size:11.5px;border-radius:999px;padding:5px 11px}
+  .footnote{font-size:11px;color:#5d7177;margin-top:22px;line-height:1.5;border-top:1px solid var(--line);padding-top:14px}
+  .brainimg{margin-top:12px;max-width:340px;border:1px solid var(--line);border-radius:10px;display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo"></div><div><b>Sapient<span class="pill">SANDBOX</span></b><span>Neural Response Engine</span></div></div>
+    <button class="gear" id="gear">⚙ Connection</button>
+  </header>
+
+  <div class="hero">
+    <h1>See the brain behind the buy.</h1>
+    <p>Drop in a video. Sapient predicts the viewer's cortical response and turns it into the signals that move purchase decisions — attention, emotion, sensory pull, value, and memory — plus the moments most likely to trigger a buy.</p>
+  </div>
+
+  <div class="card">
+    <div class="drawer" id="drawer">
+      <div><label>API base URL (blank = this site)</label><input id="base" type="text" placeholder="https://api.thesapientcompany.com"/></div>
+      <div><label>API key</label><input id="key" type="text" placeholder="sk_sapient_…"/></div>
+    </div>
+    <div class="uploader">
+      <div>
+        <div class="drop" id="drop">
+          <div class="ic">🎬</div>
+          <div><div class="t" id="fname">Drop a video here, or click to choose</div>
+          <div class="s">mp4 / mov / webm · or just describe the clip below</div></div>
+        </div>
+        <input id="file" type="file" accept="video/*" style="display:none"/>
+        <input id="transcript" type="text" placeholder="Optional: transcript / caption (e.g. 'sneaker ad, beach at sunset')"/>
+      </div>
+      <button class="btn" id="run" disabled>Analyze ▸</button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <div id="results">
+    <div class="top">
+      <div class="card gauge-card">
+        <svg id="gauge" viewBox="0 0 220 140" width="220" height="140"></svg>
+        <div class="rec" id="rec">—</div>
+        <div class="conf" id="conf"></div>
+      </div>
+      <div class="card">
+        <div class="section-h" style="margin-top:0">Cognitive signal breakdown</div>
+        <div class="grid" id="cons"></div>
+      </div>
+    </div>
+
+    <div class="section-h">Purchase-intent timeline</div>
+    <div class="card">
+      <div class="legend">
+        <span><i style="background:var(--teal)"></i>Purchase intent</span>
+        <span><i style="background:var(--mag)"></i>Attention</span>
+        <span><i style="background:var(--gold)"></i>Emotion</span>
+      </div>
+      <svg id="timeline" viewBox="0 0 1000 280" width="100%" preserveAspectRatio="none" style="height:240px"></svg>
+      <div class="peakrow" id="peaks"></div>
+    </div>
+
+    <div class="section-h">Predicted cortical map</div>
+    <div class="card"><img id="brain" class="brainimg" alt="predicted ROI activation"/></div>
+
+    <div class="footnote" id="foot"></div>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const LS_BASE="sapient_base",LS_KEY="sapient_key";
+$("base").value=localStorage.getItem(LS_BASE)||"";
+$("key").value=localStorage.getItem(LS_KEY)||"";
+$("base").oninput=e=>localStorage.setItem(LS_BASE,e.target.value.trim());
+$("key").oninput=e=>localStorage.setItem(LS_KEY,e.target.value.trim());
+$("gear").onclick=()=>$("drawer").classList.toggle("open");
+
+let chosenFile=null;
+const baseUrl=()=> ($("base").value||"").replace(/\/$/,"");
+const headers=()=>({Authorization:"Bearer "+($("key").value||"").trim()});
+function refreshRun(){ $("run").disabled = !(chosenFile || $("transcript").value.trim()); }
+$("transcript").oninput=refreshRun;
+$("drop").onclick=()=>$("file").click();
+$("file").onchange=e=>{chosenFile=e.target.files[0]||null; $("fname").textContent=chosenFile?chosenFile.name:"Drop a video here, or click to choose"; refreshRun();};
+["dragover","dragenter"].forEach(ev=>$("drop").addEventListener(ev,e=>{e.preventDefault();$("drop").classList.add("over")}));
+["dragleave","drop"].forEach(ev=>$("drop").addEventListener(ev,e=>{e.preventDefault();$("drop").classList.remove("over")}));
+$("drop").addEventListener("drop",e=>{chosenFile=e.dataTransfer.files[0]||null; if(chosenFile)$("fname").textContent=chosenFile.name; refreshRun();});
+
+function status(t,err){const s=$("status");s.textContent=t;s.className="status"+(err?" err":"");}
+
+$("run").onclick=async()=>{
+  if(!($("key").value||"").trim()){$("drawer").classList.add("open");status("Add your API key (⚙ Connection) to run.",true);return;}
+  $("run").disabled=true;$("results").style.display="none";status("Submitting…");
+  try{
+    const fd=new FormData();
+    if(chosenFile)fd.append("video",chosenFile);
+    if($("transcript").value.trim())fd.append("transcript",$("transcript").value.trim());
+    const r=await fetch(baseUrl()+"/v1/encode",{method:"POST",headers:headers(),body:fd});
+    if(!r.ok)throw new Error("encode "+r.status+": "+(await r.text()));
+    const job=(await r.json()).job_id;
+    status("Reading the cortex…");
+    let res=null;
+    for(let i=0;i<150;i++){
+      const s=await(await fetch(baseUrl()+"/v1/jobs/"+job,{headers:headers()})).json();
+      if(s.status==="done"){res=s; break;}
+      if(s.status==="error")throw new Error(s.error);
+      await new Promise(x=>setTimeout(x,400));
+    }
+    if(!res)throw new Error("timed out");
+    render(res.result, res.model_version);
+    status("");
+  }catch(e){status(e.message,true);}finally{$("run").disabled=false;}
+};
+
+function render(result,modelVersion){
+  const sg=result.signals;
+  $("results").style.display="block";
+  drawGauge(sg.purchase_intent, sg.recommendation);
+  $("rec").textContent=sg.recommendation;$("rec").className="rec "+sg.recommendation;
+  $("conf").textContent="confidence "+Math.round(sg.confidence*100)+"%";
+  // constructs
+  const palette={reward:"var(--green)",emotion:"var(--gold)",attention:"var(--mag)",visual:"var(--teal)",memory:"#8fa6ff",conflict:"#e0894e",load:"var(--red)"};
+  $("cons").innerHTML="";
+  sg.constructs.forEach((c,i)=>{
+    const col=palette[c.key]||"var(--teal)";
+    const el=document.createElement("div");el.className="con";
+    el.innerHTML=`<div class="h"><b>${c.label}</b><span class="v" style="color:${col}">${c.score.toFixed(0)}</span></div>
+      <div class="nets">${c.networks.join(" · ")}</div>
+      <div class="track"><div class="fill" style="background:${col}"></div></div>
+      <div class="desc">${c.description}</div>`;
+    $("cons").appendChild(el);
+    setTimeout(()=>{el.querySelector(".fill").style.width=Math.max(2,c.score)+"%";},60+i*70);
+  });
+  drawTimeline(sg.timeline, sg.peak_moments);
+  $("peaks").innerHTML=sg.peak_moments.map(p=>`<span class="chip">⚡ ${p.t_seconds.toFixed(0)}s · intent ${p.purchase_intent.toFixed(0)}</span>`).join("");
+  $("brain").src=result.image_data_uri;
+  $("foot").textContent="Demonstration — predicted neural response from Sapient-1 (illustrative in this build). "
+    +"Per-ROI values are predicted activation, not correlation with measured fMRI, and purchase intent is a transparent "
+    +"composite of network activity, not a validated purchasing metric. Served model: "+modelVersion+".";
+}
+
+function polar(cx,cy,r,deg){const a=(deg-180)*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function arc(cx,cy,r,a0,a1){const[x0,y0]=polar(cx,cy,r,a0),[x1,y1]=polar(cx,cy,r,a1);
+  const large=a1-a0>180?1:0;return`M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1}`;}
+function drawGauge(score,rec){
+  const g=$("gauge"),cx=110,cy=120,r=92;
+  const col=rec==="Buy"?getComputedStyle(document.body).getPropertyValue('--green')
+    :rec==="Hold"?getComputedStyle(document.body).getPropertyValue('--amber')
+    :getComputedStyle(document.body).getPropertyValue('--red');
+  g.innerHTML=`<path d="${arc(cx,cy,r,0,180)}" stroke="#15242b" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <path d="${arc(cx,cy,r,0,Math.max(1,score/100*180))}" stroke="${col}" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <text x="${cx}" y="108" text-anchor="middle" class="gnum" fill="#eaf4f4" style="font:800 40px -apple-system,sans-serif">${score.toFixed(0)}</text>
+    <text x="${cx}" y="128" text-anchor="middle" fill="#7f969b" style="font:600 11px -apple-system,sans-serif;letter-spacing:1.5px">PURCHASE INTENT</text>`;
+}
+
+function drawTimeline(tl,peaks){
+  const W=1000,H=280,pad=28,n=tl.seconds.length;
+  const X=i=>pad+(W-2*pad)*(i/(n-1));
+  const Y=v=>H-pad-(H-2*pad)*(v/100);
+  const poly=(arr,col,w)=>`<polyline fill="none" stroke="${col}" stroke-width="${w}" points="${arr.map((v,i)=>X(i)+","+Y(v)).join(" ")}"/>`;
+  const area=`<polygon fill="url(#pg)" points="${pad},${H-pad} ${tl.purchase_intent.map((v,i)=>X(i)+","+Y(v)).join(" ")} ${W-pad},${H-pad}"/>`;
+  let grid="";for(let k=0;k<=4;k++){const y=pad+(H-2*pad)*k/4;grid+=`<line x1="${pad}" y1="${y}" x2="${W-pad}" y2="${y}" stroke="#16242b" stroke-width="1"/>`;}
+  const peakdots=peaks.map(p=>{const i=Math.round(p.t_seconds);return`<circle cx="${X(i)}" cy="${Y(p.purchase_intent)}" r="5.5" fill="#e36bae" stroke="#0d1419" stroke-width="2"/>`}).join("");
+  $("timeline").innerHTML=`<defs><linearGradient id="pg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="rgba(63,184,173,.32)"/><stop offset="1" stop-color="rgba(63,184,173,0)"/></linearGradient></defs>
+    ${grid}${area}
+    ${poly(tl.emotion,'#e8b765',2)}
+    ${poly(tl.attention,'#e36bae',2)}
+    ${poly(tl.purchase_intent,'#3fb8ad',3)}
+    ${peakdots}
+    <text x="${pad}" y="${H-6}" fill="#5d7177" style="font:600 11px sans-serif">0s</text>
+    <text x="${W-pad}" y="${H-6}" text-anchor="end" fill="#5d7177" style="font:600 11px sans-serif">${(n-1)}s</text>`;
+}
+</script>
+</body>
+</html>

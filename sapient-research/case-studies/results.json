@@ -1,0 +1,151 @@
+{
+  "spearman_rho_real_campaigns": 0.17857142857142858,
+  "n_real": 7,
+  "rows": [
+    {
+      "name": "Daisy (LBJ, 1964)",
+      "category": "political",
+      "buy_sell": 65.3,
+      "approach": 57.5,
+      "confidence": 0.74,
+      "outcome": 0.08,
+      "outcome_kind": "estimated_vote_swing",
+      "constructs": {
+        "reward_value": 70.0,
+        "emotion": 95.0,
+        "attention": 60.0,
+        "visual_sensory": 55.0,
+        "memory_encoding": 45.0,
+        "conflict_risk": 85.0,
+        "cognitive_load": 20.0
+      }
+    },
+    {
+      "name": "1984 (Apple, Super Bowl)",
+      "category": "brand",
+      "buy_sell": 64.0,
+      "approach": 56.2,
+      "confidence": 0.79,
+      "outcome": 0.15,
+      "outcome_kind": "brand_lift",
+      "constructs": {
+        "reward_value": 57.5,
+        "emotion": 60.0,
+        "attention": 85.0,
+        "visual_sensory": 90.0,
+        "memory_encoding": 55.0,
+        "conflict_risk": 70.0,
+        "cognitive_load": 35.0
+      }
+    },
+    {
+      "name": "Think Small (VW, 1959)",
+      "category": "brand",
+      "buy_sell": 47.3,
+      "approach": 57.5,
+      "confidence": 0.93,
+      "outcome": 0.11,
+      "outcome_kind": "brand_lift",
+      "constructs": {
+        "reward_value": 50.0,
+        "emotion": 35.0,
+        "attention": 35.0,
+        "visual_sensory": 40.0,
+        "memory_encoding": 65.0,
+        "conflict_risk": 25.0,
+        "cognitive_load": 70.0
+      }
+    },
+    {
+      "name": "Morning in America (Reagan, 1984)",
+      "category": "political",
+      "buy_sell": 70.5,
+      "approach": 70.0,
+      "confidence": 0.88,
+      "outcome": 0.1,
+      "outcome_kind": "estimated_vote_effect",
+      "constructs": {
+        "reward_value": 70.0,
+        "emotion": 70.0,
+        "attention": 40.0,
+        "visual_sensory": 65.0,
+        "memory_encoding": 70.0,
+        "conflict_risk": 40.0,
+        "cognitive_load": 30.0
+      }
+    },
+    {
+      "name": "Whopper Freakout (BK, 2007)",
+      "category": "brand",
+      "buy_sell": 50.1,
+      "approach": 45.0,
+      "confidence": 0.78,
+      "outcome": 0.09,
+      "outcome_kind": "sales_lift",
+      "constructs": {
+        "reward_value": 50.0,
+        "emotion": 60.0,
+        "attention": 55.0,
+        "visual_sensory": 60.0,
+        "memory_encoding": 40.0,
+        "conflict_risk": 75.0,
+        "cognitive_load": 30.0
+      }
+    },
+    {
+      "name": "Generic product spot (low-arousal control)",
+      "category": "control",
+      "buy_sell": 40.4,
+      "approach": 27.5,
+      "confidence": 0.94,
+      "outcome": 0.02,
+      "outcome_kind": "assumed_low",
+      "constructs": {
+        "reward_value": 25.0,
+        "emotion": 20.0,
+        "attention": 30.0,
+        "visual_sensory": 35.0,
+        "memory_encoding": 30.0,
+        "conflict_risk": 20.0,
+        "cognitive_load": 25.0
+      }
+    },
+    {
+      "name": "Fear-appeal PSA (anti-smoking, graphic)",
+      "category": "psa",
+      "buy_sell": 58.9,
+      "approach": 52.5,
+      "confidence": 0.76,
+      "outcome": 0.12,
+      "outcome_kind": "quit_intent_recall",
+      "constructs": {
+        "reward_value": 65.0,
+        "emotion": 90.0,
+        "attention": 50.0,
+        "visual_sensory": 60.0,
+        "memory_encoding": 40.0,
+        "conflict_risk": 80.0,
+        "cognitive_load": 35.0
+      }
+    },
+    {
+      "name": "Dumb Ways to Die (Metro, 2012)",
+      "category": "psa",
+      "buy_sell": 65.3,
+      "approach": 70.0,
+      "confidence": 0.85,
+      "outcome": 0.13,
+      "outcome_kind": "awareness_behavior",
+      "constructs": {
+        "reward_value": 65.0,
+        "emotion": 55.0,
+        "attention": 50.0,
+        "visual_sensory": 70.0,
+        "memory_encoding": 75.0,
+        "conflict_risk": 50.0,
+        "cognitive_load": 30.0
+      }
+    }
+  ],
+  "caveat": "ILLUSTRATIVE machinery demo \u2014 predicted scores on SELF-AUTHORED descriptors (circular), n=7 SURVIVORS only (no flops), INCOMMENSURABLE outcomes pooled. The rho is NOT an interpretable effect size. Real test: validation/. NOT Link 4."
+}

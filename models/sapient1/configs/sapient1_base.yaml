@@ -1,0 +1,90 @@
+# sapient-1 BASE config — architecture defaults shared across all variants.
+# Inherit from this in variant configs; override only what changes.
+#
+# Sourced from engineering-outline/08_sapient1_sapient2_spec.md §3 and the
+# "Architecture lock" in engineering-outline/00_HANDOFF_README.md.
+# Decision numbers below refer to that lock.
+
+model:
+  # Modality feature dims (set by upstream encoder; d_text overridden per variant)
+  d_video: 1280            # V-JEPA 2 Gigantic
+  d_audio: 1024            # W2V-BERT 2.0
+  d_text:  3072            # Llama-3.2-3B (override per variant if encoder ever changes)
+
+  # Transformer body
+  hidden: 1152             # TRIBE v2 source default; divisible by 8 heads
+  n_layers: 8              # TRIBE v1 paper Table 1
+  n_heads: 8               # TRIBE v1 paper Table 1
+  ff_mult: 4               # ff = 4 × hidden = 4608
+  dropout: 0.1
+  pre_norm: true           # decision #5: pre-norm transformer block
+  activation: gelu
+
+  # Output head — two-stage low-rank (decision #7)
+  low_rank_dim: 2048
+  n_vertices: 20484        # fsaverage5 × 2 hemispheres
+
+  # Regularization (decisions #1, #2)
+  modality_dropout: 0.3    # applied AFTER projections, BEFORE sum
+  subject_dropout: 0.1     # training-time only
+
+  # Sequence length (decision #3, #4, #5)
+  max_stim_len: 200        # 100 s × 2 Hz
+  max_fmri_len: 100        # 100 s × 1 Hz
+  pos_embed_init_std: 0.02 # nn.Parameter(1, 100, 1152) × 0.02, LEARNABLE
+  pool_to_1hz: mean        # 2 Hz → 1 Hz pair-mean
+  pos_embed_post_pool: true  # decision #4: added AFTER pool
+
+  # Subjects (overridden per variant — 4 for sapient-1, ~75 for sapient-2)
+  n_subjects: 4
+
+  # HRF (decision #8)
+  hrf_offset_trs: 5        # fMRI window starts 5 TR after stim window
+
+data:
+  duration_trs: 100        # 100 s window at 1 Hz
+  fmri_dim: 20484          # fsaverage5 vertices
+  stim_rate_hz: 2
+  fmri_rate_hz: 1
+  resample_fmri_to_1hz: true
+
+train:
+  optimizer: AdamW
+  lr: 1.0e-4
+  weight_decay: 0.0
+  betas: [0.9, 0.999]
+  lr_schedule: OneCycleLR
+  pct_start: 0.1           # 10% warmup, cosine decay
+  epochs: 15
+  batch_size: 8
+  grad_accum_steps: 2      # effective batch 16
+  grad_clip: 1.0
+  precision: bf16-mixed    # A100/H100 native
+
+  # Loss (decision #15)
+  loss: masked_mse         # per-vertex squared error → mean over vertices → mask-weighted mean over time
+
+  # Logging
+  log_every: 50            # steps
+  val_every: 1             # epochs
+  save_best_metric: vertex_pearson_mean
+  seed: 42
+
+eval:
+  # Decision #10: Schaefer atlas used in post-processing only, never at training time
+  parcellation:
+    atlas: schaefer_2018
+    n_rois: 1000
+    yeo_networks: 7
+    resolution_mm: 2
+    cache_path: data/parcellate.npz
+
+  metrics:
+    - vertex_pearson_mean
+    - vertex_pearson_top10pct_mean
+    - parcel_pearson_mean
+
+  brain_surface_plot:
+    output_dir: eval/figures
+    plot_type: stat_map
+    threshold: 0.05

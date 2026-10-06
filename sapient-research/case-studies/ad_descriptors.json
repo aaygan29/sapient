@@ -1,0 +1,82 @@
+{
+  "_meta": {
+    "what_this_is": "A small, transparent, hand-authored set of famous ads encoded as Yeo-7 network-activation descriptors, paired with publicly-reported outcome magnitudes. It is fed through the REAL local neurosignal construct engine (neurosignal.detect.detect_from_networks) to produce buy/sell + approach scores.",
+    "what_this_is_NOT": "This is NOT measured brain data and NOT the Mary/TRIBE encoder. The network activations are structured expert descriptors of each ad's dominant neural drivers, on a common 0-1 axis, scored with normalize=False so ads are comparable to each other. Treat every number as an ILLUSTRATIVE, predicted-construct estimate on n=8. It demonstrates the scoring machinery and the investor-facing story shape; it is not validation of the predicted-brain -> behavior link (see neurosignal/CHAIN_AUDIT_2026-07-16.md, 'Link 4').",
+    "descriptor_axis": "Each network value in 0..1 estimates that Yeo-7 network's relative engagement by the ad, from its documented creative structure (fear appeal, reward imagery, motion/attention, narrative memory). Rationale is stored per-ad so the mapping is auditable and editable.",
+    "outcome_axis": "outcome_magnitude is a coarse, publicly-reported effect size (vote swing, brand-lift, or documented sales/recall lift), normalized to 0..1 for plotting. Sources are cited. These are approximate and heterogeneous across campaigns; the cross-ad correlation is illustrative only."
+  },
+  "ads": [
+    {
+      "name": "Daisy (LBJ, 1964)",
+      "category": "political",
+      "networks": {"Limbic": 0.95, "VentralAttention": 0.85, "Visual": 0.55, "DorsalAttention": 0.6, "Default": 0.45, "Frontoparietal": 0.2},
+      "rationale": "Nuclear fear appeal: peak amygdala/limbic threat + salience/interrupt (VentralAttention), countdown drives dorsal attention; low deliberation.",
+      "outcome_magnitude": 0.08,
+      "outcome_kind": "estimated_vote_swing",
+      "outcome_source": "Widely credited with a large persuasion effect; magnitude is a historical estimate (aired once, dominated coverage). Approximate."
+    },
+    {
+      "name": "1984 (Apple, Super Bowl)",
+      "category": "brand",
+      "networks": {"Visual": 0.9, "DorsalAttention": 0.85, "Limbic": 0.6, "VentralAttention": 0.7, "Default": 0.55, "Frontoparietal": 0.35},
+      "rationale": "High cinematic visual salience + attention capture (the runner/hammer), moderate emotional arousal, strong narrative-memory imprint.",
+      "outcome_magnitude": 0.15,
+      "outcome_kind": "brand_lift",
+      "outcome_source": "Frequently cited as a landmark brand-lift ad (Macintosh launch). Magnitude approximate/qualitative."
+    },
+    {
+      "name": "Think Small (VW, 1959)",
+      "category": "brand",
+      "networks": {"Frontoparietal": 0.7, "Default": 0.65, "Visual": 0.4, "DorsalAttention": 0.35, "Limbic": 0.35, "VentralAttention": 0.25},
+      "rationale": "Cognitive/witty print appeal: deliberation-forward (Frontoparietal), memorable framing (Default), low arousal/salience.",
+      "outcome_magnitude": 0.11,
+      "outcome_kind": "brand_lift",
+      "outcome_source": "Canonically effective long-run brand campaign; magnitude qualitative/approximate."
+    },
+    {
+      "name": "Morning in America (Reagan, 1984)",
+      "category": "political",
+      "networks": {"Limbic": 0.7, "Default": 0.7, "Visual": 0.65, "VentralAttention": 0.4, "DorsalAttention": 0.4, "Frontoparietal": 0.3},
+      "rationale": "Warm-emotion + autobiographical/narrative (Default) reassurance imagery; moderate salience, low conflict.",
+      "outcome_magnitude": 0.1,
+      "outcome_kind": "estimated_vote_effect",
+      "outcome_source": "Associated with a strong incumbent cycle; ad-specific effect is an approximate historical estimate."
+    },
+    {
+      "name": "Whopper Freakout (BK, 2007)",
+      "category": "brand",
+      "networks": {"VentralAttention": 0.75, "Limbic": 0.6, "Visual": 0.6, "DorsalAttention": 0.55, "Default": 0.4, "Frontoparietal": 0.3},
+      "rationale": "Surprise/violation salience (VentralAttention) with social-proof emotion; documented sales response.",
+      "outcome_magnitude": 0.09,
+      "outcome_kind": "sales_lift",
+      "outcome_source": "Reported double-digit sales lift in case writeups; normalized approximate."
+    },
+    {
+      "name": "Generic product spot (low-arousal control)",
+      "category": "control",
+      "networks": {"Visual": 0.35, "DorsalAttention": 0.3, "Limbic": 0.2, "VentralAttention": 0.2, "Default": 0.3, "Frontoparietal": 0.25},
+      "rationale": "Flat informational spot: low arousal, low salience, low memory imprint. Included as a low-outcome anchor.",
+      "outcome_magnitude": 0.02,
+      "outcome_kind": "assumed_low",
+      "outcome_source": "Synthetic low-anchor control, not a real campaign. Labeled as control."
+    },
+    {
+      "name": "Fear-appeal PSA (anti-smoking, graphic)",
+      "category": "psa",
+      "networks": {"Limbic": 0.9, "VentralAttention": 0.8, "Visual": 0.6, "DorsalAttention": 0.5, "Default": 0.4, "Frontoparietal": 0.35},
+      "rationale": "Strong threat/disgust limbic drive + salience; graphic anti-smoking PSAs show measurable recall/quit-intent.",
+      "outcome_magnitude": 0.12,
+      "outcome_kind": "quit_intent_recall",
+      "outcome_source": "Graphic-warning PSA literature reports meaningful recall/quit-intent lifts; normalized approximate."
+    },
+    {
+      "name": "Dumb Ways to Die (Metro, 2012)",
+      "category": "psa",
+      "networks": {"Default": 0.75, "Visual": 0.7, "Limbic": 0.55, "DorsalAttention": 0.5, "VentralAttention": 0.5, "Frontoparietal": 0.3},
+      "rationale": "Catchy narrative-memory (Default) + charming visual encoding; documented awareness/behavioral pledge lift.",
+      "outcome_magnitude": 0.13,
+      "outcome_kind": "awareness_behavior",
+      "outcome_source": "Case reports cite large awareness and pledge-to-be-safe lifts; normalized approximate."
+    }
+  ]
+}

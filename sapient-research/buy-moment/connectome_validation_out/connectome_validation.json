@@ -1,0 +1,811 @@
+{
+  "real_data_internal_connectivity": {
+    "status": "ok",
+    "n_subjects_scanned": 40,
+    "n_adult_subjects_found": 9,
+    "n_subjects_used": 8,
+    "subject_ids_used": [
+      "sub-pixar131",
+      "sub-pixar123",
+      "sub-pixar125",
+      "sub-pixar130",
+      "sub-pixar127",
+      "sub-pixar128",
+      "sub-pixar129",
+      "sub-pixar126"
+    ],
+    "dataset": "nilearn.datasets.fetch_development_fmri (Richardson et al., naturalistic movie-watching fMRI; OpenNeuro ds000228; public, no data-use agreement)",
+    "n_null_draws": 1000,
+    "groups": {
+      "Limbic_OFC": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 11,
+        "observed_mean_within_group_r": 0.3191,
+        "null_mean_random_r": 0.0929,
+        "null_sd_random_r": 0.0278,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.000999,
+        "fwer_significant_p05": true
+      },
+      "Default_PFC_vmPFC": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 41,
+        "observed_mean_within_group_r": 0.2594,
+        "null_mean_random_r": 0.0924,
+        "null_sd_random_r": 0.0103,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.000999,
+        "fwer_significant_p05": true
+      },
+      "Default_Temp_SocCog": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 43,
+        "observed_mean_within_group_r": 0.2229,
+        "null_mean_random_r": 0.0927,
+        "null_sd_random_r": 0.0103,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.001998,
+        "fwer_significant_p05": true
+      },
+      "Limbic_TempPole": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 15,
+        "observed_mean_within_group_r": 0.2659,
+        "null_mean_random_r": 0.0913,
+        "null_sd_random_r": 0.0202,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.000999,
+        "fwer_significant_p05": true
+      },
+      "Cont_PFCl_DLPFC": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 23,
+        "observed_mean_within_group_r": 0.2315,
+        "null_mean_random_r": 0.0917,
+        "null_sd_random_r": 0.016,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.001998,
+        "fwer_significant_p05": true
+      },
+      "SalVentAttn_FrOperIns": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 17,
+        "observed_mean_within_group_r": 0.3787,
+        "null_mean_random_r": 0.0928,
+        "null_sd_random_r": 0.02,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.000999,
+        "fwer_significant_p05": true
+      },
+      "Cont_Par_CogLoad": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 12,
+        "observed_mean_within_group_r": 0.3316,
+        "null_mean_random_r": 0.092,
+        "null_sd_random_r": 0.0251,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.000999,
+        "fwer_significant_p05": true
+      },
+      "SalVentAttn_ParOper": {
+        "provenance": "real_data",
+        "approach": "pooled_average (pseudo-replicated: 8 subjects averaged into one (400,400) matrix BEFORE nulling \u2014 treats 8 subjects as one data point; kept for continuity, see subject_level_connectivity for the corrected per-subject check)",
+        "n_parcels": 11,
+        "observed_mean_within_group_r": 0.397,
+        "null_mean_random_r": 0.0918,
+        "null_sd_random_r": 0.0278,
+        "empirical_percentile_vs_random": 1.0,
+        "beats_random_null_p95": true,
+        "p_uncorrected": 0.000999,
+        "fdr_q_value": 0.000999,
+        "fdr_significant_q05": true,
+        "fwer_p_value": 0.000999,
+        "fwer_significant_p05": true
+      }
+    },
+    "multiple_comparisons_correction": {
+      "method_fdr": "Benjamini & Hochberg (1995), JRSS-B 57(1):289-300 \u2014 step-up FDR control across the 8 group-level p-values.",
+      "method_fwer": "Nichols & Holmes (2002), Hum Brain Mapp 15(1):1-25 \u2014 max-statistic permutation correction: the max within-group connectivity value across all 8 groups' null draws at each of the 1000 permutations builds one family-wise null distribution; each group tested against that single corrected null.",
+      "n_tests": 8,
+      "n_permutations": 1000,
+      "note": "Both corrections are reported ADDITIVELY alongside the original uncorrected p_uncorrected/empirical_percentile_vs_random fields per group above \u2014 neither replaces the original numbers. Prior to this pass, 8 independent 'beats random null p95' calls carried no correction for testing 8 hypotheses at once."
+    },
+    "subject_level_connectivity": {
+      "Limbic_OFC": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.5613,
+          0.3224,
+          0.3881,
+          0.295,
+          0.324,
+          0.2348,
+          0.2117,
+          0.2158
+        ],
+        "per_subject_null_z": [
+          8.3979,
+          6.9266,
+          5.7476,
+          3.6124,
+          5.6033,
+          3.3866,
+          3.5421,
+          2.4349
+        ],
+        "mean_null_z": 4.9564,
+        "sd_null_z": 1.917,
+        "wilcoxon_signed_rank": {
+          "statistic": 36.0,
+          "p_value_one_sided_greater_than_0": 0.003906,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.004464,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 4.956435543157129,
+          "tau2_between_subject": 3.6749068892887378,
+          "sigma2_within_subject_proxy": 0.5249866984698197,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            8.397930382856108,
+            6.926629592904927,
+            5.74764363427624,
+            3.612383633094579,
+            5.603284930290328,
+            3.3865792172194142,
+            3.542115653332188,
+            2.4349173012832477
+          ],
+          "shrunk_effects": [
+            7.967743527893736,
+            6.6803553366864525,
+            5.648742622886351,
+            3.7803901218523976,
+            5.522428756898678,
+            3.5828112579616285,
+            3.7189056395603055,
+            2.750107081517483
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      },
+      "Default_PFC_vmPFC": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.269,
+          0.2138,
+          0.2933,
+          0.2993,
+          0.281,
+          0.2748,
+          0.1487,
+          0.2951
+        ],
+        "per_subject_null_z": [
+          5.626,
+          10.3266,
+          9.8102,
+          9.5816,
+          14.5908,
+          10.61,
+          6.3185,
+          11.7249
+        ],
+        "mean_null_z": 9.8236,
+        "sd_null_z": 2.6734,
+        "wilcoxon_signed_rank": {
+          "statistic": 36.0,
+          "p_value_one_sided_greater_than_0": 0.003906,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.004464,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 9.823578007785997,
+          "tau2_between_subject": 7.147099697949875,
+          "sigma2_within_subject_proxy": 1.0210142425642679,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            5.62604440678431,
+            10.326574202765984,
+            9.810212892081077,
+            9.581589745991707,
+            14.590831279854264,
+            10.60998334510826,
+            6.318492807444846,
+            11.72489538225753
+          ],
+          "shrunk_effects": [
+            6.1507361069095206,
+            10.263699678393486,
+            9.811883531544192,
+            9.611838278715993,
+            13.99492462084573,
+            10.511682677942977,
+            6.75662845748749,
+            11.48723071044859
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      },
+      "Default_Temp_SocCog": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.1853,
+          0.2408,
+          0.2389,
+          0.2352,
+          0.1805,
+          0.2473,
+          0.2447,
+          0.2103
+        ],
+        "per_subject_null_z": [
+          1.6597,
+          12.0592,
+          6.7024,
+          7.5101,
+          8.561,
+          8.168,
+          13.8932,
+          6.7206
+        ],
+        "mean_null_z": 8.1593,
+        "sd_null_z": 3.4479,
+        "wilcoxon_signed_rank": {
+          "statistic": 36.0,
+          "p_value_one_sided_greater_than_0": 0.003906,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.004464,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 8.159266109170487,
+          "tau2_between_subject": 11.888307447222402,
+          "sigma2_within_subject_proxy": 1.6983296353174862,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            1.659707536623682,
+            12.059186519896414,
+            6.702404092693301,
+            7.510114203297402,
+            8.56096312989949,
+            8.168013131333161,
+            13.89317258025051,
+            6.720567679369931
+          ],
+          "shrunk_effects": [
+            2.472152358192032,
+            11.571696468555674,
+            6.884511844752948,
+            7.591258191531537,
+            8.510751002308364,
+            8.166919753562826,
+            13.176434271365508,
+            6.900404983095001
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      },
+      "Limbic_TempPole": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.4345,
+          0.0657,
+          0.3761,
+          0.3003,
+          0.2251,
+          0.3273,
+          0.125,
+          0.2732
+        ],
+        "per_subject_null_z": [
+          7.2292,
+          -0.198,
+          7.3333,
+          5.0076,
+          4.9827,
+          6.8443,
+          2.0452,
+          4.6567
+        ],
+        "mean_null_z": 4.7376,
+        "sd_null_z": 2.4782,
+        "wilcoxon_signed_rank": {
+          "statistic": 35.0,
+          "p_value_one_sided_greater_than_0": 0.007812,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.007812,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 4.737612406814651,
+          "tau2_between_subject": 6.141630893870251,
+          "sigma2_within_subject_proxy": 0.8773758419814645,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            7.229241241173618,
+            -0.19803794617010823,
+            7.3332571075075235,
+            5.007629001859868,
+            4.982672835578363,
+            6.844262579416419,
+            2.045153468705133,
+            4.656720966446387
+          ],
+          "shrunk_effects": [
+            6.917787636878748,
+            0.418918347952987,
+            7.008801519920914,
+            4.973876927479216,
+            4.952040281982899,
+            6.580931307841198,
+            2.3817108359688226,
+            4.66683239649242
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      },
+      "Cont_PFCl_DLPFC": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.2375,
+          0.2578,
+          0.3317,
+          0.167,
+          0.2381,
+          0.2151,
+          0.1869,
+          0.2175
+        ],
+        "per_subject_null_z": [
+          2.7755,
+          8.7453,
+          8.8598,
+          2.1323,
+          7.1952,
+          4.6031,
+          6.0517,
+          5.16
+        ],
+        "mean_null_z": 5.6904,
+        "sd_null_z": 2.3557,
+        "wilcoxon_signed_rank": {
+          "statistic": 36.0,
+          "p_value_one_sided_greater_than_0": 0.003906,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.004464,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 5.69035531011744,
+          "tau2_between_subject": 5.549098920910096,
+          "sigma2_within_subject_proxy": 0.7927284172728708,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            2.775452779909308,
+            8.745251540864873,
+            8.859809643352083,
+            2.1322959062705933,
+            7.195204461822075,
+            4.603121846710581,
+            6.051715983691314,
+            5.159990318318691
+          ],
+          "shrunk_effects": [
+            3.1398155961853242,
+            8.363389512021444,
+            8.463627851697753,
+            2.5770533317514492,
+            7.007098317858995,
+            4.739026029636439,
+            6.006545899494579,
+            5.226285942293535
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      },
+      "SalVentAttn_FrOperIns": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.3054,
+          0.3572,
+          0.4655,
+          0.5197,
+          0.4062,
+          0.3822,
+          0.32,
+          0.2732
+        ],
+        "per_subject_null_z": [
+          3.7929,
+          11.5923,
+          11.5566,
+          10.65,
+          12.8355,
+          9.7427,
+          10.6974,
+          5.3939
+        ],
+        "mean_null_z": 9.5327,
+        "sd_null_z": 2.9994,
+        "wilcoxon_signed_rank": {
+          "statistic": 36.0,
+          "p_value_one_sided_greater_than_0": 0.003906,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.004464,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 9.532667145245675,
+          "tau2_between_subject": 8.996338521264605,
+          "sigma2_within_subject_proxy": 1.285191217323515,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            3.7928637532342147,
+            11.592322667564726,
+            11.556622933159627,
+            10.65004558712426,
+            12.835483131731495,
+            9.742680042607878,
+            10.697373168585049,
+            5.393945877958155
+          ],
+          "shrunk_effects": [
+            4.510339177235648,
+            11.334865727274845,
+            11.303628459670383,
+            10.510373281889438,
+            12.422631133420769,
+            9.716428430437603,
+            10.551784915667627,
+            5.911286036369095
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      },
+      "Cont_Par_CogLoad": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.3147,
+          0.3193,
+          0.3782,
+          0.3908,
+          0.2998,
+          0.3545,
+          0.3341,
+          0.2618
+        ],
+        "per_subject_null_z": [
+          3.5806,
+          7.2306,
+          6.7628,
+          5.9383,
+          6.1612,
+          6.9909,
+          7.5394,
+          4.2209
+        ],
+        "mean_null_z": 6.0531,
+        "sd_null_z": 1.3451,
+        "wilcoxon_signed_rank": {
+          "statistic": 36.0,
+          "p_value_one_sided_greater_than_0": 0.003906,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.004464,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 6.0530946458925925,
+          "tau2_between_subject": 1.8092027823162695,
+          "sigma2_within_subject_proxy": 0.25845754033089563,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            3.580648527883129,
+            7.230614930739665,
+            6.762829936403116,
+            5.938314765782529,
+            6.161167164017306,
+            6.990866446153812,
+            7.539415036921311,
+            4.220900359239872
+          ],
+          "shrunk_effects": [
+            3.889704292634312,
+            7.083424895133781,
+            6.674113025089301,
+            5.952662250796287,
+            6.147658099251717,
+            6.87364497112116,
+            7.353624988042721,
+            4.449924645071462
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      },
+      "SalVentAttn_ParOper": {
+        "provenance": "real_data",
+        "approach": "subject_level (corrected: each of the 8 subjects' within-group connectivity is nulled against ITS OWN random-parcel draws before any pooling across subjects \u2014 no pseudo-replication)",
+        "n_subjects": 8,
+        "subject_ids": [
+          "sub-pixar131",
+          "sub-pixar123",
+          "sub-pixar125",
+          "sub-pixar130",
+          "sub-pixar127",
+          "sub-pixar128",
+          "sub-pixar129",
+          "sub-pixar126"
+        ],
+        "per_subject_observed_r": [
+          0.5602,
+          0.237,
+          0.3735,
+          0.4841,
+          0.3719,
+          0.3751,
+          0.3074,
+          0.4669
+        ],
+        "per_subject_null_z": [
+          7.8144,
+          4.5243,
+          4.9944,
+          7.6616,
+          6.8787,
+          6.4693,
+          6.2101,
+          9.12
+        ],
+        "mean_null_z": 6.7091,
+        "sd_null_z": 1.4138,
+        "wilcoxon_signed_rank": {
+          "statistic": 36.0,
+          "p_value_one_sided_greater_than_0": 0.003906,
+          "note": "tests whether the 8 per-subject null-normalized z-scores are systematically > 0, i.e. whether the group is more internally connected than its own random-parcel null IN EACH SUBJECT, not whether one pooled group-average matrix beats one pooled null.",
+          "fdr_q_value": 0.004464,
+          "fdr_significant_q05": true
+        },
+        "empirical_bayes_shrinkage": {
+          "mu": 6.709097431343625,
+          "tau2_between_subject": 1.9987769619794258,
+          "sigma2_within_subject_proxy": 0.2855395659970608,
+          "shrinkage_factor": 0.875,
+          "raw_effects": [
+            7.814421855850571,
+            4.5242548154607505,
+            4.994439759934249,
+            7.661585038756742,
+            6.8786804572877305,
+            6.469279408815637,
+            6.210126681479993,
+            9.119991433163326
+          ],
+          "shrunk_effects": [
+            7.676256302787203,
+            4.797360142446109,
+            5.208771968860421,
+            7.5425240878301025,
+            6.857482579044717,
+            6.499256661631636,
+            6.272498025212947,
+            8.818629682935864
+          ],
+          "note": "shrinkage_factor near 1.0 means little pooling was applied (between-subject variance dominates); near 0.0 means heavy pooling toward the population mean (within-subject noise dominates). Structurally inspired by decision_phenotype's fit_agents_pooled (aaygan29/ideal-doodle) but implemented fresh for scalar per-subject effects \u2014 see module docstring."
+        }
+      }
+    },
+    "pooled_vs_subject_level_disclosure": "'groups' above is the ORIGINAL (2026-08-26 phase-1) pooled-average check: 8 subjects' connectivity matrices averaged into one (400,400) matrix BEFORE comparing to a null. This treats 8 subjects as a single data point, which inflates apparent significance and ignores between-subject variance (pseudo-replication). 'subject_level_connectivity' is the CORRECTED check added this pass: each subject's within-group connectivity is nulled against its own random-parcel draws first, THEN a Wilcoxon signed-rank test asks whether the resulting 8 per-subject effects are systematically above zero. Both are reported; the subject-level check is the one that should be trusted for any claim resting on 'is this true across subjects', not the pooled-average one."
+  },
+  "yeo7_network_consistency": {
+    "Limbic_OFC": {
+      "provenance": "literature_label",
+      "n_parcels": 11,
+      "yeo7_network_counts": {
+        "Limbic": 11
+      },
+      "dominant_network": "Limbic",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    },
+    "Default_PFC_vmPFC": {
+      "provenance": "literature_label",
+      "n_parcels": 41,
+      "yeo7_network_counts": {
+        "Default": 41
+      },
+      "dominant_network": "Default",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    },
+    "Default_Temp_SocCog": {
+      "provenance": "literature_label",
+      "n_parcels": 43,
+      "yeo7_network_counts": {
+        "Default": 43
+      },
+      "dominant_network": "Default",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    },
+    "Limbic_TempPole": {
+      "provenance": "literature_label",
+      "n_parcels": 15,
+      "yeo7_network_counts": {
+        "Limbic": 15
+      },
+      "dominant_network": "Limbic",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    },
+    "Cont_PFCl_DLPFC": {
+      "provenance": "literature_label",
+      "n_parcels": 23,
+      "yeo7_network_counts": {
+        "Cont": 23
+      },
+      "dominant_network": "Cont",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    },
+    "SalVentAttn_FrOperIns": {
+      "provenance": "literature_label",
+      "n_parcels": 17,
+      "yeo7_network_counts": {
+        "SalVentAttn": 17
+      },
+      "dominant_network": "SalVentAttn",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    },
+    "Cont_Par_CogLoad": {
+      "provenance": "literature_label",
+      "n_parcels": 12,
+      "yeo7_network_counts": {
+        "Cont": 12
+      },
+      "dominant_network": "Cont",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    },
+    "SalVentAttn_ParOper": {
+      "provenance": "literature_label",
+      "n_parcels": 11,
+      "yeo7_network_counts": {
+        "SalVentAttn": 11
+      },
+      "dominant_network": "SalVentAttn",
+      "purity": 1.0,
+      "single_network": true,
+      "note": "bundle sits entirely within one Yeo-7 network"
+    }
+  },
+  "disclosure": "real_data_internal_connectivity numbers come from fetched, real human fMRI connectivity (see its 'dataset' field) \u2014 genuine empirical validation of within-group connectivity coherence, NOT of any link to buying behavior. yeo7_network_consistency numbers come from the Schaefer atlas's own published Yeo-7 network labels \u2014 real published data, but a structural cross-tab, not an independently measured connectivity check. The two are reported separately and must not be conflated."
+}

@@ -1,0 +1,74 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+pip-wheel-metadata/
+
+# --- Editors / OS ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Secrets ---
+.env
+.env.local
+*.env
+file.env
+.netrc
+.aws/credentials
+
+# --- Training artifacts (per-repo gitignores narrow this further) ---
+checkpoints/
+wandb/
+runs/
+logs/
+*.pt
+*.safetensors
+*.ckpt
+
+# --- Data caches (never commit) ---
+data/raw/
+data/fmri/
+data/features/
+data/manifest.json
+*.npy
+*.npz
+!data/parcellate.npz.example
+*.bin
+*.h5
+*.hdf5
+
+# --- HuggingFace cache mirrors (if symlinked into the repo) ---
+.cache/
+hf_cache/
+
+# --- Modal local state ---
+.modal/
+
+# --- Tool managers ---
+.uv/
+uv.lock
+
+# Extra venv name patterns (e.g. .venv-smoketest)
+.venv-*/
+
+*.code-workspace
+__pycache__/
+*.pyc

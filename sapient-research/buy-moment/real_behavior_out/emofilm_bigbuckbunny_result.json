@@ -1,0 +1,50 @@
+{
+  "dataset": "Emo-FilM (ds004892 fMRI, ds004872 annotations), stimulus=BigBuckBunny, subjects=S01/S02/S03",
+  "hrf_lag_sec": 4,
+  "engagement_proxy_columns": [
+    "IntenseEmotion",
+    "Alert",
+    "Attention"
+  ],
+  "per_subject": {
+    "S01": {
+      "n_timepoints_used": 486,
+      "r_composite_score_z": -0.017610487383955657,
+      "p_composite_two_sided": 0.8281718281718282,
+      "r_generalizable_score": 0.08876700440739885,
+      "p_generalizable_two_sided": 0.35364635364635366,
+      "r_idiosyncratic_score": -0.026387538716836745,
+      "p_idiosyncratic_two_sided": 0.8531468531468531
+    },
+    "S02": {
+      "n_timepoints_used": 486,
+      "r_composite_score_z": -0.06670319567358499,
+      "p_composite_two_sided": 0.5234765234765235,
+      "r_generalizable_score": -0.013616597757658184,
+      "p_generalizable_two_sided": 0.932067932067932,
+      "r_idiosyncratic_score": 0.13942444294489484,
+      "p_idiosyncratic_two_sided": 0.06293706293706294
+    },
+    "S03": {
+      "n_timepoints_used": 486,
+      "r_composite_score_z": 0.1710265437991648,
+      "p_composite_two_sided": 0.23876123876123875,
+      "r_generalizable_score": 0.16373963282538126,
+      "p_generalizable_two_sided": 0.34765234765234765,
+      "r_idiosyncratic_score": 0.2086462907178774,
+      "p_idiosyncratic_two_sided": 0.03896103896103896
+    }
+  },
+  "pooled_block_concatenated": {
+    "n_subjects": 3,
+    "n_timepoints_total": 1458,
+    "r_composite_score_z": 0.028980273798470933,
+    "p_composite_two_sided_block_permutation": 0.6601699150424788,
+    "r_generalizable_score": 0.07947058259058436,
+    "p_generalizable_two_sided_block_permutation": 0.2843578210894553,
+    "r_idiosyncratic_score": 0.10713878131062177,
+    "p_idiosyncratic_two_sided_block_permutation": 0.07746126936531735,
+    "n_permutations": 2000,
+    "permutation_method": "per-subject circular time-shift, blocks concatenated after shifting"
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "title": "Mary \u2014 perceiving the world through a human brain",
+  "claim": "Mary predicts the human brain's response to held-out stimuli it never trained on, across all 7 cortical networks, and per-person models beat the average brain ~3.7x.",
+  "model": {
+    "name": "Mary",
+    "detail": "mary_full (d_model=2048, n_subjects=43), 3 seeds [13,17,23], 5 datasets",
+    "space": "fsaverage5",
+    "vertices": 20484,
+    "channel": "improving"
+  },
+  "metric": "Encoding Pearson r (Mary's predicted fMRI vs real fMRI), per Yeo-7 network, with inter-subject noise ceiling.",
+  "network_order": [
+    "Visual",
+    "Somatomotor",
+    "DorsalAttention",
+    "VentralAttention",
+    "Limbic",
+    "Frontoparietal",
+    "Default"
+  ],
+  "social_networks": [
+    "Default",
+    "Frontoparietal",
+    "Limbic",
+    "VentralAttention"
+  ],
+  "stimuli": {
+    "forgot": {
+      "name": "forgot",
+      "label": "Spoken narrative ('forgot' story)",
+      "dataset": "Huth Narratives",
+      "modality": "audio / language",
+      "n_subjects": 22,
+      "noise_ceiling_overall": 0.0088,
+      "per_network": [
+        {
+          "network": "Visual",
+          "mary_r": 0.0117,
+          "noise_ceiling": 0.0054,
+          "pct_of_ceiling": 215.8,
+          "n_parcels": 162,
+          "is_social": false
+        },
+        {
+          "network": "Somatomotor",
+          "mary_r": 0.0137,
+          "noise_ceiling": 0.011,
+          "pct_of_ceiling": 124.5,
+          "n_parcels": 194,
+          "is_social": false
+        },
+        {
+          "network": "DorsalAttention",
+          "mary_r": 0.0174,
+          "noise_ceiling": 0.009,
+          "pct_of_ceiling": 194.2,
+          "n_parcels": 122,
+          "is_social": false
+        },
+        {
+          "network": "VentralAttention",
+          "mary_r": 0.0141,
+          "noise_ceiling": 0.0156,
+          "pct_of_ceiling": 90.3,
+          "n_parcels": 121,
+          "is_social": true
+        },
+        {
+          "network": "Limbic",
+          "mary_r": 0.0083,
+          "noise_ceiling": 0.0021,
+          "pct_of_ceiling": 398.9,
+          "n_parcels": 60,
+          "is_social": true
+        },
+        {
+          "network": "Frontoparietal",
+          "mary_r": 0.0156,
+          "noise_ceiling": 0.0116,
+          "pct_of_ceiling": 134.5,
+          "n_parcels": 129,
+          "is_social": true
+        },
+        {
+          "network": "Default",
+          "mary_r": 0.0123,
+          "noise_ceiling": 0.0097,
+          "pct_of_ceiling": 127.5,
+          "n_parcels": 212,
+          "is_social": true
+        }
+      ],
+      "personalization": {
+        "per_subject_mean_r": 0.0132,
+        "average_mean_r": 0.0035,
+        "ratio": 3.72,
+        "beats_average": true
+      },
+      "is_broadcast_artifact": false,
+      "figures": {
+        "network_bars": "assets/forgot_yeo7.png",
+        "brain_surface": "assets/forgot_brain_surface.png"
+      }
+    },
+    "bourne": {
+      "name": "bourne",
+      "label": "Movie (CNeuroMod 'Bourne')",
+      "dataset": "CNeuroMod",
+      "modality": "audiovisual movie",
+      "n_subjects": 4,
+      "noise_ceiling_overall": 0.0533,
+      "per_network": [
+        {
+          "network": "Visual",
+          "mary_r": 0.0118,
+          "noise_ceiling": 0.0864,
+          "pct_of_ceiling": 13.6,
+          "n_parcels": 162,
+          "is_social": false
+        },
+        {
+          "network": "Somatomotor",
+          "mary_r": 0.022,
+          "noise_ceiling": 0.0463,
+          "pct_of_ceiling": 47.4,
+          "n_parcels": 194,
+          "is_social": false
+        },
+        {
+          "network": "DorsalAttention",
+          "mary_r": 0.0184,
+          "noise_ceiling": 0.0649,
+          "pct_of_ceiling": 28.3,
+          "n_parcels": 122,
+          "is_social": false
+        },
+        {
+          "network": "VentralAttention",
+          "mary_r": 0.0172,
+          "noise_ceiling": 0.0489,
+          "pct_of_ceiling": 35.2,
+          "n_parcels": 121,
+          "is_social": true
+        },
+        {
+          "network": "Limbic",
+          "mary_r": 0.0099,
+          "noise_ceiling": 0.0187,
+          "pct_of_ceiling": 52.9,
+          "n_parcels": 60,
+          "is_social": true
+        },
+        {
+          "network": "Frontoparietal",
+          "mary_r": 0.0162,
+          "noise_ceiling": 0.0488,
+          "pct_of_ceiling": 33.3,
+          "n_parcels": 129,
+          "is_social": true
+        },
+        {
+          "network": "Default",
+          "mary_r": 0.0154,
+          "noise_ceiling": 0.0664,
+          "pct_of_ceiling": 23.2,
+          "n_parcels": 212,
+          "is_social": true
+        }
+      ],
+      "personalization": {
+        "per_subject_mean_r": 0.0157,
+        "average_mean_r": 0.0052,
+        "ratio": 3.06,
+        "beats_average": true
+      },
+      "is_broadcast_artifact": false,
+      "figures": {
+        "network_bars": "assets/bourne_yeo7.png",
+        "brain_surface": "assets/bourne_brain_surface.png"
+      }
+    }
+  },
+  "headline_personalization": {
+    "per_subject_mean_r": 0.0132,
+    "average_mean_r": 0.0035,
+    "ratio": 3.72,
+    "beats_average": true
+  },
+  "honesty": "Representational alignment (real encoding r vs real fMRI), NOT phenomenal feeling. Per-subject > average is the personalization signal that powers the data moat. NeuroEngage (human-vs-robot) is the roadmap: needs Mary's video streams + fMRI validation.",
+  "provenance": "Mary-Papers/paper-A-mary-orcle (integrity-checked; every number traces to results.json)."
+}

@@ -1,0 +1,21 @@
+# Experiment 2 — Deeper Fusion and Prediction Transformer
+#
+# Hypothesis: a single fusion layer is a bottleneck for integrating 6 streams.
+# Two fusion layers + two prediction layers gives the model more capacity to
+# resolve cross-modal conflicts before projecting to 20,484 vertices.
+# Lower LR compensates for the increased depth.
+#
+
+inherits: ../configs/mary_multi_v2.yaml
+variant_name: exp_02_deeper_fusion
+
+model:
+  n_fusion_layers: 2           # was 1 — second fusion pass over all 6 streams
+  n_prediction_layers: 3       # was 2 — extra temporal reasoning layer
+
+train:
+  max_epochs: 120
+  early_stopping_patience: 25
+  batch_size: 16
+  learning_rate: 1.5e-4        # lower LR for increased depth
+  timeout_seconds: 21600       # 6h cap

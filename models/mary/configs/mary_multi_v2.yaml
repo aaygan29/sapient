@@ -1,0 +1,16 @@
+# Mary-Multi v2 — the "push the magnitudes up" config for the daytime retrain.
+# Same faithful 4-dataset data; fixes the two things that likely held v1 down:
+#   (1) dataset-balanced sampling now ACTUALLY wired (v1 had the weights but sampled uniformly),
+#   (2) longer training (more epochs, higher early-stop patience, more warmup).
+inherits: mary_multi.yaml
+variant_name: mary_multi_v2
+hf_repo: The-Sapient-Company/mary
+
+train:
+  balanced_sampling: true     # NOW wired into train.py via WeightedRandomSampler
+  max_epochs: 120
+  warmup_steps: 400
+  early_stopping_patience: 25
+  train_oversample: 40
+  batch_size: 16
+  gpu: H100

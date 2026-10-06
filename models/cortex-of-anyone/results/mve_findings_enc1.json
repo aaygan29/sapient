@@ -1,0 +1,44 @@
+[
+  {
+    "name": "H1_enrolled_vs_average",
+    "value": 0.6960986529499577,
+    "dataset": "simulated(enc1)",
+    "baseline": 0.5470835857401831,
+    "effect_size": 2.0503370879463048,
+    "ci95": [
+      0.10797240653211145,
+      0.18627389177672762
+    ],
+    "n": 12,
+    "passed": true,
+    "note": "paired \u0394r=+0.1490 (95% CI in ci95); %ceiling enrolled=122% vs average=96% (ceiling=0.570); group-only r=0.551"
+  },
+  {
+    "name": "H3_identity_specificity",
+    "value": 1.0,
+    "dataset": "simulated(enc1)",
+    "baseline": 0.08333333333333333,
+    "effect_size": 4.717689409245873,
+    "ci95": [
+      0.25591009979807,
+      0.32261422058886224
+    ],
+    "n": 12,
+    "passed": true,
+    "note": "rank-1 identification 100% vs chance 8%; own-vs-other \u0394r=0.2895 (CI excludes 0)"
+  },
+  {
+    "name": "H5_conformal_coverage_new_person",
+    "value": 0.9012375,
+    "dataset": "simulated(enc1)",
+    "baseline": 0.9,
+    "effect_size": 0.0012375000000000025,
+    "ci95": [
+      0.9012375,
+      0.9012375
+    ],
+    "n": 80000,
+    "passed": true,
+    "note": "split-conformal radius q=1.148; target 0.90"
+  }
+]

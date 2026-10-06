@@ -1,0 +1,78 @@
+{
+  "_headline": "VISUAL IS NOT IGNORED. Under 20 random permutations, shuffling the three visual streams costs -10.4% of responsive-vertex accuracy, 95% CI [-14.3%, -7.0%] of base, 20/20 permutations negative. The long-standing '~0.3%, the model ignores visual' conclusion was a compound measurement artifact.",
+  "date": "2026-07-16",
+  "script": "scripts/diagnose_visual_swap.py (permutation-null section added 2026-07-16)",
+  "checkpoint": "/data/checkpoints/mary_multi_stable_resp_s13/best.pt",
+  "modal_app": "https://modal.com/apps/robert-16572/main/ap-gWWDnA461FkAhTxLv2z611",
+  "metric": "vertex_pearson_mean_responsive (ISC > 0.05 mask)",
+  "split": "val",
+  "data": "real fMRI val windows from manifest_mary_multi.json — NOT simulated",
+  "n_video_windows": 112,
+  "base_acc_all_streams": 0.12967415153980255,
+  "k_permutations": 20,
+  "seed": 13,
+  "loads_all_streams": true,
+
+  "permutation_null": {
+    "ALL_VISUAL": {
+      "mean_delta": -0.013523349538445473,
+      "sd_delta": 0.0026424036723645718,
+      "ci95": [-0.01853228248655796, -0.00903580114245415],
+      "frac_negative": 1.0,
+      "mean_pct_of_base": -10.43,
+      "ci95_pct_of_base": [-14.29, -6.97],
+      "excludes_zero": true
+    },
+    "ALL_AUDIO_TEXT": {
+      "mean_delta": -0.09803412687033415,
+      "sd_delta": 0.012848766725282214,
+      "ci95": [-0.11861427007243038, -0.07382073719054462],
+      "frac_negative": 1.0,
+      "mean_pct_of_base": -75.60,
+      "ci95_pct_of_base": [-91.47, -56.93],
+      "excludes_zero": true,
+      "_role": "positive control"
+    },
+    "qwen_ctx": {
+      "mean_delta": -0.024857036396861078,
+      "sd_delta": 0.004403034677431047,
+      "ci95": [-0.03238549828529358, -0.016951276734471332],
+      "frac_negative": 1.0,
+      "mean_pct_of_base": -19.17,
+      "excludes_zero": true
+    },
+    "beats": {
+      "mean_delta": -0.019962266832590104,
+      "sd_delta": 0.006523645284315439,
+      "ci95": [-0.03433945365250111, -0.011601935513317587],
+      "frac_negative": 1.0,
+      "mean_pct_of_base": -15.39,
+      "excludes_zero": true
+    },
+    "_not_captured": "slowfast, qwen_vl, got_ocr and whisper individual-stream nulls ran but were lost to console truncation on the client side. The grouped numbers above are the load-bearing ones. Re-run to recover them; the JSON is written in full by the script."
+  },
+
+  "roll_by_half_vs_random_permutation": {
+    "_finding": "The original deterministic roll-by-half permutation SYSTEMATICALLY UNDERSTATES every stream's contribution. It is a weak shuffle: val windows are ordered by recording, so rolling by B//2 can map a window onto another window from a similar recording, partially preserving content/target alignment. Random permutations break it fully.",
+    "ALL_VISUAL":     { "roll_by_half": -0.0059, "random_mean": -0.0135, "understated_by": "2.3x" },
+    "ALL_AUDIO_TEXT": { "roll_by_half": -0.0713, "random_mean": -0.0980, "understated_by": "1.4x" },
+    "beats":          { "roll_by_half": -0.0088, "random_mean": -0.0200, "understated_by": "2.3x" },
+    "qwen_ctx":       { "roll_by_half": -0.0254, "random_mean": -0.0249, "understated_by": "1.0x (unaffected)" }
+  },
+
+  "revised_picture": [
+    "Visual contributes ~10.4% of responsive-vertex accuracy (CI excludes zero, 20/20 permutations negative). It is NOT decorative.",
+    "Audio+text contributes ~75.6%. The ratio is ~7x, not the ~12x implied by the single-permutation run and nothing like the ~300x implied by the old 0.3% headline.",
+    "The historical '0.3%' was a COMPOUND artifact of two things: (1) measuring slowfast ALONE, which redundancy across qwen_vl/got_ocr masks, and (2) a weak roll-by-half permutation. Correcting either one raises the number; correcting both raises it ~35x.",
+    "Text (qwen_ctx, -19.2%) remains the single strongest stream, which is notable for a product sold as visual creative analysis."
+  ],
+
+  "limitations": [
+    "THE CI IS ACROSS PERMUTATIONS, NOT ACROSS SUBJECTS OR WINDOWS. It answers 'does destroying visual alignment reliably hurt on this val set' (yes). It does NOT give a generalization interval. A subject/window-level bootstrap is required before this number goes in a paper or a customer-facing claim.",
+    "Base accuracy is r=0.1297 on responsive vertices. 10.4% of a small number is a small number in absolute terms (delta 0.0135).",
+    "112 val windows carrying slowfast, single batch, one seed (13).",
+    "STILL DOES NOT ANSWER THE CAUSAL QUESTION. Visual carrying ~10% is consistent with both 'visual is worth ~10% and that is all it has' and 'visual is under-weighted because the model found audio easier'. finetune_visual_force.py is the discriminating test."
+  ],
+
+  "product_consequence": "qualia/core/mary_engine.py:21 sets ACTIVE_STREAMS = ('beats','whisper','qwen_ctx'). Production therefore runs with the visual streams switched OFF — while those streams demonstrably carry ~10% of the model's responsive-vertex accuracy on video. This is no longer 'the video encoders are inert so the flag does not matter'. The flag is now leaving measurable, real accuracy on the table, and it is the reason the Visual Attention / Face Processing / Visual Pull read-outs are derived from audio and transcript. Cost side: enabling them requires running the slowfast (A100-40GB) and qwen_vl (A100-80GB) feature extractors per asset, so this is a cost/benefit call, not a free win."
+}

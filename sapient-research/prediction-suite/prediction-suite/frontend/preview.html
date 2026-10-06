@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sapient — Prediction Suite</title>
+<style>
+  :root {
+    --bg: #000000; --panel: #0a0a0b; --panel-2: #111113; --line: #1e1e22;
+    --ink: #f4f4f5; --ink-dim: #a1a1aa; --ink-faint: #6b6b73;
+    --accent: #6ee7b7; --accent-2: #60a5fa; --warn: #fbbf24; --bad: #f87171;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans);
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 24px 96px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  h1 { font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -.02em;
+    margin: 14px 0 12px; }
+  h1 .grad { background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .lede { color: var(--ink-dim); font-size: 17px; max-width: 680px; }
+  .lede b { color: var(--ink); font-weight: 600; }
+  .rule { height: 1px; background: var(--line); margin: 40px 0; border: 0; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 32px; } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px 22px 20px; position: relative; overflow: hidden; }
+  .card .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent); }
+  .card h3 { font-size: 19px; font-weight: 600; margin: 8px 0 6px; letter-spacing: -.01em; }
+  .card p { color: var(--ink-dim); font-size: 14px; }
+  .card .q { color: var(--ink-faint); font-size: 13px; font-style: italic; margin-top: 10px; }
+  .metric { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 10px; }
+  .metric .n { font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--ink); }
+  .metric .u { font-size: 12px; color: var(--ink-faint); }
+  .pill { display: inline-block; font-family: var(--mono); font-size: 10px; padding: 2px 8px;
+    border-radius: 999px; border: 1px solid var(--line); color: var(--ink-dim); }
+  .pill.good { color: var(--accent); border-color: color-mix(in oklab, var(--accent) 40%, transparent); }
+  /* ranking table */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 6px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 500; }
+  td .bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
+  .mono { font-family: var(--mono); }
+  .prov { color: var(--ink-faint); font-size: 12.5px; }
+  /* trajectory sparkline */
+  .spark { width: 100%; height: 92px; display: block; }
+  .foot { margin-top: 56px; color: var(--ink-faint); font-size: 12.5px; }
+  .foot a { color: var(--ink-dim); }
+  .cite { font-size: 12px; color: var(--ink-faint); }
+  .cite b { color: var(--ink-dim); font-weight: 500; }
+  .sectlabel { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 40px 0 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Sapient · Prediction Suite</div>
+  <h1>From predicted brain response<br/>to <span class="grad">forecast behavior</span>.</h1>
+  <p class="lede">
+    Mary predicts how a brain responds to your content. This layer turns that response into a
+    <b>calibrated forecast of what the market will do</b> — grounded in the published
+    neuroforecasting paradigm that predicted a 400,000-person campaign from 50 brains, and
+    gated so it never reports a number the neural signal can't carry.
+  </p>
+
+  <hr class="rule" />
+
+  <!-- Four capabilities -->
+  <div class="grid">
+
+    <div class="card">
+      <div class="tag">01 · PredictiveValue</div>
+      <h3>Forecast the outcome</h3>
+      <p>Maps affect-weighted brain response to real outcomes (CTR, sales lift, recall) and
+      validates it leave-one-ad-out against actual results — the brain term has to beat self-report to pass.</p>
+      <div class="q">"Will this campaign actually move the market?"</div>
+      <div class="metric">
+        <span class="n">r = 0.95</span><span class="u">brain vs outcome (demo)</span>
+        <span class="pill good">beats self-report r=0.63</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="tag">02 · BrainTrajectory</div>
+      <h3>See the second-by-second arc</h3>
+      <p>Tracks engagement, arousal and memory-encoding across the runtime, and flags where
+      attention peaks and where it drops — with concrete edit recommendations.</p>
+      <div class="q">"Where do I lose them, and where do they remember?"</div>
+      <svg class="spark" viewBox="0 0 320 92" preserveAspectRatio="none" aria-label="engagement over time">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#6ee7b7" stop-opacity="0.35"/>
+          <stop offset="1" stop-color="#6ee7b7" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,70 C50,66 70,30 110,22 C140,16 150,14 160,14 C185,15 200,52 230,60 C260,66 290,58 320,54"
+          fill="none" stroke="#6ee7b7" stroke-width="2"/>
+        <path d="M0,70 C50,66 70,30 110,22 C140,16 150,14 160,14 C185,15 200,52 230,60 C260,66 290,58 320,54 L320,92 L0,92 Z"
+          fill="url(#g)"/>
+        <line x1="160" y1="6" x2="160" y2="86" stroke="#6ee7b7" stroke-dasharray="3 3" stroke-width="1" opacity="0.6"/>
+        <line x1="200" y1="6" x2="200" y2="86" stroke="#fbbf24" stroke-dasharray="3 3" stroke-width="1" opacity="0.6"/>
+      </svg>
+      <div class="prov"><span class="mono" style="color:var(--accent)">▲ :15s</span> peak engagement · <span class="mono" style="color:var(--warn)">▼ :18s</span> attention drop</div>
+    </div>
+
+    <div class="card">
+      <div class="tag">03 · PersonaMap</div>
+      <h3>Phenotype the audience</h3>
+      <p>Learns how an individual's brain deviates from the population — who is high-value for a
+      message — and transfers to new content from 1–3 examples.</p>
+      <div class="q">"Which segment is this actually for?"</div>
+      <div class="metric">
+        <span class="n">value · attention · memory</span>
+      </div>
+      <div class="prov">top responsive constructs · confidence 1.00 (demo, n=10)</div>
+    </div>
+
+    <div class="card">
+      <div class="tag">04 · BehavioralBridge</div>
+      <h3>Weight what generalizes</h3>
+      <p>Weights the <b style="color:var(--ink)">anticipatory-affect</b> signal (NAcc, mOFC) that the
+      literature shows generalizes to aggregate choice, down-weights deliberative signal, and stays
+      valid on non-representative samples.</p>
+      <div class="q">"Why should I trust a forecast from a small panel?"</div>
+      <div class="metric">
+        <span class="pill good">sample-robust</span>
+        <span class="u">affect-driven forecast</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Forecast ranking -->
+  <div class="sectlabel">Campaign forecast · ranked (illustrative)</div>
+  <table>
+    <thead><tr><th>Ad</th><th>Forecast index</th><th style="width:38%">Relative</th><th>Driver</th><th>Band</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">ad03</td><td class="mono">72.3</td><td><div class="bar" style="width:96%"></div></td><td>value (affect)</td><td class="mono prov">68.6–75.9</td></tr>
+      <tr><td class="mono">ad34</td><td class="mono">70.1</td><td><div class="bar" style="width:90%"></div></td><td>value (affect)</td><td class="mono prov">66.5–73.8</td></tr>
+      <tr><td class="mono">ad08</td><td class="mono">69.0</td><td><div class="bar" style="width:86%"></div></td><td>value (affect)</td><td class="mono prov">65.4–72.7</td></tr>
+      <tr><td class="mono">ad17</td><td class="mono">51.4</td><td><div class="bar" style="width:42%"></div></td><td>attention</td><td class="mono prov">39.9–62.9</td></tr>
+    </tbody>
+  </table>
+  <p class="prov" style="margin-top:12px">Ads driven by an integrative/attention signal (ad17) carry a wider band — that component
+  generalizes less across individuals than affect. The suite tells you not just the number, but how much to trust it.</p>
+
+  <!-- Evidence -->
+  <div class="sectlabel">Grounded in the neuroforecasting literature</div>
+  <div class="grid">
+    <div class="card"><p class="cite"><b>Knutson et al., Neuron 2007.</b> NAcc / MPFC / insula predict purchases beyond self-report.</p></div>
+    <div class="card"><p class="cite"><b>Falk et al., Psych Science 2012.</b> 50 brains forecast a 400,000-person national quit-line campaign; self-report did not.</p></div>
+    <div class="card"><p class="cite"><b>Kühn et al., NeuroImage 2016.</b> fMRI forecast real chocolate sales across 63,617 shoppers; signed region directions.</p></div>
+    <div class="card"><p class="cite"><b>Genevsky et al., PNAS Nexus 2025.</b> Brain forecasts stay valid on non-representative samples where behavior forecasts break.</p></div>
+  </div>
+
+  <div class="foot">
+    Every figure on this page is produced by <span class="mono">ag_push/engine/demo.py</span> on synthetic data and is labelled illustrative.
+    Real numbers require Mary vertex exports + measured ad outcomes. The suite withholds any construct claim that fails the
+    <span class="mono">mary_readouts</span> specificity gate. No claim is made that the tool changes minds — it forecasts and explains response.
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Mary-Multi-Stable — the BIGGER model, with the LR bug FIXED.
+#
+# The scaled recipe (mary_multi_v2: d_model 1024, 6 layers) collapsed because LR 3e-4
+# is too hot for it (s13 peaked at epoch 0 then decayed; s23 never learned). This keeps
+# the extra capacity (better for the visual stream / ad video) but trains it GENTLY:
+# LR 1e-4 (3x lower), 1000-step warmup, modality_dropout 0.10. Runs in PARALLEL with
+# mary_nano_multi as the high-upside arm — we pick whichever evals best.
+
+inherits: mary_multi.yaml          # d_model 1024, 2 fusion + 4 pred, correlation-led loss
+variant_name: mary_multi_stable
+hf_repo: The-Sapient-Company/mary-orcle-multi
+manifest_file: manifest_mary_multi.json
+
+model:
+  modality_dropout: 0.10
+
+train:
+  learning_rate: 1.0e-4            # was 3e-4 → collapse; gentle LR for the wider/deeper model
+  warmup_steps: 1000              # long warmup to stabilize the big model
+  max_epochs: 60
+  batch_size: 16
+  sequence_length: 200
+  train_oversample: 20
+  early_stopping_patience: 12
+  gradient_clip_norm: 1.0
+  balanced_sampling: false        # keep optimizer dynamics simple/clean (v2's on-collapse had this on)
+  gpu: H100
+  timeout_seconds: 64800

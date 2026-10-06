@@ -1,0 +1,28 @@
+# Inherits the workspace-level .gitignore. Per-repo overrides + tightenings here.
+
+# Training outputs (large, regenerable)
+checkpoints/
+wandb/
+runs/
+logs/
+release_artifacts/
+eval/
+
+# Data caches (NEVER commit derived feature arrays or raw datasets)
+data/raw/
+data/fmri/
+data/features/
+data/manifest.json
+
+# Generated artifacts
+*.pt
+*.safetensors
+*.ckpt
+
+# Local venv
+.venv/
+
+# Mac
+.DS_Store
+.venv-*/
+*.log

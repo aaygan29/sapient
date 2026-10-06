@@ -1,0 +1,11 @@
+# Never commit secrets or local state.
+.env
+keys.json
+*.key
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+build/
+dist/

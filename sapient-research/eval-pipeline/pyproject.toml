@@ -1,0 +1,25 @@
+[project]
+name = "sapienteval"
+version = "0.1.0"
+description = "Sapient Cognitive Eval — Track B: brain-encoding fine-tune on NeuroEngage (OpenNeuro ds004996)."
+requires-python = ">=3.11"
+dependencies = [
+    "datalad",
+    "openneuro-py",
+    "nilearn",
+    "nibabel",
+    "numpy",
+    "scipy",
+    "pandas",
+    "torch>=2.4.0",
+    "transformers>=4.45.0",
+    "huggingface-hub",
+    "modal",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["sapienteval"]

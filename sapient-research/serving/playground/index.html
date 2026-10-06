@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sapient-1 — Playground</title>
+  <style>
+    :root { --ink:#1c2b2d; --teal:#4C9AA8; --bg:#f6f8f8; }
+    body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--ink); margin: 0; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+    h1 { font-size: 22px; margin: 0 0 2px; }
+    .sub { color: #5b6b6d; font-size: 13px; margin-bottom: 20px; }
+    .card { background: #fff; border: 1px solid #e2e8e8; border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+    label { display:block; font-size: 12px; font-weight:600; margin: 10px 0 4px; }
+    input[type=text], input[type=password] { width: 100%; padding: 9px 10px; border:1px solid #cdd8d8; border-radius:8px; box-sizing:border-box; }
+    button { background: var(--teal); color:#fff; border:0; border-radius:8px; padding:10px 16px; font-weight:600; cursor:pointer; }
+    button:disabled { opacity:.5; cursor:default; }
+    .row { display:flex; gap:12px; }
+    .row > div { flex:1; }
+    .bar { height: 16px; background: var(--teal); border-radius: 4px; }
+    .roi { display:flex; align-items:center; gap:8px; margin:4px 0; font-size:13px; }
+    .roi .name { width:130px; }
+    .roi .track { flex:1; background:#eef2f2; border-radius:4px; }
+    img { max-width:100%; border:1px solid #e2e8e8; border-radius:8px; margin-top:8px; }
+    .muted { color:#7a8a8c; font-size:12px; }
+    pre { background:#0e1516; color:#cfe; padding:10px; border-radius:8px; overflow:auto; font-size:12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Sapient-1 — Encoding Playground</h1>
+    <div class="sub">Upload a clip; see the model's predicted cortical response. Serves <b>Sapient-1</b> (clean-room, CC0) — not the paper "Mary" model.</div>
+
+    <div class="card">
+      <div class="row">
+        <div><label>API base URL</label><input id="base" type="text" value="" placeholder="(same origin)"/></div>
+        <div><label>API key</label><input id="key" type="password" placeholder="sk_sapient_…"/></div>
+      </div>
+      <label>Video file (optional)</label><input id="video" type="file" accept="video/*"/>
+      <label>Audio file (optional)</label><input id="audio" type="file" accept="audio/*"/>
+      <label>Transcript (optional)</label><input id="transcript" type="text" placeholder="spoken text / caption"/>
+      <div style="margin-top:14px"><button id="run">Run</button> <span id="status" class="muted"></span></div>
+    </div>
+
+    <div class="card" id="out" style="display:none">
+      <h3 style="margin:0 0 8px">Predicted ROI activation</h3>
+      <div id="rois"></div>
+      <h3 style="margin:14px 0 6px">Brain summary</h3>
+      <img id="img" alt="prediction"/>
+      <details style="margin-top:10px"><summary class="muted">raw response</summary><pre id="raw"></pre></details>
+    </div>
+  </div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+function base() { return ($("base").value || "").replace(/\/$/, ""); }
+function headers() { return { "Authorization": "Bearer " + $("key").value.trim() }; }
+
+async function run() {
+  $("run").disabled = true; $("status").textContent = "submitting…"; $("out").style.display = "none";
+  try {
+    const fd = new FormData();
+    if ($("video").files[0]) fd.append("video", $("video").files[0]);
+    if ($("audio").files[0]) fd.append("audio", $("audio").files[0]);
+    if ($("transcript").value) fd.append("transcript", $("transcript").value);
+    const r = await fetch(base() + "/v1/encode", { method: "POST", headers: headers(), body: fd });
+    if (!r.ok) throw new Error("encode failed: " + r.status + " " + (await r.text()));
+    const { job_id } = await r.json();
+    $("status").textContent = "processing…";
+    let result = null;
+    for (let i = 0; i < 120; i++) {
+      const s = await (await fetch(base() + "/v1/jobs/" + job_id, { headers: headers() })).json();
+      if (s.status === "done") { result = s.result; break; }
+      if (s.status === "error") throw new Error(s.error);
+      await new Promise((res) => setTimeout(res, 500));
+    }
+    if (!result) throw new Error("timed out");
+    render(result);
+    $("status").textContent = "done";
+  } catch (e) {
+    $("status").textContent = "✕ " + e.message;
+  } finally {
+    $("run").disabled = false;
+  }
+}
+
+function render(result) {
+  $("out").style.display = "block";
+  const rois = $("rois"); rois.innerHTML = "";
+  const max = Math.max(0.6, ...Object.values(result.roi_scores));
+  for (const [name, val] of Object.entries(result.roi_scores)) {
+    const row = document.createElement("div"); row.className = "roi";
+    row.innerHTML = `<div class="name">${name}</div><div class="track"><div class="bar" style="width:${(100*val/max).toFixed(1)}%"></div></div><div>${val.toFixed(3)}</div>`;
+    rois.appendChild(row);
+  }
+  $("img").src = result.image_data_uri;
+  $("raw").textContent = JSON.stringify(result, null, 2);
+}
+$("run").addEventListener("click", run);
+</script>
+</body>
+</html>

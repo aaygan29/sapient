@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>sapient · qualia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#000; --fg:#fff; --muted:#8a8a8e; --line:rgba(255,255,255,.10); --glow:#e8ecff; --warm:#ffd9b0;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+  .wrap{flex:1;width:100%;max-width:1140px;margin:0 auto;padding:26px 28px 8px}
+  header{display:flex;justify-content:space-between;align-items:center}
+  .word{font-weight:600;font-size:18px;letter-spacing:-.01em}
+  .tag{color:var(--muted);font-size:13px}
+  .hero{margin:40px 0 8px;text-align:center}
+  .hero h1{font-weight:600;font-size:clamp(28px,4.4vw,46px);letter-spacing:-.025em;line-height:1.08}
+  .hero h1 .dim{color:var(--muted);font-weight:500}
+  .hero p{color:var(--muted);font-size:15.5px;margin-top:14px}
+  .hero .said{display:inline-block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+
+  .brains{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}
+  @media(max-width:760px){.brains{grid-template-columns:1fr}}
+  .panel{border:1px solid var(--line);border-radius:22px;padding:20px 18px 14px;background:rgba(255,255,255,.015);
+    display:flex;flex-direction:column;align-items:center;transition:border-color .4s}
+  .panel.person{border-color:rgba(232,236,255,.22)}
+  .panel .who{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;margin-bottom:2px}
+  .panel .who .e{font-size:20px}
+  .panel .sub{color:var(--muted);font-size:13px;margin-bottom:6px;min-height:18px;text-align:center}
+  svg{width:100%;max-width:330px;height:auto;display:block}
+  .silh{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1.4}
+  .edge{stroke:rgba(255,255,255,.08);stroke-width:1}
+  .node{transition:r 1.1s cubic-bezier(.22,1,.36,1), opacity 1.1s ease}
+
+  .mid{text-align:center;margin:26px auto 8px;max-width:720px}
+  .mid .gap{font-size:19px;font-weight:500;line-height:1.5}
+  .mid .gap b{color:var(--glow)}
+  .cta{margin-top:18px;display:inline-flex;gap:10px;align-items:center;cursor:pointer;
+    background:#fff;color:#000;border:none;border-radius:999px;padding:13px 22px;font-family:inherit;
+    font-size:15px;font-weight:600;transition:transform .2s, opacity .2s}
+  .cta:hover{transform:translateY(-1px)} .cta:disabled{opacity:.5;cursor:default;transform:none}
+  .bridgemsg{margin-top:16px;color:var(--warm);font-size:15px;font-weight:500;opacity:0;transition:opacity .6s;min-height:22px}
+  .bridgemsg.show{opacity:1}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:15px 28px;display:flex;
+    justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  footer .v{color:var(--muted);font-size:12px;max-width:680px;line-height:1.5}
+  footer .moat{font-family:"JetBrains Mono",monospace;font-size:12px;border:1px solid var(--line);
+    border-radius:999px;padding:7px 13px;white-space:nowrap}
+  footer .moat b{color:var(--glow)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><div class="word">sapient</div><div class="tag">qualia · giving machines a human brain</div></header>
+
+    <div class="hero">
+      <h1>the same words. <span class="dim">two very different brains.</span></h1>
+      <p>what a human brain does talking to a <b>person</b> — versus a <b>robot</b>.</p>
+      <div class="said">“ hey — how are you feeling today? ”</div>
+    </div>
+
+    <div class="brains">
+      <div class="panel person">
+        <div class="who"><span class="e">🧑</span> with a person</div>
+        <div class="sub" id="subP">the social & emotional brain lights up</div>
+        <svg viewBox="0 0 360 300" id="brainP"></svg>
+      </div>
+      <div class="panel">
+        <div class="who"><span class="e">🤖</span> with a robot</div>
+        <div class="sub" id="subR">the social brain stays dark — heard, not felt</div>
+        <svg viewBox="0 0 360 300" id="brainR"></svg>
+      </div>
+    </div>
+
+    <div class="mid">
+      <div class="gap" id="gapText">this <b>gap</b> — the dark social &amp; emotional areas — is the difference between
+        a machine being <i>heard</i> and being <b>understood</b>.</div>
+      <button class="cta" id="bridge">▶ teach the robot to bridge it</button>
+      <div class="bridgemsg" id="bridgemsg">sapient teaches machines to see, hear & feel like a person — closing the gap.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="v">the human-vs-robot brain difference is a real published finding (NeuroEngage, 50 people:
+      a human partner recruits social/frontal networks; a robot recruits mostly sensory). exact per-region
+      maps come from processing the study's fMRI — that's the next step.</div>
+    <div class="moat">closing this gap is the moat · <b>measured by mary</b></div>
+  </footer>
+
+<script>
+const NETS=["Frontoparietal","Default","DorsalAttention","VentralAttention","Somatomotor","Limbic","Visual"];
+const POS={Frontoparietal:[112,108],Default:[146,158],DorsalAttention:[184,90],VentralAttention:[210,150],
+  Somatomotor:[232,100],Limbic:[172,206],Visual:[286,146]};
+const SOCIAL=new Set(["Frontoparietal","Default","Limbic","VentralAttention"]);
+const EDGES=[["Frontoparietal","Default"],["Frontoparietal","DorsalAttention"],["DorsalAttention","Somatomotor"],
+  ["Default","VentralAttention"],["VentralAttention","Somatomotor"],["Default","Limbic"],
+  ["VentralAttention","Visual"],["Somatomotor","Visual"],["Limbic","VentralAttention"]];
+// pattern from the NeuroEngage finding: person -> social/frontal high; robot -> sensory-ish, social low
+const PERSON={Frontoparietal:.92,Default:1.0,DorsalAttention:.5,VentralAttention:.82,Somatomotor:.5,Limbic:.88,Visual:.55};
+const ROBOT ={Frontoparietal:.28,Default:.22,DorsalAttention:.6,VentralAttention:.34,Somatomotor:.58,Limbic:.18,Visual:.7};
+const SILH="M58,170 C36,128 54,82 98,70 C120,48 168,46 192,66 C226,50 278,58 308,90 C338,104 340,152 314,178 C320,212 284,232 246,226 C222,248 178,248 154,226 C112,236 76,214 74,182 C66,180 60,176 58,170 Z";
+
+function buildBrain(svg){
+  svg.innerHTML=`<defs><radialGradient id="g" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#fff" stop-opacity=".95"/>
+    <stop offset="38%" stop-color="#e8ecff" stop-opacity=".5"/>
+    <stop offset="100%" stop-color="#e8ecff" stop-opacity="0"/></radialGradient></defs>
+    <path class="silh" d="${SILH}"/><g class="edges"></g><g class="nodes"></g>`;
+  const eg=svg.querySelector('.edges'), ng=svg.querySelector('.nodes'), circ={};
+  EDGES.forEach(([a,b])=>{const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('class','edge');l.setAttribute('x1',POS[a][0]);l.setAttribute('y1',POS[a][1]);
+    l.setAttribute('x2',POS[b][0]);l.setAttribute('y2',POS[b][1]);eg.appendChild(l);});
+  NETS.forEach(n=>{const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',POS[n][0]);c.setAttribute('cy',POS[n][1]);c.setAttribute('fill','url(#g)');
+    c.setAttribute('class','node');c.setAttribute('r',5);ng.appendChild(c);circ[n]=c;});
+  return circ;
+}
+function setState(circ,vals){NETS.forEach(n=>{const t=vals[n];
+  circ[n].setAttribute('r',(11+t*34).toFixed(1)); circ[n].style.opacity=(0.14+0.86*t).toFixed(3);});}
+
+const cP=buildBrain(document.getElementById('brainP'));
+const cR=buildBrain(document.getElementById('brainR'));
+setState(cP,PERSON); setState(cR,ROBOT);
+
+document.getElementById('bridge').addEventListener('click',function(){
+  this.disabled=true; this.textContent="bridging the gap…";
+  setState(cR,PERSON);                 // robot brain fills in toward the human one
+  document.getElementById('subR').textContent="now the social brain engages — like a person";
+  document.getElementById('bridgemsg').classList.add('show');
+  document.querySelector('.panel:not(.person)').classList.add('person');
+  document.getElementById('gapText').innerHTML="the gap <b>closes</b> — the robot now triggers the same human response.";
+  setTimeout(()=>{this.textContent="↺ reset";this.disabled=false;this.dataset.done="1";},1300);
+});
+document.getElementById('bridge').addEventListener('click',function(){
+  if(this.dataset.done==="1"){this.dataset.done="";location.reload();}
+});
+</script>
+</body>
+</html>

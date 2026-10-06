@@ -1,0 +1,40 @@
+# Mary-Full — the ORCLE-Full tier scale-up, past the POC.
+# Inherits mary_multi_v2 (which wires balanced sampling + the long-training fixes)
+# and bumps capacity to the ORCLE-Full tier: d_model 2048, 2 fusion layers,
+# 4 prediction layers. Trains on the full faithful 5-dataset manifest
+# (cneuromod incl. sub-03/sub-05 + wen2017 video added), Bourne held out.
+#
+# Launched as a 3-seed detached H100 ensemble:
+#   modal run --detach train.py --config configs/mary_full.yaml --seed {13,17,23}
+inherits: mary_multi_v2.yaml
+variant_name: mary_full
+hf_repo: The-Sapient-Company/mary-full
+manifest_file: manifest_mary_multi.json
+
+model:
+  # ORCLE-Full tier: wider + deeper than the multi_v2 (1024 / 2 / 4) baseline.
+  d_model: 2048
+  n_fusion_layers: 2
+  n_prediction_layers: 4
+  n_heads: 8
+  modality_dropout: 0.15      # handles per-dataset missing streams (wen2017 video-only)
+  n_vertices: 20484
+
+train:
+  balanced_sampling: true     # dataset-balanced WeightedRandomSampler (wired in train.py)
+  # CONVERGENCE PASS (round 2): the first run early-stopped at 16-35 epochs. Resuming
+  # from latest.pt restarts the cosine LR schedule (a warm restart / SGDR cycle), which
+  # can escape the plateau — not just "more of the same". Higher patience lets it run
+  # past the prior plateau; 5h cap bounds spend (~$50 for the 3-seed resume).
+  max_epochs: 120
+  warmup_steps: 300
+  early_stopping_patience: 25
+  train_oversample: 25
+  batch_size: 12              # 2048-d model is heavier; trim batch for H100-80GB headroom
+  learning_rate: 2.5e-4       # slightly lower LR for the wider model's stability
+  precision: bf16
+  gpu: H100
+  timeout_seconds: 18000      # 5h hard cap
+
+# 3-seed ensemble (ORCLE-Lite/Full recipe: per-vertex softmax-weighted combine at eval).
+ensemble_seeds: [13, 17, 23]

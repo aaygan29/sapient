@@ -1,0 +1,48 @@
+# Mary-Multi — the FAITHFUL multi-dataset overnight config.
+# Trains on all available ORCLE datasets (CNeuroMod + Lebel2023 + HAD + Huth + Wen2017),
+# with the paper's score-boosters baked in (wider adapter + the fixed correlation-led loss
+# + window oversampling). Multi-seed ensemble is launched as N parallel detached jobs
+# (scripts/launch_ensemble.py), each using this config with a different --seed.
+#
+# n_subjects + dataset composition are read from the multi-dataset manifest at train time
+# (train.py sets model.n_subjects from the manifest), so this file is dataset-agnostic.
+
+inherits: mary_base.yaml
+variant_name: mary_multi
+hf_repo: The-Sapient-Company/mary-orcle-multi
+manifest_file: manifest_mary_multi.json      # built by data/build_manifest_multi.py
+
+model:
+  # Score-booster: wider + deeper than Nano (toward ORCLE-Lite/Full capacity).
+  d_model: 1024
+  n_fusion_layers: 2
+  n_prediction_layers: 4
+  n_heads: 8
+  modality_dropout: 0.15      # critical: handles per-dataset missing streams
+  n_vertices: 20484
+
+# Correlation-led loss (the fix that made Mary actually learn; MSE-dominant collapsed it).
+loss:
+  mse_weight: 0.2
+  negcorr_weight: 1.0
+  infonce_weight: 0.3
+  infonce_temperature: 0.07
+
+train:
+  learning_rate: 3.0e-4
+  weight_decay: 0.01
+  scheduler: cosine_with_warmup
+  warmup_steps: 200
+  max_epochs: 60
+  batch_size: 16
+  train_oversample: 30        # many windows/epoch from each (subject,run); real step counts
+  early_stopping_patience: 10
+  gradient_clip_norm: 1.0
+  precision: bf16
+  modal_app: mary-train
+  gpu: H100
+  timeout_seconds: 64800      # 18h cap
+
+# Ensemble: launch this config with seeds [13, 17, 23] as 3 parallel detached H100 jobs.
+# Per-vertex softmax-weighted combination at eval (ORCLE-Lite recipe).
+ensemble_seeds: [13, 17, 23]
