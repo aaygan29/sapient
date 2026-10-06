@@ -109,6 +109,29 @@ The control-ladder results in Section 6.1 are synthetic. They establish that the
 
 We presented a measurement discipline for in-silico neuroforecasting that separates content from brain, withholds construct names without localizers, and decomposes forecasting value into a population term and an individual term with preregistered gates. On synthetic ground truth the apparatus recovers the correct verdict in every cell with zero false positives. On real data it withholds most construct scores, which is the intended behavior. The contribution is a protocol that decides, per measure, whether a predicted neural signal has earned its behavioral claim.
 
+## 10. Code and reproducibility
+
+This paper is the centralized write-up for the code in this repository. Each claim points to the module that backs it.
+
+| Claim or component | Where it lives |
+|---|---|
+| Stimulus-to-cortex encoders (Section 1, 2) | `models/sapient1`, `models/sapient2`, `models/mary`, `models/qualia` |
+| Construct mapping, buy/sell composite, specificity gate, split-conformal intervals, enrollment (Sections 3, 4) | `neurosignal/` (see `neurosignal/EVIDENCE.md`, `neurosignal/validation.py`, `neurosignal/enrollment.py`) |
+| Control ladder, two preregistered gates, synthetic validation (Sections 5, 6.1) | `experiments/control-ladder/mve_control_ladder.py`, `verify_gate1_independent.py`, `VALIDATION_REPORT.md` |
+| Content baselines and the emotion and memorability nulls (Section 6.2) | `sapient-research/buy-moment/`, `sapient-research/case-studies/validation/` |
+| Evaluation and fine-tuning pipeline (Section 2, 6) | `sapient-research/eval-pipeline/` |
+| Read-out serving (Section 7) | `sapient-research/serving/` |
+
+The synthetic apparatus check that produces the Section 6.1 table runs with:
+
+```bash
+cd experiments/control-ladder
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \
+  python3 mve_control_ladder.py
+```
+
+Trained weights and the OpenLAV / LIRIS-ACCEDE videos are not distributed here; see `docs/DATA.md`.
+
 ## References
 
 Bartra, O., McGuire, J. T., and Kable, J. W. (2013). The valuation system: a coordinate-based meta-analysis of BOLD fMRI experiments. NeuroImage, 76, 412-427.
