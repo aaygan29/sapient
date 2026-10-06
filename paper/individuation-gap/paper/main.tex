@@ -1,6 +1,6 @@
-\documentclass[10pt,twocolumn]{article}
+\documentclass[11pt]{article}
 
-\usepackage[margin=0.82in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -33,7 +33,14 @@ Products and clinical pipelines increasingly promise to read an individual's emo
 Our answer is a boundary with a clean shape. Forecasting value splits into a population term and an individual term, and the two are provably asymmetric. The population term is what classical neuroforecasting already exploits: aggregate neural signals predict markets and audiences even when the sampled individuals' own behavior does not \citep{knutson2007,genevsky2017,dmochowski2014}. The individual term is the one the market sells, and it is the one that is not there without a price. A zero-shot encoder emits the same features for every unseen person, so it carries no between-subject information, and the best-case individual forecast collapses to the population forecast. Paying the price, per-subject enrollment, recovers some individual signal, but on current encoders and signals it recovers identity far more than behavior.
 
 \paragraph{Claims.}
-(1)~We state and machine-check the \emph{individuation gap}: aggregation strictly improves the population term, while the zero-shot individual term is exactly zero (Sec.~\ref{sec:gap}). (2)~\emph{Who, not what}: on real data, non-invasive readouts recover identity but not individual behavioral content (Sec.~\ref{sec:whowhat}). (3)~A Bayes-optimal forecaster adds zero individual value at zero-shot and only a modest, saturating gain with enrollment (Sec.~\ref{sec:bayes}). (4)~Multimodal fusion does not rescue individuation, because variance accumulates faster than signal (Sec.~\ref{sec:fusion}). (5)~These limits follow the field's measurement-reliability results, and the gap is enforceable as a refusal-first protocol (Secs.~\ref{sec:reliability}--\ref{sec:protocol}).
+(1)~We state and machine-check the \emph{individuation gap}: aggregation strictly improves the population term, while the zero-shot individual term is exactly zero (Sec.~\ref{sec:gap}). (2)~\emph{Who, not what}: on real data, non-invasive readouts recover identity but not individual behavioral content (Sec.~\ref{sec:whowhat}). (3)~A Bayes-optimal forecaster adds zero individual value at zero-shot and only a modest, saturating gain with enrollment (Sec.~\ref{sec:bayes}). (4)~Multimodal fusion does not rescue individuation, because variance accumulates faster than signal (Sec.~\ref{sec:fusion}). (5)~These limits follow the field's measurement-reliability results, and the gap is enforceable as a refusal-first protocol (Secs.~\ref{sec:reliability}--\ref{sec:protocol}). Figure~\ref{fig:overview} summarizes the four quantitative results.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{../figures/fig0_overview.pdf}
+\caption{Overview. (a)~The individuation gap: the population term rises with aggregation while the zero-shot individual term is pinned at zero, below the small measured individual-difference ceiling. (b)~On real data, identity (who) is recoverable in both the vision and decision settings, while individual behavioral content (what) is not. (c)~A Bayes-optimal forecaster adds no individual value at zero-shot and only a modest, saturating gain with enrollment. (d)~Multimodal fusion is non-monotone: low-reliability modalities add variance faster than signal and lower individual $\rho^2$.}
+\label{fig:overview}
+\end{figure*}
 
 \section{The individuation gap}
 \label{sec:gap}
@@ -88,14 +95,8 @@ One might hope that a principled probabilistic model recovers the individual whe
 If the predictor is constant across subjects, the posterior over an individual's outcome equals the population prior, and no estimator achieves above-population individual accuracy.
 \end{proposition}
 
-We verify this with a Bayesian simulation (sigmoidal choice with a latent per-subject bias; a grid posterior updated from a subject's own trials). At zero-shot the recovery correlation is $r=0.00$ and the incremental AUC over the population model is $+0.000$. Enrollment pays the price: recovery rises to $r=0.58,0.86,0.99$ at $2,10,200$ trials, and the incremental AUC rises to $+0.05,+0.11,+0.14$ and saturates (Fig.~\ref{fig:bayes}). The honest reading is twofold. Zero-shot individual probabilistic prediction is falsified, exactly. Enrolled individual prediction is possible but modest and data-hungry, and it saturates well short of certainty.
+We verify this with a Bayesian simulation (sigmoidal choice with a latent per-subject bias; a grid posterior updated from a subject's own trials). At zero-shot the recovery correlation is $r=0.00$ and the incremental AUC over the population model is $+0.000$. Enrollment pays the price: recovery rises to $r=0.58,0.86,0.99$ at $2,10,200$ trials, and the incremental AUC rises to $+0.05,+0.11,+0.14$ and saturates (Fig.~\ref{fig:overview}c). The honest reading is twofold. Zero-shot individual probabilistic prediction is falsified, exactly. Enrolled individual prediction is possible but modest and data-hungry, and it saturates well short of certainty.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{../figures/fig5_bayes_enrollment.pdf}
-\caption{A Bayes-optimal individual forecaster adds exactly zero value at zero-shot and only a modest, saturating gain once per-subject data is paid for.}
-\label{fig:bayes}
-\end{figure}
 
 \section{Does multimodal fusion rescue it?}
 \label{sec:fusion}
@@ -107,14 +108,8 @@ $\rho^2 = A/(A+v+\sum_m\delta_m)$
 increases when modality $m$ is added if and only if $a_m/\delta_m$ exceeds the current signal-to-noise ratio; low-reliability modalities strictly lower it.
 \end{proposition}
 
-Figure~\ref{fig:fusion} shows the consequence: adding high-reliability modalities helps, but low-reliability ones (single-channel autonomic signals, slow and state-dependent hormonal assays) push $\rho^2$ back down. Fusion can lift the population term; it does not supply the between-subject signal the individual term needs, and past a point it hurts.
+Figure~\ref{fig:overview}d shows the consequence: adding high-reliability modalities helps, but low-reliability ones (single-channel autonomic signals, slow and state-dependent hormonal assays) push $\rho^2$ back down. Fusion can lift the population term; it does not supply the between-subject signal the individual term needs, and past a point it hurts.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{../figures/fig4_fusion.pdf}
-\caption{Multimodal fusion is not a free lunch. Each added modality contributes signal $a_m$ but also nuisance variance $\delta_m$; low-reliability modalities lower individual $\rho^2$.}
-\label{fig:fusion}
-\end{figure}
 
 \section{Why the individual level is hard}
 \label{sec:reliability}
