@@ -82,7 +82,7 @@ The pattern is consistent: the \emph{who} question (identity, verification) is a
 
 \section{A Bayes-optimal forecaster cannot escape it}
 \label{sec:bayes}
-One might hope that a principled probabilistic model recovers the individual where point estimates fail. It does not, in the zero-shot regime, and the reason is information-theoretic rather than algorithmic. If the predicted feature carries no between-subject variance, then conditional on the population it is independent of the individual outcome, so the Bayes-optimal individual forecast equals the population forecast and the mutual information between feature and individual outcome is zero.
+One might hope that a principled probabilistic model recovers the individual where point estimates fail. In the zero-shot regime it does not, and the reason is information-theoretic, not algorithmic. If the predicted feature has no between-subject variance, it is independent of the individual outcome given the population, so the Bayes-optimal individual forecast equals the population forecast and their mutual information is zero.
 
 \begin{proposition}[Zero-shot posterior collapse]
 If the predictor is constant across subjects, the posterior over an individual's outcome equals the population prior, and no estimator achieves above-population individual accuracy.
@@ -166,7 +166,7 @@ Non-invasive and in-silico brain readouts can tell you who someone is and can fo
 \bibitem[Allen et al.(2022)]{allen2022} Allen, E.~J., et al. (2022). A massive 7T fMRI dataset to bridge cognitive neuroscience and artificial intelligence. \emph{Nature Neuroscience}, 25, 116--126.
 \bibitem[Bernal-Casas et al.(2017)]{bernalcasas2017} Bernal-Casas, D., et al. (2017). Studying brain circuit function with dynamic causal modeling for optogenetic fMRI. \emph{Neuron}, 93(3), 522--532.
 \bibitem[Botvinik-Nezer et al.(2019)]{botviniknezer2019} Botvinik-Nezer, R., et al. (2019). A large-scale fMRI dataset for the study of value-based decision making. \emph{Scientific Data}, 6, 106.
-\bibitem[Card et al.(2025)]{card2025} Card, N., et al. (2025). Long-term independent use of an intracortical brain--computer interface for speech and cursor control. \emph{Nature Medicine}.
+\bibitem[Card et al.(2026)]{card2025} Card, N.~S., et al. (2026). Long-term independent use of an intracortical brain--computer interface for speech and cursor control. \emph{Nature Medicine}, 32(7), 2504--2510.
 \bibitem[Chang et al.(2019)]{chang2019} Chang, N., et al. (2019). BOLD5000: a public fMRI dataset of 5000 images. \emph{Scientific Data}, 6, 49.
 \bibitem[Dmochowski et al.(2014)]{dmochowski2014} Dmochowski, J.~P., et al. (2014). Audience preferences are predicted by temporal reliability of neural processing. \emph{Nature Communications}, 5, 5567.
 \bibitem[Du et al.(2025)]{du2025} Du, J.-N., et al. (2025). Within-individual precision mapping of brain networks exclusively using task data. \emph{Neuron}.
@@ -174,7 +174,7 @@ Non-invasive and in-silico brain readouts can tell you who someone is and can fo
 \bibitem[Genevsky et al.(2017)]{genevsky2017} Genevsky, A., Yoon, C., \& Knutson, B. (2017). When brain beats behavior: neuroforecasting crowdfunding outcomes. \emph{Journal of Neuroscience}, 37(36), 8625--8634.
 \bibitem[Gordon et al.(2017)]{gordon2017} Gordon, E.~M., et al. (2017). Precision functional mapping of individual human brains. \emph{Neuron}, 95(4), 791--807.
 \bibitem[Hutzler(2013)]{hutzler2013} Hutzler, F. (2013). Reverse inference is not a fallacy per se. \emph{NeuroImage}, 84, 1061--1069.
-\bibitem[Kang et al.(2024)]{kang2024} Kang, K.-D., et al. (2024). Study design features increase replicability in brain-wide association studies. \emph{Nature}, 636.
+\bibitem[Kang et al.(2024)]{kang2024} Kang, K., et al. (2024). Study design features increase replicability in brain-wide association studies. \emph{Nature}, 636(8043), 719--727.
 \bibitem[Knutson et al.(2007)]{knutson2007} Knutson, B., et al. (2007). Neural predictors of purchases. \emph{Neuron}, 53(1), 147--156.
 \bibitem[Kragel et al.(2021)]{kragel2021} Kragel, P.~A., et al. (2021). Functional MRI can be highly reliable, but it depends on what you measure. \emph{Psychological Science}, 32(4), 622--626.
 \bibitem[Marek et al.(2022)]{marek2022} Marek, S., et al. (2022). Reproducible brain-wide association studies require thousands of individuals. \emph{Nature}, 603, 654--660.
@@ -184,7 +184,7 @@ Non-invasive and in-silico brain readouts can tell you who someone is and can fo
 \bibitem[Vovk et al.(2005)]{vovk2005} Vovk, V., Gammerman, A., \& Shafer, G. (2005). \emph{Algorithmic Learning in a Random World}. Springer.
 \bibitem[Willett et al.(2023)]{willett2023} Willett, F.~R., et al. (2023). A high-performance speech neuroprosthesis. \emph{Nature}, 620, 1031--1036.
 \bibitem[Yao et al.(2024)]{yao2024} Yao, X., et al. (2024). Using neural data to forecast aggregate consumer behavior in neuromarketing. \emph{Journal of Consumer Behaviour}.
-\bibitem[Zhao et al.(2011)]{zhao2011} Zhao, S., et al. (2011). Cell-type-specific optogenetic mice for dissecting neural circuitry function. \emph{Nature Methods}, 8, 745--752.
+\bibitem[Zhao et al.(2011)]{zhao2011} Zhao, S., et al. (2011). Cell type-specific channelrhodopsin-2 transgenic mice for optogenetic dissection of neural circuitry function. \emph{Nature Methods}, 8(9), 745--752.
 \end{thebibliography}
 
 \end{document}
